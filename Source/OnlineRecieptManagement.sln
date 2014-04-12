@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "OnlineRecieptManagement", "OnlineRecieptManagement\", "{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/OnlineRecieptManagement"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\OnlineRecieptManagement\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\OnlineRecieptManagement\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/OnlineRecieptManagement"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\OnlineRecieptManagement\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\OnlineRecieptManagement\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1787"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecieptManagementService", "RecieptManagementService\RecieptManagementService.csproj", "{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
