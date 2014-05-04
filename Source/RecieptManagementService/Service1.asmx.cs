@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using ReceiptManagement.Bll;
 
 namespace RecieptManagementService
 {

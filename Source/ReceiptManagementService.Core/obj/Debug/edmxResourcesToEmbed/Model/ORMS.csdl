@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ORMSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="OrmsEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Events" EntityType="ORMSModel.Event" />
+    <EntitySet Name="EventStatuses" EntityType="ORMSModel.EventStatus" />
+    <EntitySet Name="Images" EntityType="ORMSModel.Image" />
+    <EntitySet Name="ImageTypes" EntityType="ORMSModel.ImageType" />
+    <EntitySet Name="My_Products_Services" EntityType="ORMSModel.My_Products_Services" />
+    <EntitySet Name="PeriodTypes" EntityType="ORMSModel.PeriodType" />
+    <EntitySet Name="Product_Service_Categories" EntityType="ORMSModel.Product_Service_Categories" />
+    <EntitySet Name="Product_Service_Images" EntityType="ORMSModel.Product_Service_Images" />
+    <EntitySet Name="Product_Service_Sections" EntityType="ORMSModel.Product_Service_Sections" />
+    <EntitySet Name="Product_Service_SubCategories" EntityType="ORMSModel.Product_Service_SubCategories" />
+    <EntitySet Name="Products_Services" EntityType="ORMSModel.Products_Services" />
+    <EntitySet Name="ReceiptImages" EntityType="ORMSModel.ReceiptImage" />
+    <EntitySet Name="Receipts" EntityType="ORMSModel.Receipt" />
+    <EntitySet Name="Roles" EntityType="ORMSModel.Role" />
+    <EntitySet Name="SocialUsers" EntityType="ORMSModel.SocialUser" />
+    <EntitySet Name="System_Social_UsersAssociation" EntityType="ORMSModel.System_Social_UsersAssociation" />
+    <EntitySet Name="Users" EntityType="ORMSModel.User" />
+    <EntitySet Name="WarrantyCardImages" EntityType="ORMSModel.WarrantyCardImage" />
+    <EntitySet Name="WarrantyCards" EntityType="ORMSModel.WarrantyCard" />
+    <AssociationSet Name="FK_Events_EventStatuses" Association="ORMSModel.FK_Events_EventStatuses">
+      <End Role="EventStatuses" EntitySet="EventStatuses" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_MyProductsServices" Association="ORMSModel.FK_Events_MyProductsServices">
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_NotifyBeforePeriodType" Association="ORMSModel.FK_Events_NotifyBeforePeriodType">
+      <End Role="PeriodTypes" EntitySet="PeriodTypes" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_ReoccurancePeriodType" Association="ORMSModel.FK_Events_ReoccurancePeriodType">
+      <End Role="PeriodTypes" EntitySet="PeriodTypes" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_Users" Association="ORMSModel.FK_Events_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_ImageTypes" Association="ORMSModel.FK_Images_ImageTypes">
+      <End Role="ImageTypes" EntitySet="ImageTypes" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductServiceImages_Images" Association="ORMSModel.FK_ProductServiceImages_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="Product_Service_Images" EntitySet="Product_Service_Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceiptImages_Images" Association="ORMSModel.FK_ReceiptImages_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="ReceiptImages" EntitySet="ReceiptImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WarrantyCardImages_Images" Association="ORMSModel.FK_WarrantyCardImages_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="WarrantyCardImages" EntitySet="WarrantyCardImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_ParentProductsServices" Association="ORMSModel.FK_MyProductsServices_ParentProductsServices">
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+      <End Role="My_Products_Services1" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_ProductsServices" Association="ORMSModel.FK_MyProductsServices_ProductsServices">
+      <End Role="Products_Services" EntitySet="Products_Services" />
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_Receipts" Association="ORMSModel.FK_MyProductsServices_Receipts">
+      <End Role="Receipts" EntitySet="Receipts" />
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_Sections" Association="ORMSModel.FK_MyProductsServices_Sections">
+      <End Role="Product_Service_Sections" EntitySet="Product_Service_Sections" />
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_Users" Association="ORMSModel.FK_MyProductsServices_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyProductsServices_WarrantyCards" Association="ORMSModel.FK_MyProductsServices_WarrantyCards">
+      <End Role="WarrantyCards" EntitySet="WarrantyCards" />
+      <End Role="My_Products_Services" EntitySet="My_Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_SubCategory" Association="ORMSModel.FK_Category_SubCategory">
+      <End Role="Product_Service_Categories" EntitySet="Product_Service_Categories" />
+      <End Role="Product_Service_SubCategories" EntitySet="Product_Service_SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsServices_Category" Association="ORMSModel.FK_ProductsServices_Category">
+      <End Role="Product_Service_Categories" EntitySet="Product_Service_Categories" />
+      <End Role="Products_Services" EntitySet="Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductServiceImages_ProductsServices" Association="ORMSModel.FK_ProductServiceImages_ProductsServices">
+      <End Role="Products_Services" EntitySet="Products_Services" />
+      <End Role="Product_Service_Images" EntitySet="Product_Service_Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsServices_SubCategory" Association="ORMSModel.FK_ProductsServices_SubCategory">
+      <End Role="Product_Service_SubCategories" EntitySet="Product_Service_SubCategories" />
+      <End Role="Products_Services" EntitySet="Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsServices_Users" Association="ORMSModel.FK_ProductsServices_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Products_Services" EntitySet="Products_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceiptImages_Receipts" Association="ORMSModel.FK_ReceiptImages_Receipts">
+      <End Role="Receipts" EntitySet="Receipts" />
+      <End Role="ReceiptImages" EntitySet="ReceiptImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receipts_Users" Association="ORMSModel.FK_Receipts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Receipts" EntitySet="Receipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="ORMSModel.FK_User_Role">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SocialUser_Association" Association="ORMSModel.FK_SocialUser_Association">
+      <End Role="SocialUsers" EntitySet="SocialUsers" />
+      <End Role="System_Social_UsersAssociation" EntitySet="System_Social_UsersAssociation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemUser_Association" Association="ORMSModel.FK_SystemUser_Association">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="System_Social_UsersAssociation" EntitySet="System_Social_UsersAssociation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WarrantyCards_Users" Association="ORMSModel.FK_WarrantyCards_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="WarrantyCards" EntitySet="WarrantyCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WarrantyCardImages_WarrantyCards" Association="ORMSModel.FK_WarrantyCardImages_WarrantyCards">
+      <End Role="WarrantyCards" EntitySet="WarrantyCards" />
+      <End Role="WarrantyCardImages" EntitySet="WarrantyCardImages" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="My_Product_Service_Id" Type="Int64" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+    <Property Name="EventName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="EventDescription" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="NotifyBefore_PeriodValue" Type="Int32" />
+    <Property Name="NotifyBefore_PeriodTypeId" Type="Int32" />
+    <Property Name="Reoccurance_PeriodValue" Type="Int32" />
+    <Property Name="Reoccurance_PeriodTypeId" Type="Int32" />
+    <Property Name="EventStatusId" Type="Int32" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="EventStatus" Relationship="ORMSModel.FK_Events_EventStatuses" FromRole="Events" ToRole="EventStatuses" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_Events_MyProductsServices" FromRole="Events" ToRole="My_Products_Services" />
+    <NavigationProperty Name="PeriodType" Relationship="ORMSModel.FK_Events_NotifyBeforePeriodType" FromRole="Events" ToRole="PeriodTypes" />
+    <NavigationProperty Name="PeriodType1" Relationship="ORMSModel.FK_Events_ReoccurancePeriodType" FromRole="Events" ToRole="PeriodTypes" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_Events_Users" FromRole="Events" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="EventStatus">
+    <Key>
+      <PropertyRef Name="EventStatusId" />
+    </Key>
+    <Property Name="EventStatusId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="EventStatus1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Events" Relationship="ORMSModel.FK_Events_EventStatuses" FromRole="EventStatuses" ToRole="Events" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ImageTypeId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileFormat" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="ImageType" Relationship="ORMSModel.FK_Images_ImageTypes" FromRole="Images" ToRole="ImageTypes" />
+    <NavigationProperty Name="Product_Service_Images" Relationship="ORMSModel.FK_ProductServiceImages_Images" FromRole="Images" ToRole="Product_Service_Images" />
+    <NavigationProperty Name="ReceiptImages" Relationship="ORMSModel.FK_ReceiptImages_Images" FromRole="Images" ToRole="ReceiptImages" />
+    <NavigationProperty Name="WarrantyCardImages" Relationship="ORMSModel.FK_WarrantyCardImages_Images" FromRole="Images" ToRole="WarrantyCardImages" />
+  </EntityType>
+  <EntityType Name="ImageType">
+    <Key>
+      <PropertyRef Name="ImageTypeId" />
+    </Key>
+    <Property Name="ImageTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ImageType1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Images" Relationship="ORMSModel.FK_Images_ImageTypes" FromRole="ImageTypes" ToRole="Images" />
+  </EntityType>
+  <EntityType Name="My_Products_Services">
+    <Key>
+      <PropertyRef Name="My_Product_Service_Id" />
+    </Key>
+    <Property Name="My_Product_Service_Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Service_Id" Type="Int64" />
+    <Property Name="Parent_My_Product_Service_Id" Type="Int64" />
+    <Property Name="SectionId" Type="Int64" />
+    <Property Name="ReceiptId" Type="Int64" />
+    <Property Name="WarrantyCardId" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="CreatedOn" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="Events" Relationship="ORMSModel.FK_Events_MyProductsServices" FromRole="My_Products_Services" ToRole="Events" />
+    <NavigationProperty Name="My_Products_Services1" Relationship="ORMSModel.FK_MyProductsServices_ParentProductsServices" FromRole="My_Products_Services" ToRole="My_Products_Services1" />
+    <NavigationProperty Name="My_Products_Services2" Relationship="ORMSModel.FK_MyProductsServices_ParentProductsServices" FromRole="My_Products_Services1" ToRole="My_Products_Services" />
+    <NavigationProperty Name="Products_Services" Relationship="ORMSModel.FK_MyProductsServices_ProductsServices" FromRole="My_Products_Services" ToRole="Products_Services" />
+    <NavigationProperty Name="Receipt" Relationship="ORMSModel.FK_MyProductsServices_Receipts" FromRole="My_Products_Services" ToRole="Receipts" />
+    <NavigationProperty Name="Product_Service_Sections" Relationship="ORMSModel.FK_MyProductsServices_Sections" FromRole="My_Products_Services" ToRole="Product_Service_Sections" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_MyProductsServices_Users" FromRole="My_Products_Services" ToRole="Users" />
+    <NavigationProperty Name="WarrantyCard" Relationship="ORMSModel.FK_MyProductsServices_WarrantyCards" FromRole="My_Products_Services" ToRole="WarrantyCards" />
+  </EntityType>
+  <EntityType Name="PeriodType">
+    <Key>
+      <PropertyRef Name="PeriodTypeId" />
+    </Key>
+    <Property Name="PeriodTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Value" Type="Int32" />
+    <NavigationProperty Name="Events" Relationship="ORMSModel.FK_Events_NotifyBeforePeriodType" FromRole="PeriodTypes" ToRole="Events" />
+    <NavigationProperty Name="Events1" Relationship="ORMSModel.FK_Events_ReoccurancePeriodType" FromRole="PeriodTypes" ToRole="Events" />
+  </EntityType>
+  <EntityType Name="Product_Service_Categories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryTitle" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Product_Service_SubCategories" Relationship="ORMSModel.FK_Category_SubCategory" FromRole="Product_Service_Categories" ToRole="Product_Service_SubCategories" />
+    <NavigationProperty Name="Products_Services" Relationship="ORMSModel.FK_ProductsServices_Category" FromRole="Product_Service_Categories" ToRole="Products_Services" />
+  </EntityType>
+  <EntityType Name="Product_Service_Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Service_Id" Type="Int64" />
+    <Property Name="ImageId" Type="Int64" />
+    <NavigationProperty Name="Image" Relationship="ORMSModel.FK_ProductServiceImages_Images" FromRole="Product_Service_Images" ToRole="Images" />
+    <NavigationProperty Name="Products_Services" Relationship="ORMSModel.FK_ProductServiceImages_ProductsServices" FromRole="Product_Service_Images" ToRole="Products_Services" />
+  </EntityType>
+  <EntityType Name="Product_Service_Sections">
+    <Key>
+      <PropertyRef Name="SectionId" />
+    </Key>
+    <Property Name="SectionId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_MyProductsServices_Sections" FromRole="Product_Service_Sections" ToRole="My_Products_Services" />
+  </EntityType>
+  <EntityType Name="Product_Service_SubCategories">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="SubCategoryTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Product_Service_Categories" Relationship="ORMSModel.FK_Category_SubCategory" FromRole="Product_Service_SubCategories" ToRole="Product_Service_Categories" />
+    <NavigationProperty Name="Products_Services" Relationship="ORMSModel.FK_ProductsServices_SubCategory" FromRole="Product_Service_SubCategories" ToRole="Products_Services" />
+  </EntityType>
+  <EntityType Name="Products_Services">
+    <Key>
+      <PropertyRef Name="Product_Service_Id" />
+    </Key>
+    <Property Name="Product_Service_Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="SubCategoryId" Type="Int32" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_MyProductsServices_ProductsServices" FromRole="Products_Services" ToRole="My_Products_Services" />
+    <NavigationProperty Name="Product_Service_Categories" Relationship="ORMSModel.FK_ProductsServices_Category" FromRole="Products_Services" ToRole="Product_Service_Categories" />
+    <NavigationProperty Name="Product_Service_Images" Relationship="ORMSModel.FK_ProductServiceImages_ProductsServices" FromRole="Products_Services" ToRole="Product_Service_Images" />
+    <NavigationProperty Name="Product_Service_SubCategories" Relationship="ORMSModel.FK_ProductsServices_SubCategory" FromRole="Products_Services" ToRole="Product_Service_SubCategories" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_ProductsServices_Users" FromRole="Products_Services" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ReceiptImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptId" Type="Int64" />
+    <Property Name="ImageId" Type="Int64" />
+    <NavigationProperty Name="Image" Relationship="ORMSModel.FK_ReceiptImages_Images" FromRole="ReceiptImages" ToRole="Images" />
+    <NavigationProperty Name="Receipt" Relationship="ORMSModel.FK_ReceiptImages_Receipts" FromRole="ReceiptImages" ToRole="Receipts" />
+  </EntityType>
+  <EntityType Name="Receipt">
+    <Key>
+      <PropertyRef Name="ReceiptId" />
+    </Key>
+    <Property Name="ReceiptId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
+    <Property Name="SerialNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_MyProductsServices_Receipts" FromRole="Receipts" ToRole="My_Products_Services" />
+    <NavigationProperty Name="ReceiptImages" Relationship="ORMSModel.FK_ReceiptImages_Receipts" FromRole="Receipts" ToRole="ReceiptImages" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_Receipts_Users" FromRole="Receipts" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="ORMSModel.FK_User_Role" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="SocialUser">
+    <Key>
+      <PropertyRef Name="SocialUserId" />
+    </Key>
+    <Property Name="SocialUserId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="SocialNetworkName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Token" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="System_Social_UsersAssociation" Relationship="ORMSModel.FK_SocialUser_Association" FromRole="SocialUsers" ToRole="System_Social_UsersAssociation" />
+  </EntityType>
+  <EntityType Name="System_Social_UsersAssociation">
+    <Key>
+      <PropertyRef Name="UserAssociationId" />
+    </Key>
+    <Property Name="UserAssociationId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="SocialUserId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="SocialUser" Relationship="ORMSModel.FK_SocialUser_Association" FromRole="System_Social_UsersAssociation" ToRole="SocialUsers" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_SystemUser_Association" FromRole="System_Social_UsersAssociation" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Events" Relationship="ORMSModel.FK_Events_Users" FromRole="Users" ToRole="Events" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_MyProductsServices_Users" FromRole="Users" ToRole="My_Products_Services" />
+    <NavigationProperty Name="Products_Services" Relationship="ORMSModel.FK_ProductsServices_Users" FromRole="Users" ToRole="Products_Services" />
+    <NavigationProperty Name="Receipts" Relationship="ORMSModel.FK_Receipts_Users" FromRole="Users" ToRole="Receipts" />
+    <NavigationProperty Name="Role" Relationship="ORMSModel.FK_User_Role" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="System_Social_UsersAssociation" Relationship="ORMSModel.FK_SystemUser_Association" FromRole="Users" ToRole="System_Social_UsersAssociation" />
+    <NavigationProperty Name="WarrantyCards" Relationship="ORMSModel.FK_WarrantyCards_Users" FromRole="Users" ToRole="WarrantyCards" />
+  </EntityType>
+  <EntityType Name="WarrantyCardImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="WarrantyCardId" Type="Int64" />
+    <Property Name="ImageId" Type="Int64" />
+    <NavigationProperty Name="Image" Relationship="ORMSModel.FK_WarrantyCardImages_Images" FromRole="WarrantyCardImages" ToRole="Images" />
+    <NavigationProperty Name="WarrantyCard" Relationship="ORMSModel.FK_WarrantyCardImages_WarrantyCards" FromRole="WarrantyCardImages" ToRole="WarrantyCards" />
+  </EntityType>
+  <EntityType Name="WarrantyCard">
+    <Key>
+      <PropertyRef Name="WarrantyCardId" />
+    </Key>
+    <Property Name="WarrantyCardId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="WarrantyExpireOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <NavigationProperty Name="My_Products_Services" Relationship="ORMSModel.FK_MyProductsServices_WarrantyCards" FromRole="WarrantyCards" ToRole="My_Products_Services" />
+    <NavigationProperty Name="User" Relationship="ORMSModel.FK_WarrantyCards_Users" FromRole="WarrantyCards" ToRole="Users" />
+    <NavigationProperty Name="WarrantyCardImages" Relationship="ORMSModel.FK_WarrantyCardImages_WarrantyCards" FromRole="WarrantyCards" ToRole="WarrantyCardImages" />
+  </EntityType>
+  <Association Name="FK_Events_EventStatuses">
+    <End Role="EventStatuses" Type="ORMSModel.EventStatus" Multiplicity="0..1" />
+    <End Role="Events" Type="ORMSModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventStatuses">
+        <PropertyRef Name="EventStatusId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="EventStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_MyProductsServices">
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="0..1" />
+    <End Role="Events" Type="ORMSModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="My_Products_Services">
+        <PropertyRef Name="My_Product_Service_Id" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="My_Product_Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_NotifyBeforePeriodType">
+    <End Role="PeriodTypes" Type="ORMSModel.PeriodType" Multiplicity="0..1" />
+    <End Role="Events" Type="ORMSModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PeriodTypes">
+        <PropertyRef Name="PeriodTypeId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="NotifyBefore_PeriodTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_ReoccurancePeriodType">
+    <End Role="PeriodTypes" Type="ORMSModel.PeriodType" Multiplicity="0..1" />
+    <End Role="Events" Type="ORMSModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PeriodTypes">
+        <PropertyRef Name="PeriodTypeId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="Reoccurance_PeriodTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_Users">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="0..1" />
+    <End Role="Events" Type="ORMSModel.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_ImageTypes">
+    <End Role="ImageTypes" Type="ORMSModel.ImageType" Multiplicity="0..1" />
+    <End Role="Images" Type="ORMSModel.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImageTypes">
+        <PropertyRef Name="ImageTypeId" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="ImageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductServiceImages_Images">
+    <End Role="Images" Type="ORMSModel.Image" Multiplicity="0..1" />
+    <End Role="Product_Service_Images" Type="ORMSModel.Product_Service_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageId" />
+      </Principal>
+      <Dependent Role="Product_Service_Images">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceiptImages_Images">
+    <End Role="Images" Type="ORMSModel.Image" Multiplicity="0..1" />
+    <End Role="ReceiptImages" Type="ORMSModel.ReceiptImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageId" />
+      </Principal>
+      <Dependent Role="ReceiptImages">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WarrantyCardImages_Images">
+    <End Role="Images" Type="ORMSModel.Image" Multiplicity="0..1" />
+    <End Role="WarrantyCardImages" Type="ORMSModel.WarrantyCardImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageId" />
+      </Principal>
+      <Dependent Role="WarrantyCardImages">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_ParentProductsServices">
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="0..1" />
+    <End Role="My_Products_Services1" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="My_Products_Services">
+        <PropertyRef Name="My_Product_Service_Id" />
+      </Principal>
+      <Dependent Role="My_Products_Services1">
+        <PropertyRef Name="Parent_My_Product_Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_ProductsServices">
+    <End Role="Products_Services" Type="ORMSModel.Products_Services" Multiplicity="0..1" />
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products_Services">
+        <PropertyRef Name="Product_Service_Id" />
+      </Principal>
+      <Dependent Role="My_Products_Services">
+        <PropertyRef Name="Product_Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_Receipts">
+    <End Role="Receipts" Type="ORMSModel.Receipt" Multiplicity="0..1" />
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receipts">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="My_Products_Services">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_Sections">
+    <End Role="Product_Service_Sections" Type="ORMSModel.Product_Service_Sections" Multiplicity="0..1" />
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Service_Sections">
+        <PropertyRef Name="SectionId" />
+      </Principal>
+      <Dependent Role="My_Products_Services">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_Users">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="0..1" />
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="My_Products_Services">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyProductsServices_WarrantyCards">
+    <End Role="WarrantyCards" Type="ORMSModel.WarrantyCard" Multiplicity="0..1" />
+    <End Role="My_Products_Services" Type="ORMSModel.My_Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WarrantyCards">
+        <PropertyRef Name="WarrantyCardId" />
+      </Principal>
+      <Dependent Role="My_Products_Services">
+        <PropertyRef Name="WarrantyCardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_SubCategory">
+    <End Role="Product_Service_Categories" Type="ORMSModel.Product_Service_Categories" Multiplicity="0..1" />
+    <End Role="Product_Service_SubCategories" Type="ORMSModel.Product_Service_SubCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Service_Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Product_Service_SubCategories">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsServices_Category">
+    <End Role="Product_Service_Categories" Type="ORMSModel.Product_Service_Categories" Multiplicity="0..1" />
+    <End Role="Products_Services" Type="ORMSModel.Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Service_Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Products_Services">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductServiceImages_ProductsServices">
+    <End Role="Products_Services" Type="ORMSModel.Products_Services" Multiplicity="0..1" />
+    <End Role="Product_Service_Images" Type="ORMSModel.Product_Service_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products_Services">
+        <PropertyRef Name="Product_Service_Id" />
+      </Principal>
+      <Dependent Role="Product_Service_Images">
+        <PropertyRef Name="Product_Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsServices_SubCategory">
+    <End Role="Product_Service_SubCategories" Type="ORMSModel.Product_Service_SubCategories" Multiplicity="0..1" />
+    <End Role="Products_Services" Type="ORMSModel.Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Service_SubCategories">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Products_Services">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsServices_Users">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="0..1" />
+    <End Role="Products_Services" Type="ORMSModel.Products_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Products_Services">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceiptImages_Receipts">
+    <End Role="Receipts" Type="ORMSModel.Receipt" Multiplicity="0..1" />
+    <End Role="ReceiptImages" Type="ORMSModel.ReceiptImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receipts">
+        <PropertyRef Name="ReceiptId" />
+      </Principal>
+      <Dependent Role="ReceiptImages">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receipts_Users">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="0..1" />
+    <End Role="Receipts" Type="ORMSModel.Receipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Receipts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Roles" Type="ORMSModel.Role" Multiplicity="1" />
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SocialUser_Association">
+    <End Role="SocialUsers" Type="ORMSModel.SocialUser" Multiplicity="1" />
+    <End Role="System_Social_UsersAssociation" Type="ORMSModel.System_Social_UsersAssociation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SocialUsers">
+        <PropertyRef Name="SocialUserId" />
+      </Principal>
+      <Dependent Role="System_Social_UsersAssociation">
+        <PropertyRef Name="SocialUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SystemUser_Association">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="1" />
+    <End Role="System_Social_UsersAssociation" Type="ORMSModel.System_Social_UsersAssociation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="System_Social_UsersAssociation">
+        <PropertyRef Name="UserAssociationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WarrantyCards_Users">
+    <End Role="Users" Type="ORMSModel.User" Multiplicity="0..1" />
+    <End Role="WarrantyCards" Type="ORMSModel.WarrantyCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="WarrantyCards">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WarrantyCardImages_WarrantyCards">
+    <End Role="WarrantyCards" Type="ORMSModel.WarrantyCard" Multiplicity="0..1" />
+    <End Role="WarrantyCardImages" Type="ORMSModel.WarrantyCardImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WarrantyCards">
+        <PropertyRef Name="WarrantyCardId" />
+      </Principal>
+      <Dependent Role="WarrantyCardImages">
+        <PropertyRef Name="WarrantyCardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
