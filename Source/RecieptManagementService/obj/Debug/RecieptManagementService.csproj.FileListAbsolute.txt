@@ -1,7 +1,0 @@
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\obj\Debug\RecieptManagementService.csprojResolveAssemblyReference.cache
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\bin\RecieptManagementService.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\bin\RecieptManagementService.pdb
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\bin\ReceiptManagement.Bll.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\bin\ReceiptManagement.Bll.pdb
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\obj\Debug\RecieptManagementService.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\RecieptManagementService\obj\Debug\RecieptManagementService.pdb
