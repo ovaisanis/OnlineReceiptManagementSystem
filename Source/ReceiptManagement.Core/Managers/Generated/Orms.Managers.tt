@@ -187,6 +187,9 @@ void AddMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 				
+			 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
+
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
 
 			try
@@ -465,6 +468,8 @@ void GetMethods(EntityType entity, CodeGenerationTools code)
             if (id == null)
                 throw new System.ArgumentNullException("id");
 		
+		 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
             Helpers.ActionResult result = Helpers.ActionResult.Factory(true);			
 			
             try
@@ -1179,7 +1184,7 @@ void BeginNamespace(string namespaceName, CodeGenerationTools code)
     if (!String.IsNullOrEmpty(namespaceName))
     {
 #>
-namespace <#=code.EscapeNamespace(namespaceName)#>
+namespace ReceiptManagement.Core.Managers
 {
 <#+
         PushIndent(CodeRegion.GetIndent(1));

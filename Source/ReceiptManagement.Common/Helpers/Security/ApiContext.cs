@@ -67,7 +67,7 @@ namespace ReceiptManagement.Common.Helpers
         /// <summary>
         ///		A boolean indicating if the current user is authenticated.
         /// </summary>
-        internal System.Boolean IsAuthenticated { get; set; }
+        public System.Boolean IsAuthenticated { get; set; }
 
         /// <summary>
         ///		A boolean indicating user is not authenticated but ApiContext object is using just to perform
@@ -124,7 +124,7 @@ namespace ReceiptManagement.Common.Helpers
         private System.Data.Objects.ObjectContext _currentContext = null;
 
         // Is Current DataContext initialized
-        internal bool IsContextInitialized { get { return (_currentContext != null); } }
+        public bool IsContextInitialized { get { return (_currentContext != null); } }
 
         #endregion
         
@@ -179,6 +179,7 @@ namespace ReceiptManagement.Common.Helpers
                 apiContext.ConnectionString = connectionString;
                 apiContext.IsAuthenticated = true;
                 apiContext.UserSessionData = new UserSession();
+              
             }
             catch
             {

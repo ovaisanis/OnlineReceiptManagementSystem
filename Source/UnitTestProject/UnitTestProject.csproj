@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReceiptManagement.Common">
+      <HintPath>..\ReceiptManagement.Common\bin\Debug\ReceiptManagement.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ReceiptManagement.Core">
+      <HintPath>..\ReceiptManagement.Core\bin\Debug\ReceiptManagement.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>

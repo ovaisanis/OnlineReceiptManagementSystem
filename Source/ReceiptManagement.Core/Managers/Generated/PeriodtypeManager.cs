@@ -3,7 +3,7 @@ using System.Linq.Dynamic;
 using Entities = ReceiptManagement.Common.Entities;
 using Helpers  = ReceiptManagement.Common.Helpers;
 
-namespace ReceiptManagement.Core.Managers.Generated
+namespace ReceiptManagement.Core.Managers
 {
     /// <summary>
     /// No Metadata Documentation available.
@@ -91,6 +91,9 @@ namespace ReceiptManagement.Core.Managers.Generated
                 if (periodTypes.Count() == 0)
                     throw new System.ArgumentOutOfRangeException("periodTypes");
     				
+    			 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
+    
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
     
     			try
@@ -337,6 +340,8 @@ namespace ReceiptManagement.Core.Managers.Generated
                 if (id == null)
                     throw new System.ArgumentNullException("id");
     		
+    		 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
                 Helpers.ActionResult result = Helpers.ActionResult.Factory(true);			
     			
                 try

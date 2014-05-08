@@ -126,6 +126,7 @@
       <DependentUpon>OrmsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\SecurityHandler.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
