@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OrmsModelStoreContainer" CdmEntityContainer="OrmsContext">
+    <EntitySetMapping Name="EventsInfoes">
+      <EntityTypeMapping TypeName="OrmsModel.EventsInfo">
+        <MappingFragment StoreEntitySet="EventsInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="My_Product_Service_Id" ColumnName="My_Product_Service_Id" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+          <ScalarProperty Name="NotifyBefore_PeriodValue" ColumnName="NotifyBefore_PeriodValue" />
+          <ScalarProperty Name="NotifyBefore_PeriodTypeId" ColumnName="NotifyBefore_PeriodTypeId" />
+          <ScalarProperty Name="Reoccurance_PeriodValue" ColumnName="Reoccurance_PeriodValue" />
+          <ScalarProperty Name="Reoccurance_PeriodTypeId" ColumnName="Reoccurance_PeriodTypeId" />
+          <ScalarProperty Name="EventStatusId" ColumnName="EventStatusId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventStatuses">
+      <EntityTypeMapping TypeName="OrmsModel.EventStatus">
+        <MappingFragment StoreEntitySet="EventStatuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventStatus1" ColumnName="EventStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="OrmsModel.Image">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageTypeId" ColumnName="ImageTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageTypes">
+      <EntityTypeMapping TypeName="OrmsModel.ImageType">
+        <MappingFragment StoreEntitySet="ImageTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageType1" ColumnName="ImageType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="My_Products_Services">
+      <EntityTypeMapping TypeName="OrmsModel.My_Products_Services">
+        <MappingFragment StoreEntitySet="My_Products_Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Product_Service_Id" ColumnName="Product_Service_Id" />
+          <ScalarProperty Name="Parent_My_Product_Service_Id" ColumnName="Parent_My_Product_Service_Id" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+          <ScalarProperty Name="WarrantyCardId" ColumnName="WarrantyCardId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PeriodTypes">
+      <EntityTypeMapping TypeName="OrmsModel.PeriodType">
+        <MappingFragment StoreEntitySet="PeriodTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Service_Categories">
+      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Categories">
+        <MappingFragment StoreEntitySet="Product_Service_Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Service_Images">
+      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Images">
+        <MappingFragment StoreEntitySet="Product_Service_Images">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Product_Service_Id" ColumnName="Product_Service_Id" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Service_Sections">
+      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Sections">
+        <MappingFragment StoreEntitySet="Product_Service_Sections">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Service_SubCategories">
+      <EntityTypeMapping TypeName="OrmsModel.Product_Service_SubCategories">
+        <MappingFragment StoreEntitySet="Product_Service_SubCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubCategoryTitle" ColumnName="SubCategoryTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products_Services">
+      <EntityTypeMapping TypeName="OrmsModel.Products_Services">
+        <MappingFragment StoreEntitySet="Products_Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReceiptImages">
+      <EntityTypeMapping TypeName="OrmsModel.ReceiptImage">
+        <MappingFragment StoreEntitySet="ReceiptImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipts">
+      <EntityTypeMapping TypeName="OrmsModel.Receipt">
+        <MappingFragment StoreEntitySet="Receipts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="OrmsModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SocialUsers">
+      <EntityTypeMapping TypeName="OrmsModel.SocialUser">
+        <MappingFragment StoreEntitySet="SocialUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SocialNetworkName" ColumnName="SocialNetworkName" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="System_Social_UsersAssociation">
+      <EntityTypeMapping TypeName="OrmsModel.System_Social_UsersAssociation">
+        <MappingFragment StoreEntitySet="System_Social_UsersAssociation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SocialUserId" ColumnName="SocialUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="OrmsModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarrantyCardImages">
+      <EntityTypeMapping TypeName="OrmsModel.WarrantyCardImage">
+        <MappingFragment StoreEntitySet="WarrantyCardImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WarrantyCardId" ColumnName="WarrantyCardId" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarrantyCards">
+      <EntityTypeMapping TypeName="OrmsModel.WarrantyCard">
+        <MappingFragment StoreEntitySet="WarrantyCards">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="WarrantyExpireOn" ColumnName="WarrantyExpireOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

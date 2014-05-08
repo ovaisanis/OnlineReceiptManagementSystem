@@ -21,13 +21,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "OnlineRecieptManagement", "
 		VWDPort = "1787"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecieptManagementService", "RecieptManagementService\RecieptManagementService.csproj", "{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Core", "ReceiptManagementService.Core\ReceiptManagement.Core.csproj", "{89805C61-0A72-430E-AC5E-111724BB3407}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Bll", "ReceiptManagement.Bll\ReceiptManagement.Bll.csproj", "{96137004-8F5C-4877-BEFB-16BD8C4AEFD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{EE49289B-0F16-4968-B480-16D51504DE85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Common", "ReceiptManagement.Common\ReceiptManagement.Common.csproj", "{B1296076-5F17-45A2-9EA3-4490F76A724C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Core", "ReceiptManagement.Core\ReceiptManagement.Core.csproj", "{89805C61-0A72-430E-AC5E-111724BB3407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +39,6 @@ Global
 		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{85CA7163-C3C8-4A9A-90BA-03159F9B70F3}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF95E564-1C7E-4D15-AA2F-784AEB0DD76E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89805C61-0A72-430E-AC5E-111724BB3407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89805C61-0A72-430E-AC5E-111724BB3407}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89805C61-0A72-430E-AC5E-111724BB3407}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89805C61-0A72-430E-AC5E-111724BB3407}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96137004-8F5C-4877-BEFB-16BD8C4AEFD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96137004-8F5C-4877-BEFB-16BD8C4AEFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96137004-8F5C-4877-BEFB-16BD8C4AEFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +47,14 @@ Global
 		{EE49289B-0F16-4968-B480-16D51504DE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE49289B-0F16-4968-B480-16D51504DE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE49289B-0F16-4968-B480-16D51504DE85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1296076-5F17-45A2-9EA3-4490F76A724C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1296076-5F17-45A2-9EA3-4490F76A724C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1296076-5F17-45A2-9EA3-4490F76A724C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1296076-5F17-45A2-9EA3-4490F76A724C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89805C61-0A72-430E-AC5E-111724BB3407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89805C61-0A72-430E-AC5E-111724BB3407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89805C61-0A72-430E-AC5E-111724BB3407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89805C61-0A72-430E-AC5E-111724BB3407}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

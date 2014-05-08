@@ -1,0 +1,1485 @@
+﻿<#
+//*********************************************************
+//
+//    Copyright (c) Microsoft. All rights reserved.
+//    This code is licensed under the Microsoft Public License.
+//    THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+//    ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+//    IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+//    PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+#>
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System.Resources" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ output extension=".cs"#><#
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader    = new MetadataLoader(this);
+CodeRegion region 		 = new CodeRegion(this, 1);
+MetadataTools ef 		 = new MetadataTools(this);
+
+string inputFile = @"..\..\Model\OrmsModel.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+Initialize(ItemCollection);
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	string entityName = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(entity.Name.ToLower()).Replace("_","");
+    fileManager.StartNewFile(entityName + "Manager.cs");
+	
+	// Include namespaces just below statement block (if any)
+#>
+using System.Linq;
+using System.Linq.Dynamic;
+using Entities = ReceiptManagement.Common.Entities;
+using Helpers  = ReceiptManagement.Common.Helpers;
+
+<#
+	BeginNamespace(namespaceName, code);
+    bool entityHasNullableFKs = entity.NavigationProperties.Any(np => np.GetDependentProperties().Any(p=>ef.IsNullable(p)));
+#>
+<# /*============================================================================================================*/ #>
+<# /* @@@@@@@@@@@@@@@@@@@@@ START : MANAGER CLASS */ #>
+<# /*============================================================================================================*/ #>
+/// <summary>
+/// <#=SummaryComment("entity")#>
+/// </summary><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+<#=Accessibility.ForType(entity)#> sealed partial class <#=entityName#>Manager : EntityManager
+{	
+	#region Methods
+	
+	<#
+	if (!entity.Abstract) // Generate methods only for Non Abstract Entities
+	{
+		PartialMethods(entity, code);
+		AddMethods(entity, code);
+		UpdateMethods(entity, code);
+		DeleteMethods(entity, code);
+		PurgeMethods(entity, code);
+		GetMethods(entity, code);
+		CountMethods(entity, code);
+		BulkUpdateMethods(entity, code);
+		if (entity.Properties.Any<EdmProperty>(e => e.Name == "IsActive")) UpdateStatusMethods(entity, code);
+		ImportMethods(entity, code);
+		HelperMethos(entity, code);
+		ValidationMethos(entity, code);
+		PartialUpdateMethods(entity,code);
+	}
+	#>	
+	
+	#endregion
+}
+<# /*============================================================================================================*/ #>
+<# /* @@@@@@@@@@@@@@@@@@@@@ END : MANAGER CLASS */ #>
+<# /*============================================================================================================*/ #>
+<#
+    EndNamespace(namespaceName);
+}
+#>
+<# fileManager.Process(); 
+	// ############################################################################################################
+	// @@@@@@@@@@@@@@@@@@@ MULTI FILE CODE GENERATION LOOP ENDS HERE
+#>
+
+<#+ 
+  /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+  /* @@@@@@@@@@@@@@@@@@@@@ START : INDIVIDUAL GENERATION METHODS */
+  /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+
+////////
+////////  Generate Partial Method Section
+////////
+void PartialMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Partial Methods
+
+        //	This partial method gives us a way to update an object before it is added to the system.
+        static partial void OnAdding(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to access an object after it has been added to the system.
+        static partial void OnAdded(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to update an object before it is updated in the system.        
+        static partial void OnUpdating(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>, bool isBulkUpdate);
+
+        //	This partial method gives us a way to access an object after it has been updated in the system.        
+        static partial void OnUpdated(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>, bool isBulkUpdate);
+
+        //	This partial method gives us a way to update an object before it is deleted from the system.
+        static partial void OnDeleting(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to access an object after it has been deleted from the system.
+        static partial void OnDeleted(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to update an object before it is imported into the system.
+        static partial void OnImporting(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to access an object after it has been imported into the system.
+        static partial void OnImported(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to bulk update an object before it is bulk updated in the system.
+        static partial void OnBulkUpdating(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>);
+
+        //	This partial method gives us a way to access an object after it has been bulk updated in the system.
+        static partial void OnBulkUpdated(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>);
+
+        //	This partial method gives us a way to access an object during it is bulk updated in the system.
+        static partial void OnPartialUpdate(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+		
+		//	This partial method gives us a way to access an object before it is validated in the system.
+        static partial void OnValidating(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>, ref Helpers.ActionResult result);
+		
+        //	This partial method gives us a way to access an object after it has been validated in the system.
+		static partial void OnValidated(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>, ref Helpers.ActionResult result);
+
+        //	This partial method gives us a way to update an object before it is purged from the system.
+        static partial void OnPurging(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+        //	This partial method gives us a way to access an object after it has been purged from the system.
+        static partial void OnPurged(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>);
+
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Add Method Section
+////////
+void AddMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Add Methods
+	
+		/// <summary>
+		///	<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Add(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+		{
+			return Add(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, false);
+		}
+		
+		/// <summary>
+		///	<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <param name="clientWins">if true system properties will not be overwritten by Api</param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Add(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>, System.Boolean clientWins)
+		{
+			// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+				
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+
+			try
+			{
+				Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+				foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+				{
+					if (!clientWins)
+					{
+						// SET system level properties
+				    	SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>, false);
+					}
+
+					// ADD to context
+					OnAdding(apiContext, <#=code.CamelCase(entity.Name)#>);
+					context.AddObject("<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+				}
+
+				context.SaveChanges(); // Save Changes				
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+				
+				foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+					OnAdded(apiContext, <#=code.CamelCase(entity.Name)#>);
+			}
+			catch (System.Exception ex)
+			{		
+				object forDebugging = ex;
+				throw;// Helpers.Exceptions.AddEntityException.Factory(ex);
+			}
+
+			return result;
+		}
+	
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Update Method Section
+////////
+void UpdateMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Update Methods
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Update(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+		{
+			return Update(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, false);
+		}
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <param name="clientWins">if true system properties will not be overwritten by Api</param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Update(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>, System.Boolean clientWins)
+		{
+			// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {
+					OnUpdating(apiContext, <#=code.CamelCase(entity.Name)#>, false);
+					
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+
+					if (!clientWins)
+					{
+						// SET system level properties
+            	    	SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>);
+					}
+					
+					// SET modified										
+                    SetModified(apiContext, <#=code.CamelCase(entity.Name)#>);
+                }
+
+				if (clientWins) {
+					context.Refresh(System.Data.Objects.RefreshMode.ClientWins, <#=code.CamelCase(GetEntityPluralName(entity))#>);
+				}
+				
+				context.SaveChanges(); // Save Changes
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                    OnUpdated(apiContext, <#=code.CamelCase(entity.Name)#>, false);
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+				HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);
+                //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.UpdateEntityException.Factory(ex);
+            }
+
+			return result;
+		}
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Delete Method Section
+////////
+void DeleteMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Delete Methods
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult Delete(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+        {
+			// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+            try
+            {				
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {
+					OnDeleting(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+					
+					// SET system level properties
+            	    SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>);
+					SetSystemPropertiesModified(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// SET SoftDeleted
+					SetDeleted(apiContext, <#=code.CamelCase(entity.Name)#>);
+                }
+
+				context.SaveChanges(); // Save Changes
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+				
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                    OnDeleted(apiContext, <#=code.CamelCase(entity.Name)#>);
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+                HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);
+                //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+            }
+            catch (System.Exception ex)
+            {     
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.DeleteEntityException.Factory(ex);
+            }
+
+            return result;
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Purge Method Section
+////////
+void PurgeMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Purge Methods
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult Purge(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+        {
+			// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+            try
+            {				
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {
+					OnPurging(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+					
+					// DELETE object
+					context.DeleteObject(<#=code.CamelCase(entity.Name)#>);
+                }
+
+				context.SaveChanges(); // Save Changes
+								
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                    OnPurged(apiContext, <#=code.CamelCase(entity.Name)#>);
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+                HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);
+                //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+            }
+            catch (System.Exception ex)
+            {     
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.DeleteEntityException.Factory(ex);
+            }
+
+            return result;
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Get Method Section
+////////
+void GetMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Get Methods
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="id"></param>
+		/// <param name="<#=code.CamelCase(entity.Name)#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult Get(Helpers.ApiContext apiContext, int id, out Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>)
+		{
+            // API doesn't allow null parameters.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+		
+            Helpers.ActionResult result = Helpers.ActionResult.Factory(true);			
+			
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                var qry = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(r => r.Id.Equals(id)).FirstOrDefault();
+
+				// See what would be default value in this case
+                // Also to see if no value found what shall be put into Action Result                
+				if (qry != null)
+				{
+					<#=code.CamelCase(entity.Name)#> = qry;
+					
+                	// must detach the object before return
+                	DetachObject(apiContext, <#=code.CamelCase(entity.Name)#>);
+				}
+				else
+				{
+            		<#=code.CamelCase(entity.Name)#> = new Entities.<#=code.Escape(entity.Name)#>();
+					<#=code.CamelCase(entity.Name)#>.Id = id;
+
+					result.WasSuccessful = false;
+					result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=code.CamelCase(entity.Name)#>, "Object not Found", Helpers.ActionResultMessageType.Warning));
+				}
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.GetEntityException.Factory(ex);
+            }
+
+			return result;            
+		}
+
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="querySettings"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Get(Helpers.ApiContext apiContext, Helpers.QuerySettings<Entities.<#=code.Escape(entity.Name)#>> querySettings, out System.Collections.Generic.List<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+		{
+            // API doesn't allow null parameters.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (querySettings == null)
+                throw new System.ArgumentNullException("querySettings");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+
+                // make entities query and set the NoTracking option to stop tracking of entities by entity framework
+                System.Data.Objects.ObjectQuery<Entities.<#=code.Escape(entity)#>> query = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>;
+                query.MergeOption = System.Data.Objects.MergeOption.NoTracking;
+				
+				// include entities
+				foreach (System.String include in querySettings.IncludedEntities) { query = query.Include(include); }
+
+                // execute the query with query settings applied
+				<#=code.CamelCase(GetEntityPluralName(entity))#> = query
+						.Where(querySettings.GetWhereExpression())
+						.OrderBy(querySettings.SortExpression)
+						.Skip(querySettings.ResultsStartIndex)
+						.Take(querySettings.MaxResultsSize)
+						.ToList();
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.GetEntityException.Factory(ex);
+            }			
+
+			return result;
+		}
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Count Method Section
+////////
+void CountMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Count Methods
+		
+		
+		/// <summary>
+		///		<#=SummaryComment("entity")#>
+		/// </summary>
+        /// <param name="apiContext"></param>
+		/// <param name="querySettings"></param>
+		/// <param name="count"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static Helpers.ActionResult Count(Helpers.ApiContext apiContext, Helpers.QuerySettings<Entities.<#=code.Escape(entity.Name)#>> querySettings, out int count)
+		{
+            // TODO: Perform QuerySettings Sort  Expression validation here (Match SortColumn type with TType)
+            // TODO: Perform QuerySettings Where Expression validation here (Match Expression; Add Default Where Expr)
+
+            // API doesn't allow null parameters.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (querySettings == null)
+                throw new System.ArgumentNullException("querySettings");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+
+                // execute the query with query settings applied
+				count = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(querySettings.GetWhereExpression()).Count();
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.GetEntityException.Factory(ex);
+            }			
+
+			return result;
+		}
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate BulkUpdate Method Section
+////////
+void BulkUpdateMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region BulkUpdate Methods
+		
+		/// <summary>
+        ///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult BulkUpdate(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+				
+				OnBulkUpdating(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>);
+
+				foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {
+					OnUpdating(apiContext, <#=code.CamelCase(entity.Name)#>, true);					
+
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+					
+					// SET system level properties
+            	    SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>);
+					SetSystemPropertiesModified(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// PARTIAL update					
+                    OnPartialUpdate(apiContext, <#=code.CamelCase(entity.Name)#>);
+                }
+
+				context.SaveChanges(); // Save Changes
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+
+                foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                    OnUpdated(apiContext, <#=code.CamelCase(entity.Name)#>, true);
+					
+				OnBulkUpdated(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>);
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+                HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);
+                //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.UpdateEntityException.Factory(ex);
+            }
+
+            return result;
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate UpdateStatus Method Section
+////////
+void UpdateStatusMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region UpdateStatus Methods
+		
+		/// <summary>
+        ///		<#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult UpdateStatus(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+
+				foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {                    
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+						
+					// SET system level properties
+            	    SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>);
+					SetSystemPropertiesModified(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// SET IsActive property modified
+					System.Data.Objects.ObjectStateEntry ose = apiContext.CurrentContext.ObjectStateManager.GetObjectStateEntry(<#=code.CamelCase(entity.Name)#>);
+					ose.SetModifiedProperty("IsActive");
+                }
+
+				context.SaveChanges(); // Save Changes
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+				//HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);
+                //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+				throw;
+            }
+            catch (System.Exception ex)
+            {     
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.UpdateEntityException.Factory(ex);
+            }
+
+            return result;
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Import Method Section
+////////
+void ImportMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Import Methods
+		
+		/// <summary>
+        ///		<#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult Import(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            //if (apiContext == null)
+            //    throw new System.ArgumentNullException("apiContext");
+
+			throw new System.NotImplementedException();
+
+            // Actual implementation is TBD. For consistency we'd want each imported item to go through the same ValidateSave method
+            // as is called on any add or edit. That way the same block of logic is used on every item before it goes into
+            // the database which assures data consistency.
+            // 
+            // For the old import this wouldn't have been a problem since all fields were required in the import file. Now imported
+            // records could be partial. This raises a bit of an issue since in some cases we'll have to return the existing data
+            // from the database before we can validate it. I expect that would be done before this method is called As a result I think we'll have to expect that there will be some 
+            // performance loss as a result of this new strategy. I think that the trade off for one set of validation logic is worth
+            // it and hopefully with some optimizations it won't be too bad.
+            //
+            // I have no idea what the final method will look like.
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Helper Method Section
+////////
+void HelperMethos(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region Helper Methods
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                return context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Any(whereClause);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+		/// <param name="id"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, long id)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                id = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).Select(e => e.Id).FirstOrDefault();                 
+
+                return (id != null);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+        /// <param name="iDs"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+       /* public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, out System.Collections.Generic.List<int> iDs)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                iDs = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).Select(e => e.Id).ToList();
+
+                return (iDs.Count > 0);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }*/
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+		/// <param name="selectClause"></param>
+        /// <param name="iDs"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, long>> selectClause, out System.Collections.Generic.List<long> iDs)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			if (selectClause == null)
+                throw new System.ArgumentNullException("selectClause");
+
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                iDs = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).Select(selectClause).ToList();
+
+                return (iDs.Count > 0);
+            }
+            catch (System.Exception ex)
+            {        
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+        /// <param name="entityKeys"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, out System.Collections.Generic.List<Helpers.EntityKey> entityKeys)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+
+            try
+            {
+               /* Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                entityKeys = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>
+									.Where(whereClause)
+									.Select(e => new { e.Id, e.ModifiedOn })
+									.ToList()									
+									.ConvertAll(e => Helpers.EntityKey.Factory(e.Id, e.ModifiedOn));
+
+             
+				*/
+				entityKeys = null;
+				   return (entityKeys.Count > 0);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+		/// <param name="entityKey"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, out Helpers.EntityKey entityKey)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			
+            try
+            {
+			/*
+				Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                var query = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).Select(e => new { e.Id, e.ModifiedOn }).FirstOrDefault();
+					*/
+				entityKey = null;
+				/*
+				if (query != null)
+					entityKey = Helpers.EntityKey.Factory(query.Id, query.ModifiedOn);
+				*/
+                return (entityKey != null);
+            }
+            catch (System.Exception ex)
+            {      
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+		/// <param name="entity"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, out Entities.<#=code.Escape(entity.Name)#> entity)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                var query = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).FirstOrDefault();
+
+				if (query != null)
+				{
+					entity = query;                	
+                	DetachObject(apiContext, entity); // must detach the object before return
+				}
+				else
+				{
+				    entity = new Entities.<#=code.Escape(entity.Name)#>();
+				}
+				
+                return (query != null);
+            }
+            catch (System.Exception ex)
+            {       
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="whereClause"></param>
+		/// <param name="entities"></param>
+        /// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static bool IsExists(Helpers.ApiContext apiContext, System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, bool>> whereClause, out System.Collections.Generic.List<Entities.<#=code.Escape(entity.Name)#>> entities)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (whereClause == null)
+                throw new System.ArgumentNullException("whereClause");
+			
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+                var query = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>;
+				query.MergeOption = System.Data.Objects.MergeOption.NoTracking;
+
+				entities = query.Where(whereClause).ToList();
+				
+                return (entities.Count > 0);
+            }
+            catch (System.Exception ex)
+            {       
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.ExistsException.Factory(ex);
+            }
+        }
+		
+		#endregion
+
+<#+}
+
+////////
+////////  Generate Validation Method Section
+////////
+void ValidationMethos(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this);
+	MetadataTools ef = new MetadataTools(this);#>
+		#region Validation Methods
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+        /// </summary>
+        /// <param name="apiContext"></param>
+        /// <param name="<#=code.CamelCase(entity.Name)#>"></param>
+        /// <param name="result"></param><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+		public static void ValidateData(Helpers.ApiContext apiContext, Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#>, ref Helpers.ActionResult result)
+        {
+			OnValidating(apiContext, <#=code.CamelCase(entity.Name)#>, ref result);
+			
+            if (<#=code.CamelCase(entity.Name)#>.Id == null)
+            {
+                result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=code.CamelCase(entity.Name)#>, "Id is required.", Helpers.ActionResultMessageType.Error));
+                result.WasSuccessful = false;
+            }
+			
+			<#+GenerateValidations(entity, code, ef, code.CamelCase(entity.Name));#>
+			
+			OnValidated(apiContext, <#=code.CamelCase(entity.Name)#>, ref result);
+        }
+		
+		/// <summary>
+        /// HandleOptimisticConcurrencyException
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <param name="exception"></param>
+		/// <param name="result"></param>
+        public static void HandleOptimisticConcurrencyException(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>, System.Exception exception, ref Helpers.ActionResult result)
+        { 		
+			result.Messages.Add(Helpers.ActionResultMessage.Factory(null, Helpers.ActionResultMessageCode.VLD_013, Helpers.ActionResultMessageType.Error));
+            result.WasSuccessful = false;
+        }
+		
+		#endregion
+	
+<#+}
+
+void PartialUpdateMethods(EntityType entity, CodeGenerationTools code) 
+{
+	CodeRegion region = new CodeRegion(this); #>
+		#region UpdateStatus Methods
+		
+		/// <summary>
+        /// <#=SummaryComment("entity")#>
+		/// </summary>
+		/// <param name="apiContext"></param>
+		/// <param name="<#=code.CamelCase(GetEntityPluralName(entity))#>"></param>
+		/// <param name="columnExpression"></param>
+		/// <returns></returns><#=LongDescriptionCommentElement("entity", region.CurrentIndentLevel)#>
+        public static Helpers.ActionResult PartialUpdate(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.<#=code.Escape(entity.Name)#>> <#=code.CamelCase(GetEntityPluralName(entity))#>,params System.Linq.Expressions.Expression<System.Func<Entities.<#=code.Escape(entity.Name)#>, object>>[] columnExpression)
+        {
+            // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+            if (apiContext == null)
+                throw new System.ArgumentNullException("apiContext");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#> == null)
+                throw new System.ArgumentNullException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+            if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
+                throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
+			if (columnExpression == null)
+				throw new System.ArgumentNullException("columnExpression");
+			if (columnExpression.Count() == 0)
+				throw new System.ArgumentOutOfRangeException("columnExpression");
+
+			ValidateColumnExpression<Entities.<#=code.Escape(entity.Name)#>>(columnExpression);
+
+			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+            try
+            {
+                Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+
+				foreach (Entities.<#=code.Escape(entity.Name)#> <#=code.CamelCase(entity.Name)#> in <#=code.CamelCase(GetEntityPluralName(entity))#>)
+                {                    
+					// ATTACH object					
+					AttachObject(apiContext, "<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
+						
+					// SET system level properties
+            	    SetSystemProperties(apiContext, <#=code.CamelCase(entity.Name)#>);
+					SetSystemPropertiesModified(apiContext, <#=code.CamelCase(entity.Name)#>);
+					
+					// SET IsActive property modified
+					System.Data.Objects.ObjectStateEntry ose = apiContext.CurrentContext.ObjectStateManager.GetObjectStateEntry(<#=code.CamelCase(entity.Name)#>);
+					
+					foreach (var item in columnExpression)
+					{
+						ose.SetModifiedProperty(item.GetPropertyName());    
+					}
+                }
+
+				context.SaveChanges(); // Save Changes
+				DetachObjects(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>); // Clean ObjectState cache
+            }
+			catch (System.Data.OptimisticConcurrencyException ex)
+            {
+				object forDebugging = ex;
+				HandleOptimisticConcurrencyException(apiContext, <#=code.CamelCase(GetEntityPluralName(entity))#>, ex, ref result);                
+            }
+            catch (System.Exception ex)
+            {     
+				object forDebugging = ex;
+                throw;// Helpers.Exceptions.UpdateEntityException.Factory(ex);
+            }
+
+            return result;
+        }
+		
+		#endregion
+
+<#+}
+		
+  /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+  /* @@@@@@@@@@@@@@@@@@@@@ END : INDIVIDUAL GENERATION METHODS */
+  /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+#>
+
+<#+
+////////
+////////  Default template methods
+////////
+void BeginNamespace(string namespaceName, CodeGenerationTools code)
+{
+    CodeRegion region = new CodeRegion(this);
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+#>
+namespace <#=code.EscapeNamespace(namespaceName)#>
+{
+<#+
+        PushIndent(CodeRegion.GetIndent(1));
+    }
+}
+
+
+void EndNamespace(string namespaceName)
+{
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+bool IsReadWriteAccessibleProperty(EdmMember member)
+{
+    string setter = Accessibility.ForWriteOnlyProperty(member);
+    string getter = Accessibility.ForReadOnlyProperty(member);
+
+    return getter != "private" && getter != "protected" && setter != "private" && setter != "protected";
+}
+
+string PropertyVirtualModifier(string accessibility)
+{
+    return accessibility + (accessibility != "private" ? " virtual" : "");
+}
+#>
+<#+
+bool VerifyTypesAreCaseInsensitiveUnique(EdmItemCollection itemCollection)
+{
+    Dictionary<string, bool> alreadySeen = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    foreach(StructuralType type in itemCollection.GetItems<StructuralType>())
+    {
+        if (!(type is EntityType || type is ComplexType))
+        {
+            continue;
+        }
+
+        if (alreadySeen.ContainsKey(type.FullName))
+        {
+            Error(String.Format(CultureInfo.CurrentCulture, "This template does not support types that differ only by case, the types {0} are not supported", type.FullName));
+            return false;
+        }
+        else
+        {
+            alreadySeen.Add(type.FullName, true);
+        }
+
+    }
+
+    return true;
+}
+#>
+
+<#+ 
+////////
+////////  Declare Documentation Properties & Methods
+////////
+
+string resxFile { get { return @"ResolutionOffice.Core\Managers\Generated\Resource.Managers.resx"; } } // We need to give relative path of file (Adjust carefully)
+
+string DefaultSummaryComment{ get { return "No Metadata Documentation available."; } }
+
+string GetResourceString(string resourceName)
+{
+	return string.Empty; /*
+	using (ResXResourceSet resxSet = new ResXResourceSet(resxFile))
+	{
+		return resxSet.GetString(resourceName, true);
+	}*/
+}
+
+//string SummaryComment(MetadataItem item)
+string SummaryComment(string resourceName)
+{
+	string resString = GetResourceString(resourceName);
+	
+	//if (item.Documentation != null && item.Documentation.Summary != null)
+    if (!String.IsNullOrEmpty(resString))
+    {
+		//return PrefixLinesOfMultilineComment(XMLCOMMENT_START + " ", XmlEntityize(item.Documentation.Summary));
+        return PrefixLinesOfMultilineComment(XMLCOMMENT_START + " ", XmlEntityize(resString));
+    }
+
+    if (DefaultSummaryComment != null)
+    {
+        return DefaultSummaryComment;
+    }
+
+    return string.Empty;
+}
+
+//string LongDescriptionCommentElement(MetadataItem item, int indentLevel)
+string LongDescriptionCommentElement(string resourceName, int indentLevel)
+{
+	string resString = GetResourceString(resourceName);
+	
+    //if (item.Documentation != null && !String.IsNullOrEmpty(item.Documentation.LongDescription))
+	if (!String.IsNullOrEmpty(resString))
+    {
+        string comment = Environment.NewLine;
+        string lineStart = CodeRegion.GetIndent(indentLevel) + XMLCOMMENT_START + " ";
+        comment += lineStart + "<LongDescription>" + Environment.NewLine;
+        //comment += lineStart + PrefixLinesOfMultilineComment(lineStart, XmlEntityize(item.Documentation.LongDescription)) + Environment.NewLine;
+		comment += lineStart + PrefixLinesOfMultilineComment(lineStart, XmlEntityize(resString)) + Environment.NewLine;
+        comment += lineStart + "</LongDescription>";
+        return comment;
+    }
+    return string.Empty;
+}
+
+string PrefixLinesOfMultilineComment(string prefix, string comment)
+{
+    return comment.Replace(Environment.NewLine, Environment.NewLine + prefix);
+}
+
+string ParameterComments(IEnumerable<Tuple<string, string>> parameters, int indentLevel)
+{
+    System.Text.StringBuilder builder = new System.Text.StringBuilder();
+    foreach (Tuple<string, string> parameter in parameters)
+    {
+        builder.AppendLine();
+        builder.Append(CodeRegion.GetIndent(indentLevel));
+        builder.Append(XMLCOMMENT_START);
+        builder.Append(String.Format(CultureInfo.InvariantCulture, " <param name=\"{0}\">{1}</param>", parameter.Item1, parameter.Item2));
+    }
+    return builder.ToString();
+}
+
+string XmlEntityize(string text)
+{
+    if (string.IsNullOrEmpty(text))
+    {
+        return string.Empty;
+    }
+
+    text = text.Replace("&","&amp;");
+    text = text.Replace("<","&lt;").Replace(">","&gt;");
+    string id = Guid.NewGuid().ToString();
+    text = text.Replace(Environment.NewLine, id);
+    text = text.Replace("\r", "&#xD;").Replace("\n","&#xA;");
+    text = text.Replace(id, Environment.NewLine);
+    return text.Replace("\'","&apos;").Replace("\"","&quot;");
+}
+
+const string XMLCOMMENT_START = "///";
+IEnumerable<EdmProperty> GetProperties(StructuralType type)
+{
+    if (type.BuiltInTypeKind == BuiltInTypeKind.EntityType)
+    {
+        return ((EntityType)type).Properties;
+    }
+    else
+    {
+        return ((ComplexType)type).Properties;
+    }
+}
+#>
+
+<#+ 
+
+////////
+////////  Get EntitySet Name
+////////
+
+static EntityContainer container = null;
+void Initialize(EdmItemCollection ItemCollection)
+{	
+	container = ItemCollection.GetItems<EntityContainer>().FirstOrDefault();
+}
+
+string GetEntitySet(EntityType entity)
+{
+	EntitySet entitySet = container.BaseEntitySets.OfType<EntitySet>().Where(c => c.ElementType == entity).FirstOrDefault();
+	
+	if (entitySet == null)
+	{
+		if (entity.BaseType == null)
+		{
+			return string.Empty;
+		}
+		
+		return GetEntitySet(entity.BaseType as EntityType);
+	}
+	
+	return entitySet.Name;
+}
+
+string GetEntityPluralName(EntityType entity)
+{
+	string entitySetName = GetEntitySet(entity);
+	
+	// Check if entitySet name & entity names are same
+	if (entitySetName.Equals(entity.Name, StringComparison.CurrentCultureIgnoreCase))
+		entitySetName += "List";
+	
+	return entitySetName;
+}
+
+string GetOfType(EntityType entity)
+{
+	EntitySet entitySet = container.BaseEntitySets.OfType<EntitySet>().Where(c => c.ElementType == entity).FirstOrDefault();
+	
+	if (entitySet == null && entity.BaseType != null)
+	{
+		return ".OfType<Entities."+ entity.Name +">()";
+	}
+	
+	return string.Empty;
+}
+
+bool IsAdministrativeProperty(EdmProperty property)
+{
+	switch (property.Name)
+	{
+		case  "CreatedOn":
+		case  "CreatedBy":
+		case "ModifiedOn":
+		case "ModifiedBy":
+		case  "IsDeleted":
+		case "CustomerId":
+				return true;
+		default:
+				return false;
+	}
+}
+
+string GetPropertyType(EdmProperty property)
+{
+	return "System" + property.TypeUsage.ToString().Substring(3);
+}
+
+string GetMaxLenth(EdmProperty property)
+{
+	var maxLen = property.TypeUsage.Facets.Where(f => f.Name == "MaxLength").FirstOrDefault();
+	
+	if (maxLen == null || maxLen.Value == null)
+		return "0";
+	
+	return maxLen.Value.ToString();
+}
+
+void GenerateValidations(EntityType entity, CodeGenerationTools code, MetadataTools ef, System.String entityName)
+{
+	if (entity.BaseType != null)
+		GenerateValidations((EntityType)entity.BaseType, code, ef, entityName);
+	
+	foreach (EdmProperty property in entity.Properties.Where(p => p.DeclaringType == entity && p.TypeUsage.EdmType is PrimitiveType))
+	{	
+		if (!ef.IsKey(property) && !IsAdministrativeProperty(property))
+		{#>
+			<#+ 
+			if (GetPropertyType(property)=="System.Guid" && !ef.IsNullable(property)) 
+			{#>					
+			if (<#=entityName#>.<#=code.Escape(property)#> == null)
+    		{
+        		result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=entityName#>, "<#=code.Escape(property)#> is required.", Helpers.ActionResultMessageType.Error));
+        		result.WasSuccessful = false;
+    		}
+			<#+
+			}
+			if (GetPropertyType(property)=="System.String" && !ef.IsNullable(property)) 
+			{#>
+			if (System.String.IsNullOrWhiteSpace(<#=entityName#>.<#=code.Escape(property)#>))
+			{
+				result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=entityName#>, "<#=code.Escape(property)#> is required.", Helpers.ActionResultMessageType.Error));
+				result.WasSuccessful = false;
+			}
+			<#+ if (GetMaxLenth(property) != "Max") { #>	
+			if (!System.String.IsNullOrWhiteSpace(<#=entityName#>.<#=code.Escape(property)#>) && <#=entityName#>.<#=code.Escape(property)#>.Length > <#= GetMaxLenth(property) #>)
+			{
+				result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=entityName#>, "<#=code.Escape(property)#> must be <#= GetMaxLenth(property) #> characters or less.", Helpers.ActionResultMessageType.Error));
+				result.WasSuccessful = false;
+			}<#+}
+			}
+			if (GetPropertyType(property)=="System.String" && ef.IsNullable(property) && GetMaxLenth(property) != "Max") 
+			{#>
+			if (!System.String.IsNullOrWhiteSpace(<#=entityName#>.<#=code.Escape(property)#>) && <#=entityName#>.<#=code.Escape(property)#>.Length > <#= GetMaxLenth(property) #>)
+			{						
+				result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=entityName#>, "<#=code.Escape(property)#> must be <#= GetMaxLenth(property) #> characters or less.", Helpers.ActionResultMessageType.Error));
+				result.WasSuccessful = false;
+			}
+			<#+}
+			if (GetPropertyType(property)=="System.String") 
+			{#>
+			if (!System.String.IsNullOrWhiteSpace(<#=entityName#>.<#=code.Escape(property)#>) && !System.Text.RegularExpressions.Regex.IsMatch(<#=entityName#>.<#=code.Escape(property)#>, alphaNumeric))
+			{						
+				result.Messages.Add(Helpers.ActionResultMessage.Factory(<#=entityName#>, "<#=code.Escape(property)#> contains invalid characters.", Helpers.ActionResultMessageType.Error));
+				result.WasSuccessful = false;
+			}
+			<#+}
+			
+			// NOT DECIDED for Integer/Long/Float/Double fields
+			//if (GetPropertyType(property)=="System.Int64" || GetPropertyType(property)=="System.Int32") {}
+		}
+	}
+}
+
+#>
