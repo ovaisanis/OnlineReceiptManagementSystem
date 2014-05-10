@@ -1,7 +1,0 @@
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\bin\Debug\UnitTestProject.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\bin\Debug\UnitTestProject.pdb
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\bin\Debug\ReceiptManagement.Bll.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\bin\Debug\ReceiptManagement.Bll.pdb
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\obj\Debug\UnitTestProject.csprojResolveAssemblyReference.cache
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\obj\Debug\UnitTestProject.dll
-C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\UnitTestProject\obj\Debug\UnitTestProject.pdb
