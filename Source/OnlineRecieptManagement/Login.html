@@ -1,297 +1,40 @@
-﻿
-<!DOCTYPE html>
-
-<html lang="en-us">
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<title>Tabs Control & Tabbed Form (Responsive) - Live Preview - WrapBootstrap</title>
-<meta content="Live preview for Tabs Control & Tabbed Form (Responsive) at WrapBootstrap" name="description">
-<meta content="width=1024" name="viewport">
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="Content/styles.css" rel="stylesheet" />
 
-<link href="//d85wutc1n854v.cloudfront.net/live/css/screen_preview.css" media="screen" type="text/css" rel="stylesheet" />
-<link href="//d85wutc1n854v.cloudfront.net/live/imgs/favicon.ico" rel="shortcut icon">
-
-<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
-<script src="//d85wutc1n854v.cloudfront.net/live/js/behavior.js"></script>
-
+    <script src="Scripts/jquery.min.js"></script>    
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/controllers.js"></script>
 </head>
+<body ng-app="customerOrm">
+  <div ng-controller="LoginController" class="container">
+    <h1>Events</h1>
+    <hr/>
 
-<body>
-<div id="demo-1" class="row-fluid">
-<div class="span10 offset1">
-<h4>Responsive Tabbed Form Aligned Above</h4>
-<div class="tabbable custom-tabs tabs-animated flat flat-all hide-label-980 shadow track-url auto-scroll">
-<ul class="nav nav-tabs">
-<li class="active">
-<a class="active " data-toggle="tab" href="#panel1">
-<i class="icon-lock"></i>
-<span>Login Panel</span>
-</a>
-</li>
-<li>
-<a data-toggle="tab" href="#panel2">
-<i class="icon-user"></i>
-<span>Register Panel</span>
-</a>
-</li>
-<li>
-<a data-toggle="tab" href="#panel3">
-<i class="icon-key"></i>
-<span>Forgot Password</span>
-</a>
-</li>
-<li>
-<a data-toggle="tab" href="#panel4">
-<i class="icon-envelope-alt"></i>
-<span>Contact Us</span>
-</a>
-</li>
-</ul>
-<div class="tab-content ">
-<div id="panel1" class="tab-pane active">
-<div class="row-fluid">
-<div class="span5">
-<h4>
-<i class="icon-user"></i>
-   Login Here
-</h4>
-<label>Username</label>
-<input class="input-block-level" type="text">
-<label>
-Password
-<a class="pull-right" href="#">
-<i class="icon-question-sign"></i>
- Forgot Password
-</a>
-</label>
-<input class="input-block-level" type="password">
-<label>
-<button class="btn btn-mini custom-checkbox active" data-toggle="button" type="button">
-<i class="icon-ok"></i>
-</button>
-   Remember Me
-</label>
-<br>
-<a class=" btn " href="#">
-Sign In   
-<i class="icon-chevron-sign-right"></i>
-</a>
-</div>
-<div class="span3">
-<h4>
-<i class="icon-expand-alt"></i>
-  Social
-</h4>
-<div class="socials clearfix">
-<a class="icon-facebook facebook"></a>
-<a class="icon-twitter twitter"></a>
-<a class="icon-google-plus google-plus"></a>
-<a class="icon-pinterest pinterest"></a>
-<a class="icon-linkedin linked-in"></a>
-<a class="icon-github github"></a>
-</div>
-</div>
-<div class="span4">
-<h4>
-<i class="icon-question"></i>
-  Registration
-</h4>
-<div class="box">
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel. </p>
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in. </p>
-</div>
-<div class="box">
-Don't Have An Account.
-<br>
-Click Here For
-<a data-toggle="tab" href="#">Free Register</a>
-</div>
-</div>
-</div>
-</div>
-<div id="panel2" class="tab-pane">
-<div class="row-fluid">
-<div class="span5">
-<h4>
-<i class="icon-user"></i>
-   Register Here
-</h4>
-<label>Username</label>
-<input class="input-block-level" type="text">
-<label>Password </label>
-<input class="input-block-level" type="password">
-<label>Repeat Password</label>
-<input class="input-block-level" type="password">
-<label>
-<button class="btn btn-mini custom-checkbox active" data-toggle="button" type="button">
-<i class="icon-ok"></i>
-</button>
-   I Aggree With
-<a href="#">Terms & Conditions</a>
-</label>
-<br>
-<a class=" btn " href="#">
-Register Now   
-<i class="icon-chevron-sign-right"></i>
-</a>
-</div>
-<div class="span3">
-<h4>
-<i class="icon-expand-alt"></i>
-  Social
-</h4>
-<div class="socials clearfix">
-<a class="icon-facebook facebook"></a>
-<a class="icon-twitter twitter"></a>
-<a class="icon-google-plus google-plus"></a>
-<a class="icon-pinterest pinterest"></a>
-<a class="icon-linkedin linked-in"></a>
-<a class="icon-github github"></a>
-</div>
-</div>
-<div class="span4">
-<h4>
-<i class="icon-question"></i>
-  Login
-</h4>
-<div class="box">
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel. </p>
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in. </p>
-</div>
-<div class="box">
-Already Have An Account.
-<br>
-Click Here For
-<a data-toggle="tab" href="#">Login</a>
-</div>
-</div>
-</div>
-</div>
-<div id="panel3" class="tab-pane">
-<div class="row-fluid">
-<div class="span5">
-<h4>
-<i class="icon-unlock"></i>
-  Password Recovery
-</h4>
-<label>Email</label>
-<input class="input-block-level" type="text">
-<label>Security Question</label>
-<select class="input-block-level">
-<option selected="selected" disabled="disabled">---Select---</option>
-<option>Which Is Your First Mobile</option>
-<option>What Is Your Pet Name</option>
-<option>What Is Your Mother Name</option>
-<option>Which Is Your First Game</option>
-</select>
-<label>Answer</label>
-<input class="input-block-level" type="text">
-<br>
-<br>
-<a class=" btn " href="#">
-Recover Password   
-<i class="icon-chevron-sign-right"></i>
-</a>
-</div>
-<div class="span7">
-<h4>
-<i class="icon-question"></i>
-  Help
-</h4>
-<div class="box">
-<p>
-Getting Error With Password Recovery Click Here For
-<a href="#">Support</a>
-</p>
-<ul>
-<li>Vestibulum pharetra lectus montes lacus!</li>
-<li>Iaculis lectus augue pulvinar taciti.</li>
-</ul>
-</div>
-<div class="box">
-<ul>
-<li>Potenti facilisis felis sociis blandit euismod.</li>
-<li>Odio mi hendrerit ad nostra.</li>
-<li>Rutrum mi commodo molestie taciti.</li>
-<li>Interdum ipsum ad risus conubia, porttitor.</li>
-<li>Placerat litora, proin hac hendrerit ac volutpat.</li>
-<li>Ornare, aliquam condimentum habitasse.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div id="panel4" class="tab-pane">
-<div class="row-fluid">
-<div class="span5">
-<h4>
-<i class="icon-envelope-alt"></i>
-  Contact Us
-</h4>
-<label>Name</label>
-<input id="" class="input-block-level" type="text" value="">
-<label>Email</label>
-<input id="Text1" class="input-block-level" type="text" value="">
-<label>Mobile No</label>
-<input id="Text2" class="input-block-level" type="text" value="">
-<label>Message</label>
-<textarea class="input-block-level" rows="5"></textarea>
-<a class=" btn " href="#">
-Send Message   
-<i class="icon-chevron-sign-right"></i>
-</a>
-<br class="visible-phone">
-<br class="visible-phone">
-</div>
-<div class="span7">
-<div class="row-fluid">
-<div class="span12">
-<h4>
-<i class="icon-location-arrow"></i>
-  Locate Us
-</h4>
-<div class="map"></div>
-</div>
-</div>
-<div class="row-fluid">
-<div class="span6">
-<h4>
-<i class="icon-envelope-alt"></i>
-  Contact Us
-</h4>
-<address>
-<strong>Full Name</strong>
-<br>
-<a href="mailto:#">first.last@example.com</a>
-</address>
-</div>
-<div class="span6">
-<h4>
-<i class="icon-location-arrow"></i>
-  Our Address
-</h4>
-<address>
-<strong>Twitter, Inc.</strong>
-<br>
-795 Folsom Ave, Suite 600
-<br>
-San Francisco, CA 94107
-<br>
-<abbr title="Phone">P:</abbr>
-(123) 456-7890
-</address>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+ <!--   <label for="username">Username:</label>
+  <input type="text" id="username"
+         >
+  <label for="password">Password:</label>
+  <input type="password" id="password"
+         >
+  <button type="submit">Login</button>
+  </div>-->
+
+    <form name="loginForm" ng-submit="login(credentials)"
+      novalidate>
+  <label for="username">Username:</label>
+  <input type="text" id="Text1"
+         ng-model="credentials.username">
+  <label for="password">Password:</label>
+  <input type="password" id="password1"
+         ng-model="credentials.password">
+  <button type="submit">Login</button>
+</form>
 </body>
-
 </html>
-
-

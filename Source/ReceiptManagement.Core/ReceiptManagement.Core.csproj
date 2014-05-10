@@ -115,6 +115,7 @@
       <DependentUpon>Orms.Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\NotGenerated\EntityManager.cs" />
+    <Compile Include="Managers\NotGenerated\UserManager.cs" />
     <Compile Include="Model\OrmsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

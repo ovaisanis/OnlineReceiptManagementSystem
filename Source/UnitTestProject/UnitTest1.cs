@@ -14,9 +14,23 @@ namespace UnitTestProject
         public static ReceiptManagement.Common.Helpers.ApiContext apiContext = ReceiptManagement.Common.Helpers.ApiContext.Factory(connectionString);
 
         [TestMethod]
-        public void TestMethod1()
+        public void GetUser()
         {           
              new UserManager().GetUsers(apiContext,3);
+        }
+
+        [TestMethod]
+        public void InsertUser()
+        {
+            ReceiptManagement.Common.Entities.User user = new ReceiptManagement.Common.Entities.User();
+
+            user.FirstName = "Faisal";
+            user.LastName = "Nasir";
+            user.Password = "123";
+            user.Email = "mfaisal.nasir@hotmail.com";
+            user.RoleId = 1;
+
+            new UserManager().Insert(apiContext, user);
         }
     }
 }
