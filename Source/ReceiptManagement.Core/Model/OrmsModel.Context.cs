@@ -20,8 +20,8 @@ namespace ReceiptManagement.Core.Model
         internal const string ContainerName    = "OrmsContext";
         internal const string ConnectionString = "name=OrmsContext";
     	
-    	private const string ConnectionStringTemplate =         
-                                @"metadata=res://*/Model.OrmsModel.csdl|res://*/Model.OrmsModel.ssdl|res://*/Model.OrmsModel.msl;
+    	private const string ConnectionStringTemplate = 
+    							@"metadata=res://*/Model.OrmsModel.csdl|res://*/Model.OrmsModel.ssdl|res://*/Model.OrmsModel.msl;
                                   provider=System.Data.SqlClient;
                                   provider connection string='{0};MultipleActiveResultSets=True'";
     

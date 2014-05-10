@@ -60,7 +60,7 @@ namespace <#=code.EscapeNamespace(namespaceName)#>
     internal const string ConnectionString = "name=<#=container.Name#>";
 	
 	private const string ConnectionStringTemplate = 
-							@"metadata=res://*/Model.EResolutionOffice.csdl|res://*/Model.EResolutionOffice.ssdl|res://*/Model.EResolutionOffice.msl;
+							@"metadata=res://*/Model.OrmsModel.csdl|res://*/Model.OrmsModel.ssdl|res://*/Model.OrmsModel.msl;
                               provider=System.Data.SqlClient;
                               provider connection string='{0};MultipleActiveResultSets=True'";
 
