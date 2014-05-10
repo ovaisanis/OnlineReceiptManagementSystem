@@ -22,14 +22,23 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "OnlineRecieptManagement", "
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Bll", "ReceiptManagement.Bll\ReceiptManagement.Bll.csproj", "{96137004-8F5C-4877-BEFB-16BD8C4AEFD3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{89805C61-0A72-430E-AC5E-111724BB3407} = {89805C61-0A72-430E-AC5E-111724BB3407}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{EE49289B-0F16-4968-B480-16D51504DE85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Core", "ReceiptManagement.Core\ReceiptManagement.Core.csproj", "{89805C61-0A72-430E-AC5E-111724BB3407}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1296076-5F17-45A2-9EA3-4490F76A724C} = {B1296076-5F17-45A2-9EA3-4490F76A724C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.Common", "ReceiptManagement.Common\ReceiptManagement.Common.csproj", "{B1296076-5F17-45A2-9EA3-4490F76A724C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptManagement.RESTfulAPI", "ReceiptManagement.RESTfulAPI\ReceiptManagement.RESTfulAPI.csproj", "{02AB68B1-4F98-47BD-BA91-2100B304D031}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96137004-8F5C-4877-BEFB-16BD8C4AEFD3} = {96137004-8F5C-4877-BEFB-16BD8C4AEFD3}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

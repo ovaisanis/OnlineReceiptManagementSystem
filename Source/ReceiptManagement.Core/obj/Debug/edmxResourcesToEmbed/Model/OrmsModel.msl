@@ -2,8 +2,8 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OrmsModelStoreContainer" CdmEntityContainer="OrmsContext">
     <EntitySetMapping Name="EventsInfoes">
-      <EntityTypeMapping TypeName="OrmsModel.EventsInfo">
-        <MappingFragment StoreEntitySet="EventsInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.EventsInfo)">
+        <MappingFragment StoreEntitySet="EventsInfoes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="My_Product_Service_Id" ColumnName="My_Product_Service_Id" />
           <ScalarProperty Name="EventDate" ColumnName="EventDate" />
@@ -21,15 +21,15 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventStatuses">
-      <EntityTypeMapping TypeName="OrmsModel.EventStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.EventStatus)">
         <MappingFragment StoreEntitySet="EventStatuses">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="EventStatus1" ColumnName="EventStatus" />
+          <ScalarProperty Name="EventStatus1" ColumnName="EventStatus1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="OrmsModel.Image">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Image)">
         <MappingFragment StoreEntitySet="Images">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ImageTypeId" ColumnName="ImageTypeId" />
@@ -43,15 +43,15 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ImageTypes">
-      <EntityTypeMapping TypeName="OrmsModel.ImageType">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.ImageType)">
         <MappingFragment StoreEntitySet="ImageTypes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ImageType1" ColumnName="ImageType" />
+          <ScalarProperty Name="ImageType1" ColumnName="ImageType1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="My_Products_Services">
-      <EntityTypeMapping TypeName="OrmsModel.My_Products_Services">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.My_Products_Services)">
         <MappingFragment StoreEntitySet="My_Products_Services">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Product_Service_Id" ColumnName="Product_Service_Id" />
@@ -66,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PeriodTypes">
-      <EntityTypeMapping TypeName="OrmsModel.PeriodType">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.PeriodType)">
         <MappingFragment StoreEntitySet="PeriodTypes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -75,7 +75,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product_Service_Categories">
-      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Product_Service_Categories)">
         <MappingFragment StoreEntitySet="Product_Service_Categories">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
@@ -83,7 +83,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product_Service_Images">
-      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Images">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Product_Service_Images)">
         <MappingFragment StoreEntitySet="Product_Service_Images">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Product_Service_Id" ColumnName="Product_Service_Id" />
@@ -92,7 +92,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product_Service_Sections">
-      <EntityTypeMapping TypeName="OrmsModel.Product_Service_Sections">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Product_Service_Sections)">
         <MappingFragment StoreEntitySet="Product_Service_Sections">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -104,7 +104,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product_Service_SubCategories">
-      <EntityTypeMapping TypeName="OrmsModel.Product_Service_SubCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Product_Service_SubCategories)">
         <MappingFragment StoreEntitySet="Product_Service_SubCategories">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -113,7 +113,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products_Services">
-      <EntityTypeMapping TypeName="OrmsModel.Products_Services">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Products_Services)">
         <MappingFragment StoreEntitySet="Products_Services">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -127,7 +127,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ReceiptImages">
-      <EntityTypeMapping TypeName="OrmsModel.ReceiptImage">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.ReceiptImage)">
         <MappingFragment StoreEntitySet="ReceiptImages">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
@@ -136,7 +136,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Receipts">
-      <EntityTypeMapping TypeName="OrmsModel.Receipt">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Receipt)">
         <MappingFragment StoreEntitySet="Receipts">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
@@ -150,7 +150,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="OrmsModel.Role">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.Role)">
         <MappingFragment StoreEntitySet="Roles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -158,7 +158,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SocialUsers">
-      <EntityTypeMapping TypeName="OrmsModel.SocialUser">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.SocialUser)">
         <MappingFragment StoreEntitySet="SocialUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -171,7 +171,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="System_Social_UsersAssociation">
-      <EntityTypeMapping TypeName="OrmsModel.System_Social_UsersAssociation">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.System_Social_UsersAssociation)">
         <MappingFragment StoreEntitySet="System_Social_UsersAssociation">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -180,7 +180,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="OrmsModel.User">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.User)">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -194,7 +194,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WarrantyCardImages">
-      <EntityTypeMapping TypeName="OrmsModel.WarrantyCardImage">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.WarrantyCardImage)">
         <MappingFragment StoreEntitySet="WarrantyCardImages">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="WarrantyCardId" ColumnName="WarrantyCardId" />
@@ -203,7 +203,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WarrantyCards">
-      <EntityTypeMapping TypeName="OrmsModel.WarrantyCard">
+      <EntityTypeMapping TypeName="IsTypeOf(OrmsModel.WarrantyCard)">
         <MappingFragment StoreEntitySet="WarrantyCards">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
