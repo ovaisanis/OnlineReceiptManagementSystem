@@ -263,6 +263,8 @@ void UpdateMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
 
             try
@@ -338,6 +340,8 @@ void DeleteMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
             try
             {				
@@ -406,6 +410,8 @@ void PurgeMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
             try
             {				
@@ -519,6 +525,8 @@ void GetMethods(EntityType entity, CodeGenerationTools code)
             if (querySettings == null)
                 throw new System.ArgumentNullException("querySettings");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
 
             try
@@ -580,6 +588,8 @@ void CountMethods(EntityType entity, CodeGenerationTools code)
             if (querySettings == null)
                 throw new System.ArgumentNullException("querySettings");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
 
             try
@@ -626,6 +636,8 @@ void BulkUpdateMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
             try
             {
@@ -699,6 +711,8 @@ void UpdateStatusMethods(EntityType entity, CodeGenerationTools code)
             if (<#=code.CamelCase(GetEntityPluralName(entity))#>.Count() == 0)
                 throw new System.ArgumentOutOfRangeException("<#=code.CamelCase(GetEntityPluralName(entity))#>");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
 			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
             try
             {
@@ -858,6 +872,8 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
             if (whereClause == null)
                 throw new System.ArgumentNullException("whereClause");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
             try
             {
                 Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -890,6 +906,8 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
 			if (selectClause == null)
                 throw new System.ArgumentNullException("selectClause");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
             try
             {
                 Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -919,6 +937,8 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
             if (whereClause == null)
                 throw new System.ArgumentNullException("whereClause");
 
+				 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
             try
             {
                /* Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -990,8 +1010,11 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
             if (whereClause == null)
                 throw new System.ArgumentNullException("whereClause");
 			
+			 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
             try
             {
+
                 Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
                 var query = context.<#=GetEntitySet(entity)#><#=GetOfType(entity)#>.Where(whereClause).FirstOrDefault();
 
@@ -1029,6 +1052,9 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
             if (whereClause == null)
                 throw new System.ArgumentNullException("whereClause");
 			
+			 // Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
+
             try
             {
                 Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;

@@ -52,7 +52,7 @@ app.config(function ($routeProvider) {
         .when('/',
             {
                 controller: 'LoginController',
-                templateUrl: '/OnlineRecieptManagement/app/Login.html'
+                templateUrl: '/OnlineRecieptManagement/Login.html'
             })
         //Define a route that has a route parameter in it (:customerID)
         //.when('/customerorders/:customerID',

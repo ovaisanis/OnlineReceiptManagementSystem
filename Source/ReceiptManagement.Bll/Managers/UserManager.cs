@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ReceiptManagement.Common.Helpers;
 using Common = ReceiptManagement.Common;
+using CoreManagers = ReceiptManagement.Core.Managers;
 
 namespace ReceiptManagement.Bll.Managers
 {
@@ -14,10 +15,39 @@ namespace ReceiptManagement.Bll.Managers
         {
             Common.Entities.User user = new Common.Entities.User();
 
-            ReceiptManagement.Core.Managers.UserManager.Get(apiContext,id,out user);
+            CoreManagers.UserManager.Get(apiContext, id, out user);
 
             return user;
             
         }
+
+        #region Insert
+
+        /// <summary>
+        ///     Insert
+        /// </summary>
+        /// <param name = "apiContext"></param>
+        /// <param name = "info"></param>
+        /// <returns></returns>
+        public bool Insert(ApiContext apiContext, Common.Entities.User user)
+        {
+            try
+            {
+                var result = CoreManagers.UserManager.Add(apiContext, new List<Common.Entities.User> { user });
+
+                if (!result.WasSuccessful)
+                {
+                    return false;
+                }
+
+                return true;
+            }           
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

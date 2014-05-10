@@ -159,6 +159,8 @@ namespace ReceiptManagement.Core.Managers
                 if (warrantyCardImages.Count() == 0)
                     throw new System.ArgumentOutOfRangeException("warrantyCardImages");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
     
                 try
@@ -226,6 +228,8 @@ namespace ReceiptManagement.Core.Managers
                 if (warrantyCardImages.Count() == 0)
                     throw new System.ArgumentOutOfRangeException("warrantyCardImages");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
                 try
                 {				
@@ -286,6 +290,8 @@ namespace ReceiptManagement.Core.Managers
                 if (warrantyCardImages.Count() == 0)
                     throw new System.ArgumentOutOfRangeException("warrantyCardImages");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
                 try
                 {				
@@ -391,6 +397,8 @@ namespace ReceiptManagement.Core.Managers
                 if (querySettings == null)
                     throw new System.ArgumentNullException("querySettings");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
     
                 try
@@ -444,6 +452,8 @@ namespace ReceiptManagement.Core.Managers
                 if (querySettings == null)
                     throw new System.ArgumentNullException("querySettings");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
     
                 try
@@ -482,6 +492,8 @@ namespace ReceiptManagement.Core.Managers
                 if (warrantyCardImages.Count() == 0)
                     throw new System.ArgumentOutOfRangeException("warrantyCardImages");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
     			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
                 try
                 {
@@ -632,6 +644,8 @@ namespace ReceiptManagement.Core.Managers
                 if (whereClause == null)
                     throw new System.ArgumentNullException("whereClause");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
                 try
                 {
                     Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -664,6 +678,8 @@ namespace ReceiptManagement.Core.Managers
     			if (selectClause == null)
                     throw new System.ArgumentNullException("selectClause");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
                 try
                 {
                     Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -693,6 +709,8 @@ namespace ReceiptManagement.Core.Managers
                 if (whereClause == null)
                     throw new System.ArgumentNullException("whereClause");
     
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
                 try
                 {
                    /* Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
@@ -764,8 +782,11 @@ namespace ReceiptManagement.Core.Managers
                 if (whereClause == null)
                     throw new System.ArgumentNullException("whereClause");
     			
+    			 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
                 try
                 {
+    
                     Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
                     var query = context.WarrantyCardImages.Where(whereClause).FirstOrDefault();
     
@@ -803,6 +824,9 @@ namespace ReceiptManagement.Core.Managers
                 if (whereClause == null)
                     throw new System.ArgumentNullException("whereClause");
     			
+    			 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
+    
                 try
                 {
                     Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
