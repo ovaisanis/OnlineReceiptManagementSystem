@@ -115,3 +115,29 @@ app.controller('OrderChildController', function ($scope) {
     };
 
 });
+
+//app.controller('LoginController', function () {
+//    $http({ method: 'GET', url: '/someUrl' }).
+//   success(function (data, status, headers, config) {
+//       //this callback will be called asynchronously, when the response is available
+//   }).
+//   error(function (data, status, headers, config) {
+//       //called asynchronously if an error occurs or server returns response with an error status.
+//   });
+//});
+
+app.controller('LoginController', function ($scope, $rootScope, AUTH_EVENTS, AuthService) {
+    
+    $scope.credentials = {
+        username: '',
+        password: ''
+    };
+    $scope.login = function (credentials) {
+        AuthService.login(credentials).then(function () {
+            
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        }, function () {
+            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        });
+    };
+})

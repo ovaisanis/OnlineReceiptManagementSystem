@@ -19,28 +19,53 @@
 
   #######################################################################*/
 
-var app = angular.module('customersApp', ['ngRoute']);
+//var app = angular.module('customersApp', ['ngRoute']);
+
+////This configures the routes and associates each route with a view and a controller
+//app.config(function ($routeProvider) {
+//    $routeProvider
+//        .when('/customers',
+//            {
+//                controller: 'CustomersController',
+//                templateUrl: '/OnlineRecieptManagement/app/partials/customers.html'
+//            })
+//        //Define a route that has a route parameter in it (:customerID)
+//        .when('/customerorders/:customerID',
+//            {
+//                controller: 'CustomerOrdersController',
+//                templateUrl: '/OnlineRecieptManagement/app/partials/customerOrders.html'
+//            })
+//        //Define a route that has a route parameter in it (:customerID)
+//        .when('/orders',
+//            {
+//                controller: 'OrdersController',
+//                templateUrl: '/OnlineRecieptManagement/app/partials/orders.html'
+//            })
+//        .otherwise({ redirectTo: '/customers' });
+//});
+
+var app = angular.module('customerOrm', ['ngRoute']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/customers',
+        .when('/',
             {
-                controller: 'CustomersController',
-                templateUrl: '/OnlineRecieptManagement/app/partials/customers.html'
+                controller: 'LoginController',
+                templateUrl: '/OnlineRecieptManagement/app/Login.html'
             })
         //Define a route that has a route parameter in it (:customerID)
-        .when('/customerorders/:customerID',
-            {
-                controller: 'CustomerOrdersController',
-                templateUrl: '/OnlineRecieptManagement/app/partials/customerOrders.html'
-            })
-        //Define a route that has a route parameter in it (:customerID)
-        .when('/orders',
-            {
-                controller: 'OrdersController',
-                templateUrl: '/OnlineRecieptManagement/app/partials/orders.html'
-            })
+        //.when('/customerorders/:customerID',
+        //    {
+        //        controller: 'CustomerOrdersController',
+        //        templateUrl: '/OnlineRecieptManagement/app/partials/customerOrders.html'
+        //    })
+        ////Define a route that has a route parameter in it (:customerID)
+        //.when('/orders',
+        //    {
+        //        controller: 'OrdersController',
+        //        templateUrl: '/OnlineRecieptManagement/app/partials/orders.html'
+        //    })
         .otherwise({ redirectTo: '/customers' });
 });
 
