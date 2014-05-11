@@ -1,0 +1,18 @@
+﻿
+.facebook-login {
+    background:url(../../website_assets/images/facebook_login.png) no-repeat top left;
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+}
+
+.orms-bg-img {
+    background:url(../../website_assets/images/orms_icon_300x300.png) no-repeat top left;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+}
+
+.orms-bg-img-top-margin {
+    margin-top:130px;
+}
