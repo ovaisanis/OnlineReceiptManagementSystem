@@ -19,6 +19,13 @@
 	<link rel="stylesheet" href="../website_assets/css/main.css">
     <link rel="stylesheet" href="../website_assets/css/custom-style.css">
 
+    <script src="../Scripts/jquery.min.js"></script>    
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script src="../app/app.js"></script>
+    <script src="../app/controllers/controllers.js"></script>
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="../website_assets/js/html5shiv.js"></script>
@@ -26,7 +33,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body ng-app="customersApp">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -57,7 +64,7 @@
 	<header id="head" class="secondary"></header>
 
 	<!-- container -->
-	<div class="container">
+	<div ng-controller="LoginController" class="container">
 
 		<ol class="breadcrumb">
 			<li><a href="index.html">Home</a></li>
@@ -73,20 +80,20 @@
 				</header>
 				
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="panel panel-default">
+			    		<div class="panel panel-default">
 						<div class="panel-body">
 							<h3 class="thin text-center">Sign in to your account</h3>
 							<p class="text-center text-muted">If you are not a registered user, Please <b><a href="signup.html">Register</a></b> To create an account on ORMS.</p>
 							<hr>
 							
-							<form>
+							<form name="loginForm" ng-submit="login(credentials)" novalidate>
 								<div class="top-margin">
 									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input type="text" ng-model="credentials.username" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" class="form-control">
+									<input type="password" model="credentials.password" class="form-control">
 								</div>
 
 								<hr>
@@ -114,7 +121,8 @@
 					</div>
 
 				</div>
-				
+				                 
+
 			</article>
 			<!-- /Article -->
 
