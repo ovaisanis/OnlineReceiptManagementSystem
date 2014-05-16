@@ -132,20 +132,66 @@ app.controller('LoginController', function ($scope, $http) {
     };
 
     $scope.login = function (credentials) {
+        //jQuery.support.cors = true;
 
+        var data1 = {
+            Username: 'aaakh',
+            Password: 'thuuu'
+        };
+
+        
+
+        $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/login',
             type: 'POST',
-            data: '{"Username":"waseem","Password":"waqar"}',
-            contentType: "application/json;charset=utf-8",
+            data: data1,
+            //contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            //contentType: "application/x-www-form-urlencoded",
             success: function (data) {
-                alert('Contacts added successfully');
+                alert('Contacts added successfully.   ' + data.responseText);
 
             },
             error: function (data) {
                 alert('Problem in adding contacts:' + data.responseText);
             }
         });
+
+
+        //var http = new XMLHttpRequest();
+        //var url = "http://localhost:22011/api/login";
+        //var params = '{"Username":"waseem","Password":"waqar"}';
+        //http.open("POST", url, true);
+
+        ////Send the proper header information along with the request
+        //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //http.setRequestHeader("Content-length", params.length);
+        //http.setRequestHeader("Connection", "close");
+        ////http.setRequestHeader("Content-type", "application/json;charset=utf-8");
+
+        //http.onreadystatechange = function () {//Call a function when the state changes.
+        //    if (http.readyState == 4 && http.status == 200) {
+        //        alert(http.responseText);
+        //    }
+        //}
+        //http.send(params);
+
+
+
+        //$.ajax({
+        //    url: "http://localhost:22011/api/login",
+        //    type: "GET",
+        //    success: function (data) {
+        //        //Grab our data from Ground Control
+        //        alert(data);
+        //    },
+        //    error: function (event) {
+        //        //If any errors occurred - detail them here
+        //        alert("Transmission failed. (An error has occurred)");
+        //    }
+        //});
+
         //alert(credentials);
         //var jsonData = { Username: 'faisal', Password: "111" };
         //$http({ method: 'post', url: 'http://localhost:1787/api/login', data: jsonData, contentType: "application/json;charset=utf-8", }).

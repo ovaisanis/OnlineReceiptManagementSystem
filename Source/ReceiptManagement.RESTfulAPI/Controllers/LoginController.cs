@@ -24,6 +24,10 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, new { Name = "Wahaj", Age="27" });
         }
 
+        public string Get()
+        {
+            return "Can you hear me Major Tom?";
+        }
 
     }
 }
