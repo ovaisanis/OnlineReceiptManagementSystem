@@ -141,22 +141,22 @@ app.controller('LoginController', function ($scope, $http) {
 
         
 
-        $.support.cors = true;
-        $.ajax({
-            url: 'http://localhost:22011/api/login',
-            type: 'POST',
-            data: data1,
-            //contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            //contentType: "application/x-www-form-urlencoded",
-            success: function (data) {
-                alert('Contacts added successfully.   ' + data.responseText);
+        //$.support.cors = true;
+        //$.ajax({
+        //    url: 'http://localhost:22011/api/login',
+        //    type: 'POST',
+        //    data: data1,
+        //    //contentType: "application/json;charset=utf-8",
+        //    dataType: "json",
+        //    //contentType: "application/x-www-form-urlencoded",
+        //    success: function (data) {
+        //        alert('Contacts added successfully.   ' + data.responseText);
 
-            },
-            error: function (data) {
-                alert('Problem in adding contacts:' + data.responseText);
-            }
-        });
+        //    },
+        //    error: function (data) {
+        //        alert('Problem in adding contacts:' + data.responseText);
+        //    }
+        //});
 
 
         //var http = new XMLHttpRequest();
@@ -194,15 +194,24 @@ app.controller('LoginController', function ($scope, $http) {
 
         //alert(credentials);
         //var jsonData = { Username: 'faisal', Password: "111" };
-        //$http({ method: 'post', url: 'http://localhost:1787/api/login', data: jsonData, contentType: "application/json;charset=utf-8", }).
-        //   success(function (data, status, headers, config) {
-        //       //this callback will be called asynchronously, when the response is available
-        //       alert(data);
-        //   }).
-        //   error(function (data, status, headers, config) {
-        //       //called asynchronously if an error occurs or server returns response with an error status.
-        //       alert("error");
-        //   });
+        //$http.defaults.useXDomain = true;
+        //$http({
+        //    method: 'post',
+        //    url: 'http://localhost:22011/api/login',
+        //    data: jsonData,
+        //    //headers: { 'dataType': 'json' }
+        //    //dataType: "json"
+        //}).
+        //success(function (data, status, headers, config) {
+        //    //this callback will be called asynchronously, when the response is available
+        //    alert(data);
+        //}).
+        //error(function (data, status, headers, config) {
+        //    //called asynchronously if an error occurs or server returns response with an error status.
+        //    alert("error");
+        //});
        
+        
+        
     };
 });
