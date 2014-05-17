@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-ng-app="customersApp" lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
@@ -42,9 +42,9 @@
 				<a class="navbar-brand" href="index.html"><img src="website_assets/images/orms_logo.png" alt="Progressus HTML5 template"></a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="website_views/about.html">About</a></li>
+				<ul class="nav navbar-nav pull-right" data-ng-controller="NavbarController">
+					<li class="active"><a href="#/">Home</a></li>
+					<li><a href="#/about">About</a></li>
 					<!--<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -52,13 +52,17 @@
 							<li class="active"><a href="sidebar-right.html">Right Sidebar</a></li>
 						</ul>
 					</li>-->
-					<li><a href="website_views/contact.html">Contact</a></li>
-					<li><a class="btn" href="website_views/signin.html">SIGN IN / SIGN UP</a></li>
-				</ul>
+					<li><a href="#/contact">Contact</a></li>
+					<li data-ng-class="{'active':getClass('/login')}">
+                        <a class="btn" href="#/login">SIGN IN / SIGN UP</a>                        
+					</li>                    
+				</ul>                
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 
 	<!-- /.navbar -->
+
+    <div animated-view></div>
 
 	<!-- Header -->
 	<header>
@@ -171,5 +175,27 @@
 	<script src="website_assets/js/headroom.min.js"></script>
 	<script src="website_assets/js/jQuery.headroom.min.js"></script>
 	<script src="website_assets/js/template.js"></script>
+
+ <!--   <script src="Scripts/jquery.min.js"></script>    
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/controllers.js"></script>-->
+
+     <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/jquery.min.js"></script>
+
+    <!-- UI Libs -->
+    <script src="Scripts/bootstrap.js"></script>
+
+
+    <!-- App libs -->
+    <script src="app/app.js"></script>
+    <script src="app/controllers/controllers.js"></script>
+    <script src="app/services/customersService.js"></script>
+    <script src="app/directives/animatedView.js"></script>
 </body>
 </html>

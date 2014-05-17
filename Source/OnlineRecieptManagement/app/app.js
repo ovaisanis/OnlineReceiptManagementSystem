@@ -27,7 +27,22 @@ app.config(function ($routeProvider) {
          .when('/login',
             {
                 controller: 'LoginController',
-                templateUrl: '/OnlineRecieptManagement/app/partials/signin.html'
+                templateUrl: '/OnlineRecieptManagement/app/partials/login/signin.html'
+            })
+         .when('/signup',
+            {
+                //controller: 'LoginController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/login/signup.html'
+            })
+         .when('/about',
+            {
+                //controller: 'LoginController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/login/about.html'
+            })         
+        .when('/contact',
+            {
+                //controller: 'LoginController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/login/contact.html'
             })
         .when('/customers',
             {
@@ -46,7 +61,7 @@ app.config(function ($routeProvider) {
                 controller: 'OrdersController',
                 templateUrl: '/OnlineRecieptManagement/app/partials/orders.html'
             })
-        .otherwise({ redirectTo: '/customers' });
+        .otherwise({ redirectTo: '/' });
 });
 
 
