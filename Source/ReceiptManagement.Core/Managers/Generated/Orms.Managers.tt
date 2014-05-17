@@ -1025,7 +1025,7 @@ void HelperMethos(EntityType entity, CodeGenerationTools code)
 				}
 				else
 				{
-				    entity = new Entities.<#=code.Escape(entity.Name)#>();
+				    entity = null;
 				}
 				
                 return (query != null);

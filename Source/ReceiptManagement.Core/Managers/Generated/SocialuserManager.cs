@@ -797,7 +797,7 @@ namespace ReceiptManagement.Core.Managers
     				}
     				else
     				{
-    				    entity = new Entities.SocialUser();
+    				    entity = null;
     				}
     				
                     return (query != null);

@@ -797,7 +797,7 @@ namespace ReceiptManagement.Core.Managers
     				}
     				else
     				{
-    				    entity = new Entities.WarrantyCardImage();
+    				    entity = null;
     				}
     				
                     return (query != null);

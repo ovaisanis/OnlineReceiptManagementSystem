@@ -4,21 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReceiptManagement.Common.Helpers;
-using Common = ReceiptManagement.Common;
+using Entities = ReceiptManagement.Common.Entities;
 using CoreManagers = ReceiptManagement.Core.Managers;
 
 namespace ReceiptManagement.Bll.Managers
 {
     public class UserManager
     {
-        public Common.Entities.User GetUsers(ApiContext apiContext, int id)
+        public Entities.User GetUsers(ApiContext apiContext, int id)
         {
-            Common.Entities.User user = new Common.Entities.User();
+            Entities.User user = new Entities.User();
 
             CoreManagers.UserManager.Get(apiContext, id, out user);
 
             return user;
             
+        }
+
+        public Entities.User IsExists(ApiContext apiContext, string email, string password)
+        {
+            Entities.User user = null;
+
+            var querySettings = QuerySettings<Entities.User>.Factory();
+            querySettings.WhereExpression = e => e.Email == email && e.Password == password;
+
+            CoreManagers.UserManager.IsExists(apiContext,querySettings.WhereExpression,out user);
+            
+            return user;
         }
 
         #region Insert

@@ -797,7 +797,7 @@ namespace ReceiptManagement.Core.Managers
     				}
     				else
     				{
-    				    entity = new Entities.Products_Services();
+    				    entity = null;
     				}
     				
                     return (query != null);

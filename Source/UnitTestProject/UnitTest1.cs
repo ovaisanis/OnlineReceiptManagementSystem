@@ -32,5 +32,16 @@ namespace UnitTestProject
 
             new UserManager().Insert(apiContext, user);
         }
+
+        [TestMethod]
+        public void IsUserExists()
+        {
+             string email = "mfaisal.nasir@hotmail.com";
+             string password = "123";
+             var user = new UserManager().IsExists(apiContext, email, password);
+
+            
+        }
     }
 }
+

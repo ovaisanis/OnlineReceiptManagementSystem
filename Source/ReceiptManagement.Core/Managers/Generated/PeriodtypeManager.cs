@@ -797,7 +797,7 @@ namespace ReceiptManagement.Core.Managers
     				}
     				else
     				{
-    				    entity = new Entities.PeriodType();
+    				    entity = null;
     				}
     				
                     return (query != null);

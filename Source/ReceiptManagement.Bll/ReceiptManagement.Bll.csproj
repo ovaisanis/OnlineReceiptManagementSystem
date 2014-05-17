@@ -30,13 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReceiptManagement.Common">
-      <HintPath>..\ReceiptManagement.Common\bin\Debug\ReceiptManagement.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ReceiptManagement.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReceiptManagement.Core\bin\Debug\ReceiptManagement.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +42,16 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReceiptManagement.Common\ReceiptManagement.Common.csproj">
+      <Project>{b1296076-5f17-45a2-9ea3-4490f76a724c}</Project>
+      <Name>ReceiptManagement.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReceiptManagement.Core\ReceiptManagement.Core.csproj">
+      <Project>{89805c61-0a72-430e-ac5e-111724bb3407}</Project>
+      <Name>ReceiptManagement.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

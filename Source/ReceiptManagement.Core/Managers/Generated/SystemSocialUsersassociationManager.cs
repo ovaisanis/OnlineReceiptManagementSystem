@@ -797,7 +797,7 @@ namespace ReceiptManagement.Core.Managers
     				}
     				else
     				{
-    				    entity = new Entities.System_Social_UsersAssociation();
+    				    entity = null;
     				}
     				
                     return (query != null);
