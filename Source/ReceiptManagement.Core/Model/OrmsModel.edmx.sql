@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/11/2014 00:06:37
+-- Date Created: 05/18/2014 06:09:42
 -- Generated from EDMX file: C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\ReceiptManagement.Core\Model\OrmsModel.edmx
 -- --------------------------------------------------
 
@@ -17,26 +17,32 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_Category_SubCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product_Service_SubCategories] DROP CONSTRAINT [FK_Category_SubCategory];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Events_EventStatuses]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventsInfo] DROP CONSTRAINT [FK_Events_EventStatuses];
+    ALTER TABLE [dbo].[EventsInfoes] DROP CONSTRAINT [FK_Events_EventStatuses];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Events_MyProductsServices]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventsInfo] DROP CONSTRAINT [FK_Events_MyProductsServices];
+    ALTER TABLE [dbo].[EventsInfoes] DROP CONSTRAINT [FK_Events_MyProductsServices];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Events_NotifyBeforePeriodType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventsInfo] DROP CONSTRAINT [FK_Events_NotifyBeforePeriodType];
+    ALTER TABLE [dbo].[EventsInfoes] DROP CONSTRAINT [FK_Events_NotifyBeforePeriodType];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Events_ReoccurancePeriodType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventsInfo] DROP CONSTRAINT [FK_Events_ReoccurancePeriodType];
+    ALTER TABLE [dbo].[EventsInfoes] DROP CONSTRAINT [FK_Events_ReoccurancePeriodType];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Events_Users]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventsInfo] DROP CONSTRAINT [FK_Events_Users];
+    ALTER TABLE [dbo].[EventsInfoes] DROP CONSTRAINT [FK_Events_Users];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Images_ImageTypes]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_Images_ImageTypes];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductServiceImages_Images]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Product_Service_Images] DROP CONSTRAINT [FK_ProductServiceImages_Images];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ReceiptImages_Images]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReceiptImages] DROP CONSTRAINT [FK_ReceiptImages_Images];
+GO
+IF OBJECT_ID(N'[dbo].[FK_WarrantyCardImages_Images]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WarrantyCardImages] DROP CONSTRAINT [FK_WarrantyCardImages_Images];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MyProductsServices_ParentProductsServices]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[My_Products_Services] DROP CONSTRAINT [FK_MyProductsServices_ParentProductsServices];
@@ -56,14 +62,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MyProductsServices_WarrantyCards]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[My_Products_Services] DROP CONSTRAINT [FK_MyProductsServices_WarrantyCards];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProductServiceImages_Images]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product_Service_Images] DROP CONSTRAINT [FK_ProductServiceImages_Images];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProductServiceImages_ProductsServices]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product_Service_Images] DROP CONSTRAINT [FK_ProductServiceImages_ProductsServices];
+IF OBJECT_ID(N'[dbo].[FK_Category_SubCategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Product_Service_SubCategories] DROP CONSTRAINT [FK_Category_SubCategory];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductsServices_Category]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Products_Services] DROP CONSTRAINT [FK_ProductsServices_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductServiceImages_ProductsServices]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Product_Service_Images] DROP CONSTRAINT [FK_ProductServiceImages_ProductsServices];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductsServices_SubCategory]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Products_Services] DROP CONSTRAINT [FK_ProductsServices_SubCategory];
@@ -71,14 +77,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductsServices_Users]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Products_Services] DROP CONSTRAINT [FK_ProductsServices_Users];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ReceiptImages_Images]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ReceiptImages] DROP CONSTRAINT [FK_ReceiptImages_Images];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ReceiptImages_Receipts]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ReceiptImages] DROP CONSTRAINT [FK_ReceiptImages_Receipts];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Receipts_Users]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Receipts] DROP CONSTRAINT [FK_Receipts_Users];
+GO
+IF OBJECT_ID(N'[dbo].[FK_User_Role]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_User_Role];
 GO
 IF OBJECT_ID(N'[dbo].[FK_SocialUser_Association]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[System_Social_UsersAssociation] DROP CONSTRAINT [FK_SocialUser_Association];
@@ -86,25 +92,19 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SystemUser_Association]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[System_Social_UsersAssociation] DROP CONSTRAINT [FK_SystemUser_Association];
 GO
-IF OBJECT_ID(N'[dbo].[FK_User_Role]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_User_Role];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WarrantyCardImages_Images]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WarrantyCardImages] DROP CONSTRAINT [FK_WarrantyCardImages_Images];
+IF OBJECT_ID(N'[dbo].[FK_WarrantyCards_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WarrantyCards] DROP CONSTRAINT [FK_WarrantyCards_Users];
 GO
 IF OBJECT_ID(N'[dbo].[FK_WarrantyCardImages_WarrantyCards]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WarrantyCardImages] DROP CONSTRAINT [FK_WarrantyCardImages_WarrantyCards];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WarrantyCards_Users]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WarrantyCards] DROP CONSTRAINT [FK_WarrantyCards_Users];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[EventsInfo]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EventsInfo];
+IF OBJECT_ID(N'[dbo].[EventsInfoes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EventsInfoes];
 GO
 IF OBJECT_ID(N'[dbo].[EventStatuses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EventStatuses];
@@ -336,7 +336,8 @@ CREATE TABLE [dbo].[Users] (
     [Password] nvarchar(50)  NOT NULL,
     [RoleId] int  NOT NULL,
     [CreatedOn] datetime  NOT NULL,
-    [LastLogin] datetime  NULL
+    [LastLogin] datetime  NULL,
+    [IsActive] bit  NOT NULL
 );
 GO
 

@@ -46,10 +46,6 @@
     <Reference Include="ReceiptManagement.Bll">
       <HintPath>..\ReceiptManagement.Bll\bin\Debug\ReceiptManagement.Bll.dll</HintPath>
     </Reference>
-    <Reference Include="ReceiptManagement.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReceiptManagement.Common\bin\Debug\ReceiptManagement.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -257,6 +253,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReceiptManagement.Common\ReceiptManagement.Common.csproj">
+      <Project>{b1296076-5f17-45a2-9ea3-4490f76a724c}</Project>
+      <Name>ReceiptManagement.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

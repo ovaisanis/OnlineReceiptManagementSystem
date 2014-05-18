@@ -140,6 +140,15 @@ namespace ReceiptManagement.Common.Entities
             get;
             set;
         }
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public virtual bool IsActive
+        {
+            get;
+            set;
+        }
 
         #endregion
 

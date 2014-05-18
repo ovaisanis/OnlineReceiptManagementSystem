@@ -1,4 +1,5 @@
 ﻿using ReceiptManagement.Common.Entities;
+using ReceiptManagement.Common.Helpers.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,21 @@ namespace ReceiptManagement.RESTfulAPI.Models
 {
     public class UserInfo
     {
-        public string Username { get; set; }        
+        public long Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string UserFullName 
+        { 
+            get
+            {
+                return (this.FirstName + " " + this.LastName);
+            }
+        }
+
+        public string Password { get; set; }
 
         public string Token { get; set; }
 
@@ -16,13 +31,29 @@ namespace ReceiptManagement.RESTfulAPI.Models
 
         public string Email { get; set; }
 
+        public bool IsActive { get; set; }
+
         public static implicit operator UserInfo(User user)
         {
-            UserInfo userInFo = new UserInfo();
-            userInFo.Username = user.FirstName + user.LastName;
-            userInFo.Email  =  user.Email;
-            userInFo.RoleId = Convert.ToString( user.RoleId);
-            return userInFo;
+            UserInfo userInfo = new UserInfo();
+            userInfo.Id = user.Id;
+            userInfo.FirstName = user.FirstName;
+            userInfo.FirstName = user.LastName;
+            userInfo.Email  =  user.Email;
+            userInfo.RoleId = Convert.ToString(user.RoleId);
+            return userInfo;
+        }
+
+        public static implicit operator User(UserInfo userInfo)
+        {
+            User user = new User();
+            user.FirstName = userInfo.FirstName.Trim();
+            user.LastName = userInfo.LastName.Trim();
+            user.Password = userInfo.Password.Trim();
+            user.Email = userInfo.Password.Trim();
+            user.RoleId = Roles.User;
+            user.IsActive = userInfo.IsActive;
+            return user;
         }
     }
 }

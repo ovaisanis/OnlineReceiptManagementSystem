@@ -4,6 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Models = ReceiptManagement.RESTfulAPI.Models;
+using Entities = ReceiptManagement.Common.Entities;
+using Managers = ReceiptManagement.Bll.Managers;
+using ReceiptManagement.RESTfulAPI.Common;
 
 namespace ReceiptManagement.RESTfulAPI.Controllers
 {
@@ -22,8 +26,20 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         }
 
         // POST api/user
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(Models.UserInfo userinfo)
         {
+            try
+            {
+                // Mark user InActive at creation, It would be activated later by email notification
+                userinfo.IsActive = false;
+                Entities.User user = userinfo;
+                new Managers.UserManager().Insert(Context.GetContext(), user);
+                return Request.CreateResponse(HttpStatusCode.OK, "User Added Successfully");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         // PUT api/user/5

@@ -1056,8 +1056,7 @@ string GetInterfaces(EntityType entity)
 		isInactiveable = BaseInactiveable(entity.BaseType as EntityType);
 		
 	string interfaces = "";
-	if (isInactiveable)	
-		interfaces += ", Helpers.IInactiveable";
+	
 	return interfaces;
 }
 

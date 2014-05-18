@@ -308,6 +308,7 @@
     <Property Name="RoleId" Type="int" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="LastLogin" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="WarrantyCardImages">
     <Key>
@@ -1009,6 +1010,7 @@
           <NavigationProperty Name="Role" Relationship="OrmsModel.FK_User_Role" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="System_Social_UsersAssociation" Relationship="OrmsModel.FK_SystemUser_Association" FromRole="Users" ToRole="System_Social_UsersAssociation" />
           <NavigationProperty Name="WarrantyCards" Relationship="OrmsModel.FK_WarrantyCards_Users" FromRole="Users" ToRole="WarrantyCards" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
         </EntityType>
         <EntityType Name="WarrantyCardImage">
           <Key>
@@ -1554,6 +1556,7 @@
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

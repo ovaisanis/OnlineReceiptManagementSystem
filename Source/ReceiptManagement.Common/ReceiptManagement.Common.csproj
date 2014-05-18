@@ -112,6 +112,7 @@
     <Compile Include="Helpers\ActionResults\ActionResultMessageCode.cs" />
     <Compile Include="Helpers\ActionResults\ActionResultMessageType.cs" />
     <Compile Include="Helpers\Common\EntityKey.cs" />
+    <Compile Include="Helpers\Common\Enums.cs" />
     <Compile Include="Helpers\Common\IEntityKey.cs" />
     <Compile Include="Helpers\Common\PropertyUsageAttributes.cs" />
     <Compile Include="Helpers\Common\UserSession.cs" />

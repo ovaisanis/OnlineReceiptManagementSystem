@@ -29,6 +29,10 @@ namespace ReceiptManagement.Bll.Managers
             querySettings.WhereExpression = e => e.Email == email && e.Password == password;
 
             CoreManagers.UserManager.IsExists(apiContext,querySettings.WhereExpression,out user);
+
+            //Check if user is active or not
+            if (user != null && !user.IsActive)
+                user = null;
             
             return user;
         }

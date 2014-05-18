@@ -17,8 +17,6 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             try
             {
-
-                // Write login authentication code here
                 UserInfo userInfo;
                 if (AuthenticateUser(loginData, out userInfo))
                 {
@@ -48,7 +46,7 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
             
             Managers.UserManager userManager = new Managers.UserManager();
             
-            var objUser= userManager.IsExists(Context.GetContext(), loginData.Username,loginData.Password);
+            var objUser= userManager.IsExists(Context.GetContext(), loginData.Username.Trim(),loginData.Password.Trim());
            if (objUser != null)
            {
                userInfo = objUser;

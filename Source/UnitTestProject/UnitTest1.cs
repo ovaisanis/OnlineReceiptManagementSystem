@@ -4,6 +4,7 @@ using ReceiptManagement.Common.Helpers;
 using ReceiptManagement.Common.Entities;
 using ReceiptManagement.Core;
 using ReceiptManagement.Bll.Managers;
+using ReceiptManagement.Common.Helpers.Common;
 
 namespace UnitTestProject
 {
@@ -28,8 +29,8 @@ namespace UnitTestProject
             user.LastName = "Nasir";
             user.Password = "123";
             user.Email = "mfaisal.nasir@hotmail.com";
-            user.RoleId = 1;
-
+            user.RoleId = Roles.User;
+            user.IsActive = true;
             new UserManager().Insert(apiContext, user);
         }
 
