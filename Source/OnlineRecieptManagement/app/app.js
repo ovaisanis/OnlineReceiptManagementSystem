@@ -44,6 +44,16 @@ app.config(function ($routeProvider) {
                 //controller: 'LoginController',
                 templateUrl: '/OnlineRecieptManagement/app/partials/login/contact.html'
             })
+        .when('/dashboard',
+            {
+               // controller: 'CustomersController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/dashboard/dashboard.html'
+            })
+        .when('/',
+            {
+                // controller: 'CustomersController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/welcome/welcome.html'
+            })
         .when('/customers',
             {
                 controller: 'CustomersController',

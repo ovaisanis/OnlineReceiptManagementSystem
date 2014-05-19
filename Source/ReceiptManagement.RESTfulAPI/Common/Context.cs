@@ -9,12 +9,13 @@ namespace ReceiptManagement.RESTfulAPI.Common
 {
     public class Context
     {
-        private static List<UserInfo> userList;
+        private static List<UserInfo> userList = new List<UserInfo>();
 
         private Context() 
         {
-            userList = new List<UserInfo>();
+           // userList = new List<UserInfo>();
         }
+        
 
         private static System.String connectionString = "Data Source=.\\SQL2008;Initial Catalog=ORMS;User Id=sa;Password=click123;";
        // private static ReceiptManagement.Common.Helpers.ApiContext apiContext = ReceiptManagement.Common.Helpers.ApiContext.Factory(connectionString);

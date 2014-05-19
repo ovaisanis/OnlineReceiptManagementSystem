@@ -124,41 +124,43 @@ var headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
-app.controller('LoginController', function ($scope, $http) {
+app.controller('LoginController', function ($scope, $http, $location) {
     
     $scope.credentials = {
-        username: '',
-        password: ''
+        Username: '',
+        Password: ''
     };
 
     $scope.login = function (credentials) {
         //jQuery.support.cors = true;
 
         var data1 = {
-            Username: 'aaakh',
-            Password: 'thuuu'
+            Username: credentials.Username,
+            Password: '123'
         };
 
         
 
-        //$.support.cors = true;
-        //$.ajax({
-        //    url: 'http://localhost:22011/api/login',
-        //    type: 'POST',
-        //    data: data1,
-        //    //contentType: "application/json;charset=utf-8",
-        //    dataType: "json",
-        //    //contentType: "application/x-www-form-urlencoded",
-        //    success: function (data) {
-        //        alert('Contacts added successfully.   ' + data.responseText);
+        $.support.cors = true;
+        $.ajax({
+            url: 'http://localhost:22011/api/login',
+            type: 'POST',
+            data: data1,
+            //contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            //contentType: "application/x-www-form-urlencoded",
+            success: function (data) {
 
-        //    },
-        //    error: function (data) {
-        //        alert('Problem in adding contacts:' + data.responseText);
-        //    }
-        //});
+                alert('Contacts added successfully.   ' + data.responseText);
+                window.location = "#/dashboard";
+            },
+            error: function (data) {
+                alert('Problem in adding contacts:' + data.responseText);            
+               
+            }
+        });
 
-
+      
         //var http = new XMLHttpRequest();
         //var url = "http://localhost:22011/api/login";
         //var params = '{"Username":"waseem","Password":"waqar"}';
