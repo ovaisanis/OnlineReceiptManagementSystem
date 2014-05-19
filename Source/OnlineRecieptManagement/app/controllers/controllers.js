@@ -138,8 +138,6 @@ app.controller('LoginController', function ($scope, $http, $location) {
             Password: credentials.Password
         };
 
-        
-
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/login',
@@ -154,6 +152,45 @@ app.controller('LoginController', function ($scope, $http, $location) {
             error: function (data) {
                 alert('Problem in adding contacts:' + data.responseText);            
                
+            }
+        });
+    };
+});
+
+app.controller('SignupController', function ($scope, $http, $location) {
+
+    $scope.signupDetails = {
+        FirstName: '',
+        LastName: '',
+        Email:'',
+        Password: '',
+        ConfirmPassword:''
+
+    };
+
+    $scope.signup = function (signupDetails) {
+
+        var userCredentials = {
+            FirstName: signupDetails.FirstName,
+            LastName: signupDetails.LastName,
+            Email:signupDetails.Email,
+            Password: signupDetails.Password
+        };
+
+        $.support.cors = true;
+        $.ajax({
+            url: 'http://localhost:22011/api/user',
+            type: 'POST',
+            data: userCredentials,
+            dataType: "json",
+            success: function (data) {
+
+                alert('Contacts added successfully.   ' + data.responseText);
+                window.location = "#/dashboard";
+            },
+            error: function (data) {
+                alert('Problem in adding contacts:' + data.responseText);
+
             }
         });
     };

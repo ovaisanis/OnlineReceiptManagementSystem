@@ -1,4 +1,5 @@
-
+<!-- container -->
+	<div ng-app="customersApp" ng-controller="SignupController" class="container">
 	<div class="row">
 			
 			<!-- Article main content -->
@@ -14,28 +15,28 @@
 							<p class="text-center text-muted">If you are already a registered user, Please <b><a href="#/login">Login</a></b> to access your account. </p>
 							<hr>
 
-							<form>
+							<form name="signupForm" ng-submit="signup(signupDetails)" novalidate>
 								<div class="top-margin">
 									<label>First Name</label>
-									<input type="text" class="form-control">
+									<input type="text" ng-model="signupDetails.FirstName" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Last Name</label>
-									<input type="text" class="form-control">
+									<input type="text" ng-model="signupDetails.LastName" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Email Address <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+									<input type="text" ng-model="signupDetails.Email" class="form-control">
 								</div>
 
 								<div class="row top-margin">
 									<div class="col-sm-6">
 										<label>Password <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
+										<input type="text" ng-model="signupDetails.Password" class="form-control">
 									</div>
 									<div class="col-sm-6">
 										<label>Confirm Password <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
+										<input type="text" ng-model="signupDetails.ConfirmPassword" class="form-control">
 									</div>
 								</div>
 
@@ -61,3 +62,4 @@
 			</article>
 			<!-- /Article -->
 	</div>
+  </div>
