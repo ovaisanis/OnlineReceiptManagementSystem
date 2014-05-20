@@ -177,6 +177,21 @@ app.controller('SignupController', function ($scope, $http, $location) {
             Password: signupDetails.Password
         };
 
+        if ($scope.signupForm.$valid) {
+            
+        }
+        //$scope.submitForm = function (isValid) {
+
+        //    // check to make sure the form is completely valid
+        //    if (isValid) {
+        //        alert('our form is amazing');
+        //    }
+        //    else {
+        //        alert('not good')
+        //    }
+
+        //};
+
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/user',

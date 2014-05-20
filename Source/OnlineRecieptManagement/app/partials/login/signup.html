@@ -16,41 +16,48 @@
 							<hr>
 
 							<form name="signupForm" ng-submit="signup(signupDetails)" novalidate>
-								<div class="top-margin">
+								<div class="top-margin" ng-class="{ 'has-error' : signupForm.firstName.$invalid && !signupForm.firstName.$pristine }">
 									<label>First Name</label>
-									<input type="text" ng-model="signupDetails.FirstName" class="form-control">
+									<input type="text" name="firstName" ng-model="signupDetails.FirstName" class="form-control" required>
+                                    <p ng-show="signupForm.firstName.$invalid && !signupForm.firstName.$pristine" class="help-block">You first name is required.</p>
 								</div>
-								<div class="top-margin">
+								<div class="top-margin" ng-class="{ 'has-error' : signupForm.lastName.$invalid && !signupForm.lastName.$pristine }">
 									<label>Last Name</label>
-									<input type="text" ng-model="signupDetails.LastName" class="form-control">
+									<input type="text" name ="lastName" ng-model="signupDetails.LastName" class="form-control" required>
+                                    <p ng-show="signupForm.lastName.$invalid && !signupForm.lastName.$pristine" class="help-block">You last name is required.</p>
 								</div>
-								<div class="top-margin">
+								<div class="top-margin" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
 									<label>Email Address <span class="text-danger">*</span></label>
-									<input type="text" ng-model="signupDetails.Email" class="form-control">
+									<input type="email" name="email" ng-model="signupDetails.Email" class="form-control" required>
+                                    <p ng-show="signupForm.email.$invalid && !signupForm.email.$pristine" class="help-block">You email is required.</p>
 								</div>
 
 								<div class="row top-margin">
-									<div class="col-sm-6">
+									<div class="col-sm-6" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine }">
 										<label>Password <span class="text-danger">*</span></label>
-										<input type="text" ng-model="signupDetails.Password" class="form-control">
+										<input name="password" type="password" ng-model="signupDetails.Password" class="form-control" ng-minlength="8" required>
+                                        <p ng-show="signupForm.password.$invalid && !signupForm.password.$pristine" class="help-block">You password is required.</p>
+                                        <p ng-show="signupForm.password.$error.minlength" class="help-block">Password is too short.</p>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-6" ng-class="{ 'has-error' : signupForm.confirmpassword.$invalid && !signupForm.confirmpassword.$pristine }">
 										<label>Confirm Password <span class="text-danger">*</span></label>
-										<input type="text" ng-model="signupDetails.ConfirmPassword" class="form-control">
+										<input name ="confirmpassword" type="password" ng-model="signupDetails.ConfirmPassword" class="form-control" required>
+                                        <p ng-show="signupForm.confirmpassword.$error.minlength" class="help-block" ng-minlength="8">Password is too short.</p>
+                                        <p ng-show="signupForm.confirmpassword.$invalid && !signupForm.confirmpassword.$pristine" class="help-block">You confirm password is required.</p>
 									</div>
 								</div>
 
 								<hr>
 
 								<div class="row">
-									<div class="col-lg-8">
+									<div class="col-lg-8" ng-class="{ 'has-error' : signupForm.termsConditions.$invalid && !signupForm.termsConditions.$pristine }">
 										<label class="checkbox">
-											<input type="checkbox"> 
+											<input name="termsConditions" type="checkbox" required> 
 											I've read the <a href="page_terms.html">Terms and Conditions</a>
 										</label>                        
 									</div>
 									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Register</button>
+										<button class="btn btn-action" type="submit" ng-disabled="signupForm.$invalid">Register</button>
 									</div>
 								</div>
 							</form>
