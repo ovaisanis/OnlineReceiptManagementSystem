@@ -138,6 +138,10 @@ app.controller('LoginController', function ($scope, $http, $location) {
             Password: credentials.Password
         };
 
+        if ($scope.loginForm.$valid) {
+            alert("i am right");
+        }
+
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/login',
