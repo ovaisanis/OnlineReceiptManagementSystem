@@ -171,7 +171,7 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
     <Property Name="IsTrackable" Type="bit" Nullable="false" />
-    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="true" />
   </EntityType>
   <EntityType Name="ImageTypes">
     <Key>
@@ -658,7 +658,7 @@
   </Association>
   <Association Name="ImageUser">
     <End Role="Image" Type="OrmsModel.Store.Images" Multiplicity="*" />
-    <End Role="User" Type="OrmsModel.Store.Users" Multiplicity="1" />
+    <End Role="User" Type="OrmsModel.Store.Users" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />

@@ -43,6 +43,21 @@ namespace UnitTestProject
 
             
         }
+
+        [TestMethod]
+        public void InsertImage()
+        {
+            ReceiptManagement.Common.Entities.Image image = new ReceiptManagement.Common.Entities.Image();
+
+            image.CreatedOn = DateTime.Now;
+            image.FileSize = 1000;
+            image.Title = "Faisal";
+            image.Path = "C:\\";
+            image.FileFormat = "jpg";
+            image.IsDeleted = false;
+
+            new ImageManager().Insert(apiContext, image);
+        }
     }
 }
 

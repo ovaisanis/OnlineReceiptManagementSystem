@@ -161,7 +161,7 @@ namespace ReceiptManagement.Common.Entities
     	/// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public virtual long UserId
+        public virtual Nullable<long> UserId
         {
             get { return _userId; }
             set
@@ -184,7 +184,7 @@ namespace ReceiptManagement.Common.Entities
     			}
             }
         }
-        private long _userId;
+        private Nullable<long> _userId;
 
         #endregion
 
@@ -384,6 +384,14 @@ namespace ReceiptManagement.Common.Entities
                 {
                     UserId = User.Id;
                 }
+            }
+            else if (!_settingFK)
+            {
+                /* [NOTE] -- 
+    			 * I have commented following, as in case of detaching entities from ObjectState it was making EntityId Null into referenced entities,
+    			 * which is not desired behavior for us.
+    			 */
+                //UserId = null;
             }
         }
     
