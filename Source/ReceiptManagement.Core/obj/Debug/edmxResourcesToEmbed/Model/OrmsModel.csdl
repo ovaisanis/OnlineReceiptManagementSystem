@@ -182,7 +182,7 @@
     <NavigationProperty Name="WarrantyCardImages" Relationship="OrmsModel.FK_WarrantyCardImages_Images" FromRole="Images" ToRole="WarrantyCardImages" />
     <Property Type="Boolean" Name="IsTrackable" Nullable="false" />
     <NavigationProperty Name="User" Relationship="OrmsModel.ImageUser" FromRole="Image" ToRole="User" />
-    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="true" />
   </EntityType>
   <EntityType Name="ImageType">
     <Key>
@@ -714,7 +714,7 @@
   </Association>
   <Association Name="ImageUser">
     <End Type="OrmsModel.Image" Role="Image" Multiplicity="*" />
-    <End Type="OrmsModel.User" Role="User" Multiplicity="1" />
+    <End Type="OrmsModel.User" Role="User" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />

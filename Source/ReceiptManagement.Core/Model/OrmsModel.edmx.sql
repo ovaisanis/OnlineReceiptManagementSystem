@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/25/2014 01:11:59
+-- Date Created: 05/25/2014 01:57:51
 -- Generated from EDMX file: C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\ReceiptManagement.Core\Model\OrmsModel.edmx
 -- --------------------------------------------------
 
@@ -97,6 +97,9 @@ IF OBJECT_ID(N'[dbo].[FK_WarrantyCards_Users]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_WarrantyCardImages_WarrantyCards]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WarrantyCardImages] DROP CONSTRAINT [FK_WarrantyCardImages_WarrantyCards];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ImageUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_ImageUser];
 GO
 
 -- --------------------------------------------------
@@ -201,7 +204,7 @@ CREATE TABLE [dbo].[Images] (
     [CreatedOn] datetime  NULL,
     [IsDeleted] bit  NULL,
     [IsTrackable] bit  NOT NULL,
-    [UserId] bigint  NOT NULL
+    [UserId] bigint  NULL
 );
 GO
 
