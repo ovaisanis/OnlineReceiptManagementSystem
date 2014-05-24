@@ -135,17 +135,21 @@
     <Compile Include="Common\Context.cs" />
     <Compile Include="Common\ResposeObject.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ProductServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WarrantyCardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductServiceModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ReceiptModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\WarrantyCardModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,21 +9,20 @@ using Entities = ReceiptManagement.Common.Entities;
 using Managers = ReceiptManagement.Bll.Managers;
 using ReceiptManagement.RESTfulAPI.Common;
 
-
 namespace ReceiptManagement.RESTfulAPI.Controllers
 {
-    public class ReceiptController : ApiController
+    public class ProductServiceController : ApiController
     {
         // POST api/receipt
-        public HttpResponseMessage Post(Models.ReceiptModel receiptModel)
+        public HttpResponseMessage Post(Models.ProductServiceModel prodServiceModel)
         {
             try
             {
-                Entities.Receipt receipt = receiptModel;
+                Entities.Products_Services prodService = prodServiceModel;
 
-                new Managers.ReceiptManager().Insert(Context.GetContext(), receipt);
+                new Managers.ProductServiceManager().Insert(Context.GetContext(), prodService);
 
-                return Request.CreateResponse(HttpStatusCode.OK, "Receipt Added Successfully");
+                return Request.CreateResponse(HttpStatusCode.OK, "Product Added Successfully");
             }
             catch (Exception ex)
             {
@@ -36,6 +35,5 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             return "value";
         }
-
     }
 }

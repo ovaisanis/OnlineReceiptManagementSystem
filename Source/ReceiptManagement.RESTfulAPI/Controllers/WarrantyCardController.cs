@@ -9,19 +9,18 @@ using Entities = ReceiptManagement.Common.Entities;
 using Managers = ReceiptManagement.Bll.Managers;
 using ReceiptManagement.RESTfulAPI.Common;
 
-
 namespace ReceiptManagement.RESTfulAPI.Controllers
 {
-    public class ReceiptController : ApiController
+    public class WarrantyCardController : ApiController
     {
         // POST api/receipt
-        public HttpResponseMessage Post(Models.ReceiptModel receiptModel)
+        public HttpResponseMessage Post(Models.WarrantyCardModel warrantyCardModel)
         {
             try
             {
-                Entities.Receipt receipt = receiptModel;
+                Entities.WarrantyCard warrantyCard = warrantyCardModel;
 
-                new Managers.ReceiptManager().Insert(Context.GetContext(), receipt);
+                new Managers.WarrantyCardManager().Insert(Context.GetContext(), warrantyCard);
 
                 return Request.CreateResponse(HttpStatusCode.OK, "Receipt Added Successfully");
             }
@@ -36,6 +35,5 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             return "value";
         }
-
     }
 }
