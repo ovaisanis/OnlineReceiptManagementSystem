@@ -111,6 +111,8 @@
     <Compile Include="Helpers\ActionResults\ActionResultMessage.cs" />
     <Compile Include="Helpers\ActionResults\ActionResultMessageCode.cs" />
     <Compile Include="Helpers\ActionResults\ActionResultMessageType.cs" />
+    <Compile Include="Helpers\Common\EmailSender.cs" />
+    <Compile Include="Helpers\Common\EncryptionHelper.cs" />
     <Compile Include="Helpers\Common\EntityKey.cs" />
     <Compile Include="Helpers\Common\Enums.cs" />
     <Compile Include="Helpers\Common\IEntityKey.cs" />
