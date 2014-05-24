@@ -541,6 +541,66 @@ namespace ReceiptManagement.Core.Managers
     		
     		#endregion
     
+    		#region UpdateStatus Methods
+    		
+    		/// <summary>
+            ///		No Metadata Documentation available.
+    		/// </summary>
+    		/// <param name="apiContext"></param>
+    		/// <param name="users"></param>
+            /// <returns></returns>
+            public static Helpers.ActionResult UpdateStatus(Helpers.ApiContext apiContext, System.Collections.Generic.IEnumerable<Entities.User> users)
+            {
+                // API doesn't allow null parameters. This method requires at least 1 item in the collection.
+                if (apiContext == null)
+                    throw new System.ArgumentNullException("apiContext");
+                if (users == null)
+                    throw new System.ArgumentNullException("users");
+                if (users.Count() == 0)
+                    throw new System.ArgumentOutOfRangeException("users");
+    
+    				 // Verify user is authorized to perform action, otherwise throw exception.
+                    Security.SecurityHandler.SetApiContext(apiContext);
+    			Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+                try
+                {
+                    Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+    
+    				foreach (Entities.User user in users)
+                    {                    
+    					// ATTACH object					
+    					AttachObject(apiContext, "Users", user);
+    						
+    					// SET system level properties
+                	    SetSystemProperties(apiContext, user);
+    					SetSystemPropertiesModified(apiContext, user);
+    					
+    					// SET IsActive property modified
+    					System.Data.Objects.ObjectStateEntry ose = apiContext.CurrentContext.ObjectStateManager.GetObjectStateEntry(user);
+    					ose.SetModifiedProperty("IsActive");
+                    }
+    
+    				context.SaveChanges(); // Save Changes
+    				DetachObjects(apiContext, users); // Clean ObjectState cache
+                }
+    			catch (System.Data.OptimisticConcurrencyException ex)
+                {
+    				object forDebugging = ex;
+    				//HandleOptimisticConcurrencyException(apiContext, users, ex, ref result);
+                    //throw Helpers.Exceptions.OptimisticConcurrencyException.Factory(ex);
+    				throw;
+                }
+                catch (System.Exception ex)
+                {     
+    				object forDebugging = ex;
+                    throw;// Helpers.Exceptions.UpdateEntityException.Factory(ex);
+                }
+    
+                return result;
+            }
+    		
+    		#endregion
+    
     		#region Import Methods
     		
     		/// <summary>
@@ -914,7 +974,7 @@ namespace ReceiptManagement.Core.Managers
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(user, "Password contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;
     			}
-    												
+    															
     			OnValidated(apiContext, user, ref result);
             }
     		

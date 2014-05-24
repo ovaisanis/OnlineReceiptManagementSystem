@@ -171,6 +171,7 @@
     <Property Name="FileFormat" Type="nvarchar" Nullable="true" MaxLength="5" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="IsTrackable" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ImageTypes">
     <Key>
@@ -190,8 +191,8 @@
     <Property Name="ReceiptId" Type="bigint" Nullable="true" />
     <Property Name="WarrantyCardId" Type="bigint" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
-    <Property Name="CreatedOn" Type="nchar" Nullable="true" MaxLength="10" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="PeriodTypes">
     <Key>
@@ -834,6 +835,7 @@
           <NavigationProperty Name="Product_Service_Images" Relationship="OrmsModel.FK_ProductServiceImages_Images" FromRole="Images" ToRole="Product_Service_Images" />
           <NavigationProperty Name="ReceiptImages" Relationship="OrmsModel.FK_ReceiptImages_Images" FromRole="Images" ToRole="ReceiptImages" />
           <NavigationProperty Name="WarrantyCardImages" Relationship="OrmsModel.FK_WarrantyCardImages_Images" FromRole="Images" ToRole="WarrantyCardImages" />
+          <Property Type="Boolean" Name="IsTrackable" Nullable="false" />
         </EntityType>
         <EntityType Name="ImageType">
           <Key>
@@ -854,7 +856,6 @@
           <Property Name="ReceiptId" Type="Int64" />
           <Property Name="WarrantyCardId" Type="Int64" />
           <Property Name="UserId" Type="Int64" />
-          <Property Name="CreatedOn" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="EventsInfoes" Relationship="OrmsModel.FK_Events_MyProductsServices" FromRole="My_Products_Services" ToRole="EventsInfo" />
           <NavigationProperty Name="My_Products_Services1" Relationship="OrmsModel.FK_MyProductsServices_ParentProductsServices" FromRole="My_Products_Services" ToRole="My_Products_Services1" />
@@ -864,6 +865,7 @@
           <NavigationProperty Name="Product_Service_Sections" Relationship="OrmsModel.FK_MyProductsServices_Sections" FromRole="My_Products_Services" ToRole="Product_Service_Sections" />
           <NavigationProperty Name="User" Relationship="OrmsModel.FK_MyProductsServices_Users" FromRole="My_Products_Services" ToRole="Users" />
           <NavigationProperty Name="WarrantyCard" Relationship="OrmsModel.FK_MyProductsServices_WarrantyCards" FromRole="My_Products_Services" ToRole="WarrantyCards" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
         </EntityType>
         <EntityType Name="PeriodType">
           <Key>
@@ -926,7 +928,8 @@
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="SubCategoryId" Type="Int32" />
           <Property Name="UserId" Type="Int64" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Type="String" Name="Tags" Nullable="false" MaxLength="Max" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="My_Products_Services" Relationship="OrmsModel.FK_MyProductsServices_ProductsServices" FromRole="Products_Services" ToRole="My_Products_Services" />
           <NavigationProperty Name="Product_Service_Categories" Relationship="OrmsModel.FK_ProductsServices_Category" FromRole="Products_Services" ToRole="Product_Service_Categories" />
@@ -1405,6 +1408,7 @@
           <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsTrackable" ColumnName="IsTrackable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1426,8 +1430,8 @@
           <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
           <ScalarProperty Name="WarrantyCardId" ColumnName="WarrantyCardId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

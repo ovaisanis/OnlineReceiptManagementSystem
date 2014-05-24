@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/18/2014 06:09:42
+-- Date Created: 05/25/2014 01:04:49
 -- Generated from EDMX file: C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\ReceiptManagement.Core\Model\OrmsModel.edmx
 -- --------------------------------------------------
 
@@ -199,7 +199,8 @@ CREATE TABLE [dbo].[Images] (
     [FileSize] int  NULL,
     [FileFormat] nvarchar(5)  NULL,
     [CreatedOn] datetime  NULL,
-    [IsDeleted] bit  NULL
+    [IsDeleted] bit  NULL,
+    [IsTrackable] bit  NOT NULL
 );
 GO
 
@@ -219,8 +220,8 @@ CREATE TABLE [dbo].[My_Products_Services] (
     [ReceiptId] bigint  NULL,
     [WarrantyCardId] bigint  NULL,
     [UserId] bigint  NULL,
-    [CreatedOn] nchar(10)  NULL,
-    [IsDeleted] bit  NULL
+    [IsDeleted] bit  NULL,
+    [CreatedOn] datetime  NOT NULL
 );
 GO
 
@@ -274,6 +275,7 @@ CREATE TABLE [dbo].[Products_Services] (
     [CategoryId] int  NULL,
     [SubCategoryId] int  NULL,
     [UserId] bigint  NULL,
+    [Tags] nvarchar(max)  NOT NULL,
     [CreatedOn] datetime  NULL,
     [IsDeleted] bit  NULL
 );
