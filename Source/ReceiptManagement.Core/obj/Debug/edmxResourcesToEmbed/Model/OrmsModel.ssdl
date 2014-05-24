@@ -128,6 +128,10 @@
       <End Role="WarrantyCards" EntitySet="WarrantyCards" />
       <End Role="WarrantyCardImages" EntitySet="WarrantyCardImages" />
     </AssociationSet>
+    <AssociationSet Name="ImageUser" Association="OrmsModel.Store.ImageUser">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="EventsInfoes">
     <Key>
@@ -166,6 +170,8 @@
     <Property Name="FileFormat" Type="nvarchar" Nullable="true" MaxLength="5" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="IsTrackable" Type="bit" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="ImageTypes">
     <Key>
@@ -185,8 +191,8 @@
     <Property Name="ReceiptId" Type="bigint" Nullable="true" />
     <Property Name="WarrantyCardId" Type="bigint" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
-    <Property Name="CreatedOn" Type="nchar" Nullable="true" MaxLength="10" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="PeriodTypes">
     <Key>
@@ -240,6 +246,7 @@
     <Property Name="CategoryId" Type="int" Nullable="true" />
     <Property Name="SubCategoryId" Type="int" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
   </EntityType>
@@ -646,6 +653,18 @@
       </Principal>
       <Dependent Role="WarrantyCardImages">
         <PropertyRef Name="WarrantyCardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ImageUser">
+    <End Role="Image" Type="OrmsModel.Store.Images" Multiplicity="*" />
+    <End Role="User" Type="OrmsModel.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

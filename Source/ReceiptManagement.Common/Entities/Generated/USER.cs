@@ -366,6 +366,41 @@ namespace ReceiptManagement.Common.Entities
             }
         }
         private ICollection<WarrantyCard> _warrantyCards;
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public virtual ICollection<Image> Images
+        {
+            get
+            {
+                if (_images == null)
+                {
+                    var newCollection = new FixupCollection<Image>();
+                    newCollection.CollectionChanged += FixupImages;
+                    _images = newCollection;
+                }
+                return _images;
+            }
+            set
+            {
+                if (!ReferenceEquals(_images, value))
+                {
+                    var previousValue = _images as FixupCollection<Image>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupImages;
+                    }
+                    _images = value;
+                    var newValue = value as FixupCollection<Image>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupImages;
+                    }
+                }
+            }
+        }
+        private ICollection<Image> _images;
 
         #endregion
 
@@ -505,6 +540,28 @@ namespace ReceiptManagement.Common.Entities
             if (e.OldItems != null)
             {
                 foreach (WarrantyCard item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.User, this))
+                    {
+                        item.User = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupImages(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Image item in e.NewItems)
+                {
+                    item.User = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Image item in e.OldItems)
                 {
                     if (ReferenceEquals(item.User, this))
                     {

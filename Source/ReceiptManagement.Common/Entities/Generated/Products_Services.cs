@@ -172,6 +172,15 @@ namespace ReceiptManagement.Common.Entities
     	/// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public virtual string Tags
+        {
+            get;
+            set;
+        }
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public virtual Nullable<System.DateTime> CreatedOn
         {
             get;

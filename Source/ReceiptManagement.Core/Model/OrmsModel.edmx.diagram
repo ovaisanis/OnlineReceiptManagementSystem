@@ -51,6 +51,7 @@
         <AssociationConnector Association="OrmsModel.FK_SystemUser_Association" ManuallyRouted="false" />
         <AssociationConnector Association="OrmsModel.FK_WarrantyCards_Users" ManuallyRouted="false" />
         <AssociationConnector Association="OrmsModel.FK_WarrantyCardImages_WarrantyCards" ManuallyRouted="false" />
+        <AssociationConnector Association="OrmsModel.ImageUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

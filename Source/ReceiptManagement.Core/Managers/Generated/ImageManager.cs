@@ -899,7 +899,7 @@ namespace ReceiptManagement.Core.Managers
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(image, "FileFormat contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;
     			}
-    						
+    												
     			OnValidated(apiContext, image, ref result);
             }
     		

@@ -148,6 +148,43 @@ namespace ReceiptManagement.Common.Entities
             get;
             set;
         }
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public virtual bool IsTrackable
+        {
+            get;
+            set;
+        }
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public virtual long UserId
+        {
+            get { return _userId; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_userId != value)
+                    {
+                        if (User != null && User.Id != value)
+                        {
+                            User = null;
+                        }
+                        _userId = value;
+                    }
+    			}
+                finally
+                {
+                    _settingFK = true;
+    			}
+            }
+        }
+        private long _userId;
 
         #endregion
 
@@ -276,6 +313,25 @@ namespace ReceiptManagement.Common.Entities
             }
         }
         private ICollection<WarrantyCardImage> _warrantyCardImages;
+    
+    	/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+    	[System.Web.Script.Serialization.ScriptIgnore]
+        public virtual User User
+        {
+            get { return _user; }
+            set
+            {
+                if (!ReferenceEquals(_user, value))
+                {
+                    var previousValue = _user;
+                    _user = value;
+                    FixupUser(previousValue);
+                }
+            }
+        }
+        private User _user;
 
         #endregion
 
@@ -308,6 +364,26 @@ namespace ReceiptManagement.Common.Entities
     			 * which is not desired behavior for us.
     			 */
                 //ImageTypeId = null;
+            }
+        }
+    
+        private void FixupUser(User previousValue)
+        {
+            if (previousValue != null && previousValue.Images.Contains(this))
+            {
+                previousValue.Images.Remove(this);
+            }
+    
+            if (User != null)
+            {
+                if (!User.Images.Contains(this))
+                {
+                    User.Images.Add(this);
+                }
+                if (UserId != User.Id)
+                {
+                    UserId = User.Id;
+                }
             }
         }
     

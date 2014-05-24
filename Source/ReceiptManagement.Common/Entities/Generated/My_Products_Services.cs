@@ -238,7 +238,7 @@ namespace ReceiptManagement.Common.Entities
     	/// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public virtual string CreatedOn
+        public virtual Nullable<bool> IsDeleted
         {
             get;
             set;
@@ -247,7 +247,7 @@ namespace ReceiptManagement.Common.Entities
     	/// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public virtual Nullable<bool> IsDeleted
+        public virtual System.DateTime CreatedOn
         {
             get;
             set;
