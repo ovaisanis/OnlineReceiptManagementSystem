@@ -1,0 +1,33 @@
+﻿	<!-- container -->
+	<div ng-app="customersApp" ng-controller="FileUploadController" class="container">
+	
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Test File Upload</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			    		<div class="panel panel-default">
+						<div class="panel-body">
+							
+							<form>
+
+                                <input type="file" onchange="angular.element(this).scope().filesChanged(this)" multiple />
+                                <button ng-click="upload()">Upload</button>
+                                <li ng-repeat="file in files">{{file.name}}</li>
+							</form>
+							
+						</div>
+					</div>
+
+				</div>
+				                 
+
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	

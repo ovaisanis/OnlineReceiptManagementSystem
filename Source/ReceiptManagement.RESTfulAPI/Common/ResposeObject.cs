@@ -15,7 +15,7 @@ namespace ReceiptManagement.RESTfulAPI.Common
     {
         #region Preperties
         
-        public ResponseType response_type { get; set; }
+        public string response_type { get; set; }
 
         public object response_object { get; set; } 
         
@@ -25,13 +25,13 @@ namespace ReceiptManagement.RESTfulAPI.Common
         
         public ResposeObject(object responseObject)
         {
-            this.response_type = ResponseType.OK;
+            this.response_type = ResponseType.OK.ToString().ToLower();
             this.response_object = responseObject;
         }
 
         public ResposeObject(string error)
         {
-            this.response_type = ResponseType.ERROR;
+            this.response_type = ResponseType.ERROR.ToString().ToLower();
             this.response_object = error;
         }
 

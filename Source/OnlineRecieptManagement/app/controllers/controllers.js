@@ -214,3 +214,37 @@ app.controller('SignupController', function ($scope, $http, $location) {
         });
     };
 });
+
+app.controller('FileUploadController', function ($scope, $http, $location) {
+
+    $scope.filesChanged = function (elm) {
+
+        $scope.files = elm.files;
+        $scope.$apply();
+    }
+
+    $scope.upload = function () {
+
+        var fd = new FormData();
+        angular.forEach($scope.files, function(file){
+            fd.append('file', file);
+        })
+
+        //$http.defaults.headers.common['Api-Token'] = 'testtoken';
+
+        $http.post('http://localhost:22011/api/fileupload', fd,
+            {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+                
+            })
+            .success(function(d){
+                console.log(d);
+            })
+            .error(function (e) {
+                console.log(e);
+            })
+    
+    }
+
+});

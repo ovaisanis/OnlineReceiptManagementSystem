@@ -29,6 +29,11 @@ app.config(function ($routeProvider) {
                 controller: 'LoginController',
                 templateUrl: '/OnlineRecieptManagement/app/partials/login/signin.html'
             })
+        .when('/testfileupload',
+            {
+                controller: 'FileUploadController',
+                templateUrl: '/OnlineRecieptManagement/app/partials/login/test-upload-form.html'
+            })
          .when('/signup',
             {
                 //controller: 'LoginController',
