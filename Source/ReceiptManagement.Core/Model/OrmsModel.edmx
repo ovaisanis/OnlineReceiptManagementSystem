@@ -246,6 +246,7 @@
     <Property Name="CategoryId" Type="int" Nullable="true" />
     <Property Name="SubCategoryId" Type="int" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
   </EntityType>
@@ -787,6 +788,10 @@
             <End Role="WarrantyCards" EntitySet="WarrantyCards" />
             <End Role="WarrantyCardImages" EntitySet="WarrantyCardImages" />
           </AssociationSet>
+          <AssociationSet Name="ImageUser" Association="OrmsModel.ImageUser">
+            <End Role="Image" EntitySet="Images" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="EventsInfo">
           <Key>
@@ -836,6 +841,8 @@
           <NavigationProperty Name="ReceiptImages" Relationship="OrmsModel.FK_ReceiptImages_Images" FromRole="Images" ToRole="ReceiptImages" />
           <NavigationProperty Name="WarrantyCardImages" Relationship="OrmsModel.FK_WarrantyCardImages_Images" FromRole="Images" ToRole="WarrantyCardImages" />
           <Property Type="Boolean" Name="IsTrackable" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="OrmsModel.ImageUser" FromRole="Image" ToRole="User" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
         </EntityType>
         <EntityType Name="ImageType">
           <Key>
@@ -1014,6 +1021,7 @@
           <NavigationProperty Name="System_Social_UsersAssociation" Relationship="OrmsModel.FK_SystemUser_Association" FromRole="Users" ToRole="System_Social_UsersAssociation" />
           <NavigationProperty Name="WarrantyCards" Relationship="OrmsModel.FK_WarrantyCards_Users" FromRole="Users" ToRole="WarrantyCards" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="OrmsModel.ImageUser" FromRole="User" ToRole="Image" />
         </EntityType>
         <EntityType Name="WarrantyCardImage">
           <Key>
@@ -1364,6 +1372,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ImageUser">
+          <End Type="OrmsModel.Image" Role="Image" Multiplicity="*" />
+          <End Type="OrmsModel.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1491,6 +1511,7 @@
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>

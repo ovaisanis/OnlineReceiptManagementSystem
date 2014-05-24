@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/25/2014 01:04:49
+-- Date Created: 05/25/2014 01:11:59
 -- Generated from EDMX file: C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\ReceiptManagement.Core\Model\OrmsModel.edmx
 -- --------------------------------------------------
 
@@ -200,7 +200,8 @@ CREATE TABLE [dbo].[Images] (
     [FileFormat] nvarchar(5)  NULL,
     [CreatedOn] datetime  NULL,
     [IsDeleted] bit  NULL,
-    [IsTrackable] bit  NOT NULL
+    [IsTrackable] bit  NOT NULL,
+    [UserId] bigint  NOT NULL
 );
 GO
 
@@ -856,6 +857,20 @@ ADD CONSTRAINT [FK_WarrantyCardImages_WarrantyCards]
 CREATE INDEX [IX_FK_WarrantyCardImages_WarrantyCards]
 ON [dbo].[WarrantyCardImages]
     ([WarrantyCardId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'Images'
+ALTER TABLE [dbo].[Images]
+ADD CONSTRAINT [FK_ImageUser]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ImageUser'
+CREATE INDEX [IX_FK_ImageUser]
+ON [dbo].[Images]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------
