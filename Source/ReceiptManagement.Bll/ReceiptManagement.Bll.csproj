@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\MyProductServiceManager.cs" />
+    <Compile Include="Managers\WarrantyCardImageManager.cs" />
+    <Compile Include="Managers\ReceiptImageManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />
     <Compile Include="Managers\ProductServiceManager.cs" />
     <Compile Include="Managers\WarrantyCardManager.cs" />
