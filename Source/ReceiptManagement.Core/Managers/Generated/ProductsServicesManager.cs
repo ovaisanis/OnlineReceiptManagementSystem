@@ -899,7 +899,7 @@ namespace ReceiptManagement.Core.Managers
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(products_Services, "Tags contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;
     			}
-    						
+    									
     			OnValidated(apiContext, products_Services, ref result);
             }
     		

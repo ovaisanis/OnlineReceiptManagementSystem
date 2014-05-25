@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/25/2014 01:57:51
+-- Date Created: 05/25/2014 16:21:28
 -- Generated from EDMX file: C:\FAISAL\MS(CS)\Advance Web Technologies\Project\Github\OnlineReceiptManagementSystem\Source\ReceiptManagement.Core\Model\OrmsModel.edmx
 -- --------------------------------------------------
 
@@ -281,7 +281,8 @@ CREATE TABLE [dbo].[Products_Services] (
     [UserId] bigint  NULL,
     [Tags] nvarchar(max)  NOT NULL,
     [CreatedOn] datetime  NULL,
-    [IsDeleted] bit  NULL
+    [IsDeleted] bit  NULL,
+    [PurchaseDate] datetime  NULL
 );
 GO
 
@@ -363,7 +364,8 @@ CREATE TABLE [dbo].[WarrantyCards] (
     [WarrantyExpireOn] datetime  NULL,
     [CreatedOn] datetime  NULL,
     [UserId] bigint  NULL,
-    [IsDeleted] bit  NULL
+    [IsDeleted] bit  NULL,
+    [CardNumber] nvarchar(max)  NULL
 );
 GO
 

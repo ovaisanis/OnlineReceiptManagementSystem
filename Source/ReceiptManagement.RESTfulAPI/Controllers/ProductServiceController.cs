@@ -18,9 +18,9 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             try
             {
-                Entities.Products_Services prodService = prodServiceModel;
+                //Entities.Products_Services prodService = prodServiceModel;
 
-                new Managers.ProductServiceManager().Insert(Context.GetContext(), prodService);
+                //new Managers.ProductServiceManager().Insert(Context.GetContext(), prodService);
 
                 return Request.CreateResponse(HttpStatusCode.OK, "Product Added Successfully");
             }

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="customersApp" ng-controller="ProductServiceController">
     <head>
         <meta charset="UTF-8">
         <title>ORMS | New Receipt</title>
@@ -15,6 +15,14 @@
          <!-- Custom styles -->
         <link href="../../css/custom_styles.css" rel="stylesheet" />
         
+        
+        <script src="../../Scripts/jquery.min.js"></script>    
+        <script src="../../Scripts/angular.js"></script>
+        <script src="../../Scripts/bootstrap.min.js"></script>
+        <script src="../../Scripts/angular-route.js"></script>
+        <script src="../../app/app.js"></script>
+        <script src="../../app/controllers/controllers.js"></script>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -126,7 +134,7 @@
                                     <h3 class="box-title">Product/Service Info</h3>
                                 </div>--><!-- /.box-header -->
                                 <div class="box-body">
-                                    <form role="form">
+                                    <form name="prodServiceForm" ng-submit="create(productServiceDetails)" novalidate>
 
                                         <!-- Save Receipt Button -->
                                         <div class="row">
@@ -170,12 +178,12 @@
                                              <!-- Product Name -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Product/Service Name</label>
-                                                <input type="text" class="form-control" placeholder="Product or Service Name...">
+                                                <input type="text" ng-model="productServiceDetails.ServiceName" class="form-control" placeholder="Product or Service Name...">
                                             </div>
                                             <!-- Purchase Date -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Purchase Date (In case of no receipt)</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy">
+                                                <input type="text"  ng-model="productServiceDetails.ServicePurchaseDate" class="form-control" placeholder="mm/dd/yyyy">
                                             </div>
                                         </div>
                                         
@@ -191,24 +199,24 @@
                                              <!-- Receipt Date -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Receipt Date</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy">
+                                                <input type="text" ng-model="productServiceDetails.ReceiptDate" class="form-control" placeholder="mm/dd/yyyy">
                                             </div>
                                               <!-- Receipt Number -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Receipt Number (If any)</label>
-                                                <input type="text" class="form-control" placeholder="Receipt Number...">
+                                                <input type="text" ng-model="productServiceDetails.SerialNumber" class="form-control" placeholder="Receipt Number...">
                                             </div>
                                         </div>
                                         <div class="row top17">
                                              <!-- Receipt Title -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Receipt Title (If any)</label>
-                                                <input type="text" class="form-control" placeholder="Receipt Title...">
+                                                <input type="text" ng-model="productServiceDetails.ReceiptTitle" class="form-control" placeholder="Receipt Title...">
                                             </div>
                                             <!-- Purchase Date -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Description (If any)</label>
-                                                <textarea class="form-control" placeholder="Description..."></textarea>
+                                                <textarea class="form-control" ng-model="productServiceDetails.ReceiptDescription" placeholder="Description..."></textarea>
                                             </div>
                                         </div>
                                         <div class="row top17">
@@ -259,24 +267,24 @@
                                              <!-- Warranty Expiry Date -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Warranty Expiry Date</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy">
+                                                <input type="text" ng-model="productServiceDetails.WarrantyExpireOn" class="form-control" placeholder="mm/dd/yyyy">
                                             </div>
                                               <!-- Receipt Number -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Warranty Card Number (If any)</label>
-                                                <input type="text" class="form-control" placeholder="Warranty Card Number...">
+                                                <input type="text" ng-model="productServiceDetails.WarrantyCardNumber" class="form-control" placeholder="Warranty Card Number...">
                                             </div>
                                         </div>
                                         <div class="row top17">
                                              <!-- Warranty Card Title -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Warranty Card Title (If any)</label>
-                                                <input type="text" class="form-control" placeholder="Warranty Card Title...">
+                                                <input type="text" ng-model="productServiceDetails.WarrantyTitle" class="form-control" placeholder="Warranty Card Title...">
                                             </div>
                                             <!-- Warranty Card Description -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label>Description (If any)</label>
-                                                <textarea class="form-control" placeholder="Description..."></textarea>
+                                                <textarea class="form-control" ng-model="productServiceDetails.WarrantyDescription" placeholder="Description..."></textarea>
                                             </div>
                                         </div>
                                         <div class="row top17">
@@ -337,11 +345,11 @@
 
 
         <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+       <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
-        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+       <!-- <script src="../../js/bootstrap.min.js" type="text/javascript"></script>-->
         <!-- AdminLTE App -->
-        <script src="../../js/AdminLTE/app.js" type="text/javascript"></script>
+        <!--<script src="../../js/AdminLTE/app.js" type="text/javascript"></script>-->
 
     </body>
 </html>

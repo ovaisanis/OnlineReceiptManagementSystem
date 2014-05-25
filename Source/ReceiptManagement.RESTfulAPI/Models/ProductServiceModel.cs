@@ -9,89 +9,34 @@ namespace ReceiptManagement.RESTfulAPI.Models
 {
     public class ProductServiceModel
     {
-        #region Primitive Properties
+       public string ServiceName { get; set; }
 
-        public long Id
-        {
-            get;
-            set;
-        }
+       public string ServiceDescription{ get; set; }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+       public int ServiceCategoryId { get; set; }
 
-        public string Description
-        {
-            get;
-            set;
-        }
+       public int ServiceSubCategoryId { get; set; }
 
-        public Nullable<int> CategoryId
-        {
-            get;
-            set;
-        }
+       public DateTime ServicePurchaseDate { get; set; }
 
-        public Nullable<int> SubCategoryId
-        {
-            get; 
-            set;
-        }
+       public int UserId{ get; set; }
 
-        public Nullable<long> UserId
-        {
-            get;
-            set;
+       public string ServiceTags{ get; set; }
 
-        }
+       public DateTime ReceiptDate{ get; set; }
 
-        public Nullable<System.DateTime> CreatedOn
-        {
-            get;
-            set;
-        }
+       public string  ReceiptSerialNumber{ get; set; }
 
-        public Nullable<bool> IsDeleted
-        {
-            get;
-            set;
-        }
+       public string  ReceiptTitle{ get; set; }
 
-        #endregion
+       public string ReceiptDescription{ get; set; }
 
-        public static implicit operator ProductServiceModel(Products_Services productService)
-        {
-            ProductServiceModel model = new ProductServiceModel();
+       public string WarrantyTitle{ get; set; }
 
-            model.Id = productService.Id;
-            model.IsDeleted = productService.IsDeleted;
-            model.Name = productService.Name;
-            model.Description = productService.Description;
-            model.CreatedOn = productService.CreatedOn;
-            model.UserId = productService.UserId;
-            model.CategoryId = productService.CategoryId;
-            model.SubCategoryId = productService.SubCategoryId;
+       public string WarrantyDescription{ get; set; }
 
-            return model;
-        }
+       public string WarrantyCardNumber { get; set; }
 
-        public static implicit operator Products_Services(ProductServiceModel model)
-        {
-            Products_Services prodService = new Products_Services();
-
-            prodService.Id = model.Id;
-            prodService.IsDeleted = model.IsDeleted;
-            prodService.Name = model.Name;
-            prodService.Description = model.Description;
-            prodService.CreatedOn = model.CreatedOn;
-            prodService.UserId = model.UserId;
-            prodService.CategoryId = model.CategoryId;
-            prodService.SubCategoryId = model.SubCategoryId;
-
-            return prodService;
-        }
+       public DateTime WarrantyExpireOn { get; set; }
     }
 }

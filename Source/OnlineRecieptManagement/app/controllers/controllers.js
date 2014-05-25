@@ -215,6 +215,72 @@ app.controller('SignupController', function ($scope, $http, $location) {
     };
 });
 
+app.controller('ProductServiceController', function ($scope, $http, $location) {
+
+    $scope.productServices = {
+        ServiceName: '',
+        ServiceDescription: '',
+        ServiceCategoryId: '',
+        ServiceSubCategoryId: '',
+        ServicePurchaseDate:'',
+        UserId: '',
+        ServiceTags: '',
+
+        ReceiptDate: '',
+        ReceiptSerialNumber: '',
+        ReceiptTitle: '',
+        ReceiptDescription: '',
+
+        WarrantyTitle: '',
+        WarrantyDescription: '',
+        WarrantyExpireOn: '',
+        WarrantyCardNumber: '',
+    };
+
+    $scope.create = function (productServiceDetails) {
+
+        /*var productServices = {
+            ServiceName: ServiceName,
+            ServiceDescription: '',
+            ServiceCategoryId: '',
+            ServiceSubCategoryId: '',
+            UserId: '',
+            ServiceTags: '',
+
+            ReceiptDate: '',
+            ReceiptSerialNumber: '',
+            ReceiptTitle: '',
+            ReceiptDescription: '',
+
+            WarrantyTitle: '',
+            WarrantyDescription: '',
+            WarrantyExpireOn: '',
+        };
+        */
+
+        //if ($scope.signupForm.$valid) {
+
+        //}        
+
+        $.support.cors = true;
+        $.ajax({
+            url: 'http://localhost:22011/api/productservice',
+            type: 'POST',
+            data: productServiceDetails,
+            dataType: "json",
+            success: function (data) {
+
+                alert('Contacts added successfully.   ' + data.responseText);
+                window.location = "#/dashboard";
+            },
+            error: function (data) {
+                alert('Problem in adding contacts:' + data.responseText);
+
+            }
+        });
+    };
+});
+
 app.controller('FileUploadController', function ($scope, $http, $location) {
 
     $scope.filesChanged = function (elm) {

@@ -884,7 +884,17 @@ namespace ReceiptManagement.Core.Managers
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(warrantyCard, "Description contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;
     			}
-    												
+    															if (!System.String.IsNullOrWhiteSpace(warrantyCard.CardNumber) && warrantyCard.CardNumber.Length > 0)
+    			{						
+    				result.Messages.Add(Helpers.ActionResultMessage.Factory(warrantyCard, "CardNumber must be 0 characters or less.", Helpers.ActionResultMessageType.Error));
+    				result.WasSuccessful = false;
+    			}
+    						if (!System.String.IsNullOrWhiteSpace(warrantyCard.CardNumber) && !System.Text.RegularExpressions.Regex.IsMatch(warrantyCard.CardNumber, alphaNumeric))
+    			{						
+    				result.Messages.Add(Helpers.ActionResultMessage.Factory(warrantyCard, "CardNumber contains invalid characters.", Helpers.ActionResultMessageType.Error));
+    				result.WasSuccessful = false;
+    			}
+    						
     			OnValidated(apiContext, warrantyCard, ref result);
             }
     		
