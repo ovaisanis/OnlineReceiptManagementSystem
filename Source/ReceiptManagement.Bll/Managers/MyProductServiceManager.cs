@@ -117,6 +117,7 @@ namespace ReceiptManagement.Bll.Managers
                 //Save My Product Service
                 Entities.My_Products_Services myProdService = new Entities.My_Products_Services();
 
+                myProdService.Product_Service_Id = serviceId;
                 myProdService.ReceiptId = receiptId;
                 myProdService.WarrantyCardId = warrantyCardId;
                 myProdService.CreatedOn = DateTime.Now;
