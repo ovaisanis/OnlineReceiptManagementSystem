@@ -235,6 +235,10 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
         WarrantyDescription: '',
         WarrantyExpireOn: '',
         WarrantyCardNumber: '',
+
+        ReceiptUploadedFiles: [],
+
+        WarrantyCardUploadedFiles: []
     };
 
     $scope.create = function (productServiceDetails) {
@@ -262,6 +266,9 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
 
         //}        
 
+        productServiceDetails.ReceiptUploadedFiles = $scope.productServices.ReceiptUploadedFiles;
+        productServiceDetails.WarrantyCardUploadedFiles = $scope.productServices.WarrantyCardUploadedFiles;
+
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/productservice',
@@ -279,6 +286,91 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
             }
         });
     };
+
+    $scope.receiptFilesChanged = function (elm) {
+
+        $scope.receiptSelectedFiles = elm.files;
+        $scope.$apply();
+    }
+
+    $scope.receiptFileUpload = function () {
+
+        var fd = new FormData();
+        angular.forEach($scope.receiptSelectedFiles, function (file) {
+            fd.append('file', file);
+        })
+
+        //$http.defaults.headers.common['Api-Token'] = 'testtoken';
+
+        $http.post('http://localhost:22011/api/fileupload', fd,
+            {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+
+            })
+            .success(function (d) {
+                console.log(d);
+                if (d.response_type == 'ok') {
+                    $scope.productServices.ReceiptUploadedFiles = $scope.productServices.ReceiptUploadedFiles.concat(d.response_object);
+                    document.getElementById("receiptFileUpload").value = "";
+                    $scope.receiptSelectedFiles = [];
+                }
+            })
+            .error(function (e) {
+                console.log(e);
+            })
+    }
+
+    $scope.warrantyCardFilesChanged = function (elm) {
+
+        $scope.warrantyCardSelectedFiles = elm.files;
+        $scope.$apply();
+    }
+
+    $scope.warrantyCardFileUpload = function () {
+
+        var fd = new FormData();
+        angular.forEach($scope.warrantyCardSelectedFiles, function (file) {
+            fd.append('file', file);
+        })
+
+        //$http.defaults.headers.common['Api-Token'] = 'testtoken';
+
+        $http.post('http://localhost:22011/api/fileupload', fd,
+            {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+
+            })
+            .success(function (d) {
+                console.log(d);
+                if (d.response_type == 'ok') {
+                    $scope.productServices.WarrantyCardUploadedFiles = $scope.productServices.WarrantyCardUploadedFiles.concat(d.response_object);
+                    document.getElementById("warrantyCardFileUpload").value = "";
+                    $scope.receiptSelectedFiles = [];
+                }
+            })
+            .error(function (e) {
+                console.log(e);
+            })
+    }
+
+    $scope.previewFile = function (link, title) {
+
+        imageFile = document.getElementById('imgFile');
+        document.getElementById('modalTitle').innerHTML = title;
+        imageFile.src = link;
+        imageFile.alt = title;
+        imageFile.title = title;
+
+        $('#modalPreviewImage').modal('show');
+    }
+
+    $scope.deleteFile = function (id, title) {
+
+        alert("You cant delete file " + title + ". No file deletion functionality implemented yet.");
+    }
+
 });
 
 app.controller('FileUploadController', function ($scope, $http, $location) {

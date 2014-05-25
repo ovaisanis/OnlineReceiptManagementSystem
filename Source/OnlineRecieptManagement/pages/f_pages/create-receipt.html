@@ -134,12 +134,11 @@
                                     <h3 class="box-title">Product/Service Info</h3>
                                 </div>--><!-- /.box-header -->
                                 <div class="box-body">
-                                    <form name="prodServiceForm" ng-submit="create(productServiceDetails)" novalidate>
-
+                                    
                                         <!-- Save Receipt Button -->
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6">
-                                                <button class="btn btn-primary">Save Receipt</button>
+                                                <button class="btn btn-primary" ng-click="create(productServiceDetails)">Save Receipt</button>
                                                 <button class="btn btn-primary">Cancel</button>
                                             </div>
                                         </div>
@@ -223,9 +222,14 @@
                                              <!-- Receipt Image File -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label for="receiptImageFile">Upload Receipt Image</label>
-                                                <input type="file" id="receiptImageFile">
+                                                
+                                                <input type="file" id="receiptFileUpload" onchange="angular.element(this).scope().receiptFilesChanged(this)" multiple>
+                                                <li ng-repeat="file in receiptSelectedFiles">{{file.name}}</li>
+                                                <button class="top5" ng-click="receiptFileUpload()">Upload</button>
+                                                
                                                 <p class="help-block">Please upload image files only.</p>
-                                                </div>
+                                                
+                                            </div>
                                         </div>
                                         <div class="row">
                                              <!-- Receipts uploaded files -->
@@ -238,16 +242,11 @@
                                                                 <th colspan="2" style="text-align:center;">Actions</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody ng:repeat="file in productServices.ReceiptUploadedFiles">
                                                             <tr>
-                                                                <td>DSC543534aadsfasdfasdfaf5.jpg</td>
-                                                                <td><a href="#">Preview</a></td>
-                                                                <td><a href="#">Remove</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>recp-imgqweq.jpg</td>
-                                                                <td><a href="#">Preview</a></td>
-                                                                <td><a href="#">Remove</a></td>
+                                                                <td>{{file.Title}}</td>
+                                                                <td><a style="cursor:pointer;" ng-click="previewFile(file.Path, file.Title)">Preview</a></td>
+                                                                <td><a style="cursor:pointer;" ng-click="deleteFile(file.Id, file.Title)">Remove</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -291,9 +290,12 @@
                                              <!-- Warranty Card Image File -->
                                             <div class="col-xs-12 col-sm-6">
                                                 <label for="warrantyCardImageFile">Upload Warranty Card Image</label>
-                                                <input type="file" id="warrantyCardImageFile">
+                                                <input type="file" id="warrantyCardFileUpload" onchange="angular.element(this).scope().warrantyCardFilesChanged(this)" multiple>
+                                                <li ng-repeat="file in warrantyCardSelectedFiles">{{file.name}}</li>
+                                                <button class="top5" ng-click="warrantyCardFileUpload()">Upload</button>
+                                                
                                                 <p class="help-block">Please upload image files only.</p>
-                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                              <!-- Warranty Cards uploaded files -->
@@ -306,16 +308,11 @@
                                                                 <th colspan="2" style="text-align:center;">Actions</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                       <tbody ng:repeat="file in productServices.WarrantyCardUploadedFiles">
                                                             <tr>
-                                                                <td>DSC543534aadsfasdfasdfaf5.jpg</td>
-                                                                <td><a href="#">Preview</a></td>
-                                                                <td><a href="#">Remove</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>recp-imgqweq.jpg</td>
-                                                                <td><a href="#">Preview</a></td>
-                                                                <td><a href="#">Remove</a></td>
+                                                                <td>{{file.Title}}</td>
+                                                                <td><a style="cursor:pointer;" ng-click="previewFile(file.Path, file.Title)">Preview</a></td>
+                                                                <td><a style="cursor:pointer;" ng-click="deleteFile(file.Id, file.Title)">Remove</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -326,15 +323,31 @@
                                         <!-- Save Receipt Button -->
                                         <div class="row top17">
                                             <div class="col-xs-12 col-sm-6">
-                                                <button class="btn btn-primary">Save Receipt</button>
+                                                <button class="btn btn-primary" ng-click="create(productServiceDetails)">Save Receipt</button>
                                                 <button class="btn btn-primary">Cancel</button>
                                             </div>
                                         </div>
 
-                                    </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
 
+                            <!--Image Preview Modal Dialogue html-->
+                            <div class="modal fade" id="modalPreviewImage">
+                              <div class="modal-dialog" style="width: 850px;">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="modalTitle">Modal title</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <img id="imgFile" src="#" width="800" height="500" title="" alt="" />
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Close</button>
+                                  </div>
+                                </div><!-- /.modal-content -->
+                              </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal --> 
                   
 
                 </section><!-- /.content -->

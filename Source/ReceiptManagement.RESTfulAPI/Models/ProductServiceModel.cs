@@ -9,34 +9,38 @@ namespace ReceiptManagement.RESTfulAPI.Models
 {
     public class ProductServiceModel
     {
-       public string ServiceName { get; set; }
+        public string ServiceName { get; set; }
 
-       public string ServiceDescription{ get; set; }
+        public string ServiceDescription{ get; set; }
 
-       public int ServiceCategoryId { get; set; }
+        public int ServiceCategoryId { get; set; }
 
-       public int ServiceSubCategoryId { get; set; }
+        public int ServiceSubCategoryId { get; set; }
 
-       public DateTime ServicePurchaseDate { get; set; }
+        public DateTime ServicePurchaseDate { get; set; }
 
-       public int UserId{ get; set; }
+        public int UserId{ get; set; }
 
-       public string ServiceTags{ get; set; }
+        public string ServiceTags{ get; set; }
 
-       public DateTime ReceiptDate{ get; set; }
+        public DateTime ReceiptDate{ get; set; }
 
-       public string  ReceiptSerialNumber{ get; set; }
+        public string  ReceiptSerialNumber{ get; set; }
 
-       public string  ReceiptTitle{ get; set; }
+        public string  ReceiptTitle{ get; set; }
 
-       public string ReceiptDescription{ get; set; }
+        public string ReceiptDescription{ get; set; }
 
-       public string WarrantyTitle{ get; set; }
+        public List<Image> ReceiptUploadedFiles { get; set; }
 
-       public string WarrantyDescription{ get; set; }
+        public string WarrantyTitle{ get; set; }
 
-       public string WarrantyCardNumber { get; set; }
+        public string WarrantyDescription{ get; set; }
 
-       public DateTime WarrantyExpireOn { get; set; }
+        public string WarrantyCardNumber { get; set; }
+
+        public DateTime WarrantyExpireOn { get; set; }
+
+        public List<Image> WarrantyCardUploadedFiles { get; set; }
     }
 }

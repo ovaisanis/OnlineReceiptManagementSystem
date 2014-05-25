@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using ReceiptManagement.Bll.Managers;
 using ReceiptManagement.RESTfulAPI.Common;
 using ReceiptManagement.RESTfulAPI.Filters;
 using ReceiptManagement.RESTfulAPI.Models;
@@ -76,11 +77,25 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
                             HttpPostedFile postedFile = httpRequest.Files[i];
                             var savedFileName = HelperMethods.SaveImage(postedFile, FileLocationRelativePath);
 
-                            // Write database save code here
+                            #region Insert Image Record in Database
+
+                            ReceiptManagement.Common.Entities.Image image = new ReceiptManagement.Common.Entities.Image();
+
+                            image.CreatedOn = DateTime.Now;
+                            image.FileSize = 0;
+                            image.Title = postedFile.FileName;
+                            image.Path = savedFileName;
+                            image.FileFormat = System.IO.Path.GetExtension(savedFileName);
+                            image.IsDeleted = false;
+
+                            long id;
+                            new ImageManager().Insert(Context.GetContext(), image, out id);
+
+                            #endregion
 
                             uploadedImages.Add(new Image
                             {
-                                Id = 1,
+                                Id = id,
                                 Title = postedFile.FileName,
                                 Path = ServerImageDirectoryPath + savedFileName
                             });
