@@ -18,12 +18,9 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             try
             {
-                //Entities.Products_Services prodService = prodServiceModel;
-
-                //new Managers.ProductServiceManager().Insert(Context.GetContext(), prodService);
                 SaveReceipts(prodServiceModel);
 
-                return Request.CreateResponse(HttpStatusCode.OK, "Product Added Successfully");
+                return Request.CreateResponse(HttpStatusCode.OK, "Product or Service Added Successfully");
             }
             catch (Exception ex)
             {
@@ -43,7 +40,9 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             Entities.Products_Services prodService = new Entities.Products_Services();
 
-            prodService.Name = prodServiceModel.ServiceName;
+            //TODO: Hack: Fix it later. Allow null value in Name field
+            prodService.Name = string.IsNullOrEmpty(prodServiceModel.ServiceName) ? string.Empty : prodServiceModel.ServiceName;
+
             prodService.Description = prodServiceModel.ServiceDescription;
             prodService.PurchaseDate = prodServiceModel.ServicePurchaseDate;
             prodService.Tags = prodServiceModel.ServiceTags;
