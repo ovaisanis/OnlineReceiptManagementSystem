@@ -63,6 +63,45 @@ namespace ReceiptManagement.Core.Managers
     
     		#region Add Methods
     	
+    
+    		public static Helpers.ActionResult Add(Helpers.ApiContext apiContext, Entities.Product_Service_SubCategories product_Service_SubCategories,out long id)
+        	{
+        		// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+                if (apiContext == null)
+                    throw new System.ArgumentNullException("apiContext");
+                if (product_Service_SubCategories == null)
+                    throw new System.ArgumentNullException("image");              
+        				
+        		// Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
+        
+        		Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+        
+        		try
+        		{
+        			Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+        				
+        			// ADD to context
+        			OnAdding(apiContext, product_Service_SubCategories);
+    
+        			context.AddObject("Images", product_Service_SubCategories);
+        				    
+        			context.SaveChanges(); // Save Changes	
+    			
+                    id = product_Service_SubCategories.Id;
+    
+        			DetachObjects(apiContext, new System.Collections.Generic.List<Entities.Product_Service_SubCategories> {product_Service_SubCategories }); // Clean ObjectState cache
+        				
+        		}
+        		catch (System.Exception ex)
+        		{		
+        			object forDebugging = ex;
+        			throw;// Helpers.Exceptions.AddEntityException.Factory(ex);
+        		}
+        
+        		return result;
+        	}  
+    
     		/// <summary>
     		///	No Metadata Documentation available.
     		/// </summary>

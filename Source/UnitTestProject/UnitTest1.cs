@@ -56,7 +56,9 @@ namespace UnitTestProject
             image.FileFormat = "jpg";
             image.IsDeleted = false;
 
-            new ImageManager().Insert(apiContext, image);
+            long id = 0;
+
+            new ImageManager().Insert(apiContext, image,out id);
         }
     }
 }

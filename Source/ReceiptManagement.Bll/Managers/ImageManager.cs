@@ -46,11 +46,12 @@ namespace ReceiptManagement.Bll.Managers
         /// <param name = "apiContext"></param>
         /// <param name = "info"></param>
         /// <returns></returns>
-        public bool Insert(ApiContext apiContext, Common.Entities.Image image)
+        public bool Insert(ApiContext apiContext, Common.Entities.Image image,out long id)
         {
             try
             {
-                var result = CoreManagers.ImageManager.Add(apiContext, new List<Common.Entities.Image> { image });
+
+                var result = CoreManagers.ImageManager.Add(apiContext, image, out id);
 
                 if (!result.WasSuccessful)
                 {

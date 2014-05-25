@@ -63,6 +63,45 @@ namespace ReceiptManagement.Core.Managers
     
     		#region Add Methods
     	
+    
+    		public static Helpers.ActionResult Add(Helpers.ApiContext apiContext, Entities.WarrantyCardImage warrantyCardImage,out long id)
+        	{
+        		// API doesn't allow null parameters. This method requires at least 1 item in the collection.
+                if (apiContext == null)
+                    throw new System.ArgumentNullException("apiContext");
+                if (warrantyCardImage == null)
+                    throw new System.ArgumentNullException("image");              
+        				
+        		// Verify user is authorized to perform action, otherwise throw exception.
+                Security.SecurityHandler.SetApiContext(apiContext);
+        
+        		Helpers.ActionResult result = Helpers.ActionResult.Factory(true);
+        
+        		try
+        		{
+        			Model.OrmsContext context = (Model.OrmsContext)apiContext.CurrentContext;
+        				
+        			// ADD to context
+        			OnAdding(apiContext, warrantyCardImage);
+    
+        			context.AddObject("Images", warrantyCardImage);
+        				    
+        			context.SaveChanges(); // Save Changes	
+    			
+                    id = warrantyCardImage.Id;
+    
+        			DetachObjects(apiContext, new System.Collections.Generic.List<Entities.WarrantyCardImage> {warrantyCardImage }); // Clean ObjectState cache
+        				
+        		}
+        		catch (System.Exception ex)
+        		{		
+        			object forDebugging = ex;
+        			throw;// Helpers.Exceptions.AddEntityException.Factory(ex);
+        		}
+        
+        		return result;
+        	}  
+    
     		/// <summary>
     		///	No Metadata Documentation available.
     		/// </summary>
