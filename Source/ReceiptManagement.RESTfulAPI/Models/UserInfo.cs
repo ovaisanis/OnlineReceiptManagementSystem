@@ -50,7 +50,7 @@ namespace ReceiptManagement.RESTfulAPI.Models
             user.FirstName = userInfo.FirstName.Trim();
             user.LastName = userInfo.LastName.Trim();
             user.Password = userInfo.Password.Trim();
-            user.Email = userInfo.Password.Trim();
+            user.Email = userInfo.Email.Trim();
             user.RoleId = Roles.User;
             user.IsActive = userInfo.IsActive;
             return user;
