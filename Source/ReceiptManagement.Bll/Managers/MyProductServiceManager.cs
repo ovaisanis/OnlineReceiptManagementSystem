@@ -83,36 +83,43 @@ namespace ReceiptManagement.Bll.Managers
                 result = CoreManagers.ReceiptManager.Add(apiContext, receipt, out receiptId);
 
                 //Save receipt images
-                List<Entities.ReceiptImage> receiptImages = new List<Entities.ReceiptImage>();
-                foreach (Entities.Image image in receiptImageList)
+
+                if (receiptImageList.Count > 0)
                 {
-                    Entities.ReceiptImage receiptImage = new Entities.ReceiptImage();
-                    
-                    receiptImage.ImageId = image.Id;
-                    receiptImage.ReceiptId = receiptId;
+                    List<Entities.ReceiptImage> receiptImages = new List<Entities.ReceiptImage>();
+                    foreach (Entities.Image image in receiptImageList)
+                    {
+                        Entities.ReceiptImage receiptImage = new Entities.ReceiptImage();
 
-                    receiptImages.Add(receiptImage);
+                        receiptImage.ImageId = image.Id;
+                        receiptImage.ReceiptId = receiptId;
+
+                        receiptImages.Add(receiptImage);
+                    }
+
+                    result = CoreManagers.ReceiptimageManager.Add(apiContext, receiptImages);
                 }
-
-                result = CoreManagers.ReceiptimageManager.Add(apiContext, receiptImages);
 
                 //Save receipt
                 long warrantyCardId = 0;
                 result = CoreManagers.WarrantycardManager.Add(apiContext, warrantyCard, out warrantyCardId);
 
                 //Save warranty card images
-                List<Entities.WarrantyCardImage> warranyCardImages = new List<Entities.WarrantyCardImage>();
-                foreach (Entities.Image image in warranyCardImageList)
+                if (warranyCardImageList.Count > 0)
                 {
-                    Entities.WarrantyCardImage warrantyCardImage = new Entities.WarrantyCardImage();
+                    List<Entities.WarrantyCardImage> warranyCardImages = new List<Entities.WarrantyCardImage>();
+                    foreach (Entities.Image image in warranyCardImageList)
+                    {
+                        Entities.WarrantyCardImage warrantyCardImage = new Entities.WarrantyCardImage();
 
-                    warrantyCardImage.ImageId = image.Id;
-                    warrantyCardImage.WarrantyCardId = warrantyCardId;
+                        warrantyCardImage.ImageId = image.Id;
+                        warrantyCardImage.WarrantyCardId = warrantyCardId;
 
-                    warranyCardImages.Add(warrantyCardImage);
+                        warranyCardImages.Add(warrantyCardImage);
+                    }
+
+                    result = CoreManagers.WarrantycardimageManager.Add(apiContext, warranyCardImages);
                 }
-
-                result = CoreManagers.WarrantycardimageManager.Add(apiContext, warranyCardImages);
 
                 //Save My Product Service
                 Entities.My_Products_Services myProdService = new Entities.My_Products_Services();

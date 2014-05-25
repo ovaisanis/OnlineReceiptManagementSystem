@@ -17,13 +17,13 @@ namespace ReceiptManagement.RESTfulAPI.Models
 
         public int ServiceSubCategoryId { get; set; }
 
-        public DateTime ServicePurchaseDate { get; set; }
+        public Nullable<DateTime> ServicePurchaseDate { get; set; }
 
         public int UserId{ get; set; }
 
         public string ServiceTags{ get; set; }
 
-        public DateTime ReceiptDate{ get; set; }
+        public Nullable<DateTime> ReceiptDate{ get; set; }
 
         public string  ReceiptSerialNumber{ get; set; }
 
@@ -39,7 +39,7 @@ namespace ReceiptManagement.RESTfulAPI.Models
 
         public string WarrantyCardNumber { get; set; }
 
-        public DateTime WarrantyExpireOn { get; set; }
+        public Nullable<DateTime> WarrantyExpireOn { get; set; }
 
         public List<Image> WarrantyCardUploadedFiles { get; set; }
     }

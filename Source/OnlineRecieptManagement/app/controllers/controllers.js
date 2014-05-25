@@ -150,7 +150,7 @@ app.controller('LoginController', function ($scope, $http, $location) {
             dataType: "json",           
             success: function (data) {
 
-                alert('Contacts added successfully.   ' + data.responseText);
+               // alert('Contacts added successfully.   ' + data.responseText);
                 window.location = "/OnlineRecieptManagement/f_index.html";
             },
             error: function (data) {
@@ -277,9 +277,7 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
             data: productServiceDetails,
             dataType: "json",
             success: function (data) {
-
-                alert('Contacts added successfully.   ' + data.responseText);
-                window.location = "#/dashboard";
+                window.location = "/OnlineRecieptManagement/pages/f_pages/receipts.html";
             },
             error: function (data) {
                 alert('Problem in adding contacts:' + data.responseText);
