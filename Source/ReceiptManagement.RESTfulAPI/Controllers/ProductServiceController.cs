@@ -35,5 +35,35 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             return "value";
         }
+
+        #region Private Functions
+
+        private void SaveReceipts(Models.ProductServiceModel prodServiceModel)
+        {
+            Entities.Products_Services prodService = new Entities.Products_Services();
+
+            prodService.Name = prodServiceModel.ServiceName;
+            prodService.Description = prodServiceModel.ServiceDescription;
+            prodService.PurchaseDate = prodServiceModel.ServicePurchaseDate;
+            prodService.Tags = prodServiceModel.ServiceTags;
+            prodService.CategoryId = prodServiceModel.ServiceCategoryId;
+            prodService.SubCategoryId = prodServiceModel.ServiceSubCategoryId;
+
+            Entities.Receipt receipt = new Entities.Receipt();
+
+            receipt.Title = prodServiceModel.ReceiptTitle;
+            receipt.SerialNumber = prodServiceModel.ReceiptSerialNumber;
+            receipt.Description = prodServiceModel.ReceiptDescription;
+            receipt.ReceiptDate = prodServiceModel.ReceiptDate;
+
+            Entities.WarrantyCard warrantyCard = new Entities.WarrantyCard();
+
+            warrantyCard.Description = prodServiceModel.ReceiptDescription;
+            warrantyCard.Title = prodServiceModel.WarrantyTitle;
+            warrantyCard.WarrantyExpireOn = prodServiceModel.WarrantyExpireOn;
+            warrantyCard.CardNumber = prodServiceModel.WarrantyCardNumber;
+        }
+
+        #endregion
     }
 }
