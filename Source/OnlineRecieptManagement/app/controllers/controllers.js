@@ -283,6 +283,31 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
 
 app.controller('FileUploadController', function ($scope, $http, $location) {
 
+    //$scope.receiptFiles = {
+    //    Id: '',
+    //    Title: '',
+    //    Linlk: ''
+
+    //};
+    $scope.receiptFiles = [];
+
+    $scope.previewFile = function (link, title) {
+
+        imageFile = document.getElementById('imgFile');
+        document.getElementById('modalTitle').innerHTML = title;
+        imageFile.src = link;
+        imageFile.alt = title;
+        imageFile.title = title;
+
+        $('#modalPreviewImage').modal('show');
+        //alert(link);
+    }
+
+    $scope.deleteFile = function (id, title) {
+
+        alert("You cant delete file " + title + ". No file deletion functionality implemented yet.");
+    }
+
     $scope.filesChanged = function (elm) {
 
         $scope.files = elm.files;
@@ -306,6 +331,9 @@ app.controller('FileUploadController', function ($scope, $http, $location) {
             })
             .success(function(d){
                 console.log(d);
+                if (d.response_type == 'ok') {
+                    $scope.receiptFiles = $scope.receiptFiles.concat(d.response_object);
+                }
             })
             .error(function (e) {
                 console.log(e);

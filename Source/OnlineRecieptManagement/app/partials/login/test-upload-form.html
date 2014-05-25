@@ -20,11 +20,46 @@
                                 <li ng-repeat="file in files">{{file.name}}</li>
 							</form>
 							
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Preview</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng:repeat="file in receiptFiles">
+                                    <tr>
+                                        <td>{{file.Title}}</td>
+                                        <td><a ng-click="previewFile(file.Path, file.Title)">Preview</a></td>
+                                        <td><a ng-click="deleteFile(file.Id, file.Title)">Remove</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
 						</div>
 					</div>
 
 				</div>
-				                 
+				
+                <!--Image Preview Modal Dialogue html-->
+                  
+                <div class="modal fade" id="modalPreviewImage">
+                  <div class="modal-dialog" style="width: 800px;">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modalTitle">Modal title</h4>
+                      </div>
+                      <div class="modal-body">
+                        <img id="imgFile" src="#" width="800" height="500" title="" alt="" />
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Close</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->               
 
 			</article>
 			<!-- /Article -->
