@@ -139,14 +139,14 @@ app.controller('LoginController', function ($scope, $http, $location) {
         };
 
         if ($scope.loginForm.$valid) {
-            alert("i am right");
+           // alert("i am right");
         }
 
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/login',
             type: 'POST',
-            data: userCredentials,           
+            data: userCredentials,
             dataType: "json",           
             success: function (data) {
 

@@ -17,15 +17,15 @@
 							<hr>
 							
 							<form name="loginForm" ng-submit="login(credentials)" novalidate>
-								<div class="top-margin" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+								<div class="top-margin" ng-class="{ 'has-error' : loginForm.Username.$invalid && !loginForm.Username.$pristine }">
 									<label>Username/Email <span class="text-danger">*</span></label>
-									<input name="username" type="text" ng-model="credentials.username" class="form-control" required>
-                                    <p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine" class="help-block">You username/email is required.</p>
+									<input name="username" type="text" ng-model="credentials.Username" class="form-control" required>
+                                    <p ng-show="loginForm.Username.$invalid && !loginForm.Username.$pristine" class="help-block">You username/email is required.</p>
 								</div>
-								<div class="top-margin" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+								<div class="top-margin" ng-class="{ 'has-error' : loginForm.Password.$invalid && !loginForm.Password.$pristine }">
 									<label>Password <span class="text-danger">*</span></label>
-									<input name="password" type="password" ng-model="credentials.password" class="form-control" required>
-                                     <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Password is required.</p>
+									<input name="password" type="password" ng-model="credentials.Password" class="form-control" required>
+                                     <p ng-show="loginForm.Password.$invalid && !loginForm.Password.$pristine" class="help-block">Password is required.</p>
 								</div>
 
 								<hr>
