@@ -275,7 +275,7 @@
     <Property Name="CategoryId" Type="Int32" />
     <Property Name="SubCategoryId" Type="Int32" />
     <Property Name="UserId" Type="Int64" />
-    <Property Type="String" Name="Tags" Nullable="false" MaxLength="Max" />
+    <Property Type="String" Name="Tags" Nullable="true" MaxLength="Max" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <NavigationProperty Name="My_Products_Services" Relationship="OrmsModel.FK_MyProductsServices_ProductsServices" FromRole="Products_Services" ToRole="My_Products_Services" />

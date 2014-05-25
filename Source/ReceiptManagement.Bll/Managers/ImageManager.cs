@@ -13,7 +13,7 @@ namespace ReceiptManagement.Bll.Managers
     {
         #region List
 
-        public List<Entities.Image> Get(ApiContext apiContext,int userId)
+       /* public List<Entities.Image> Get(ApiContext apiContext,int userId)
         {
             var list = new List<Entities.Image>();
 
@@ -27,6 +27,30 @@ namespace ReceiptManagement.Bll.Managers
                 querySettings.WhereExpression = rc => rc.UserId == userId;
 
                 CoreManagers.ImageManager.Get(apiContext, querySettings, out list);               
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        */
+
+        public List<Entities.Image> Get(ApiContext apiContext, int id)
+        {
+            var list = new List<Entities.Image>();
+
+            try
+            {
+                var querySettings = QuerySettings<Entities.Image>.Factory();
+
+                //Include Entities             
+
+                //Filter records
+                querySettings.WhereExpression = rc => rc.Id == id;
+
+                CoreManagers.ImageManager.Get(apiContext, querySettings, out list);
 
                 return list;
             }

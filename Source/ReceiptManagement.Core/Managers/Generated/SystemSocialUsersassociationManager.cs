@@ -84,7 +84,7 @@ namespace ReceiptManagement.Core.Managers
         			// ADD to context
         			OnAdding(apiContext, system_Social_UsersAssociation);
     
-        			context.AddObject("Images", system_Social_UsersAssociation);
+        			context.AddObject("System_Social_UsersAssociation", system_Social_UsersAssociation);
         				    
         			context.SaveChanges(); // Save Changes	
     			

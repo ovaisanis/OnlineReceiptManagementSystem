@@ -84,7 +84,7 @@ namespace ReceiptManagement.Core.Managers
         			// ADD to context
         			OnAdding(apiContext, warrantyCardImage);
     
-        			context.AddObject("Images", warrantyCardImage);
+        			context.AddObject("WarrantyCardImages", warrantyCardImage);
         				    
         			context.SaveChanges(); // Save Changes	
     			

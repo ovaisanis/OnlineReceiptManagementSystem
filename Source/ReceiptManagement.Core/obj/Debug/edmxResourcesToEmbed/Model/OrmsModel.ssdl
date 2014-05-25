@@ -246,7 +246,7 @@
     <Property Name="CategoryId" Type="int" Nullable="true" />
     <Property Name="SubCategoryId" Type="int" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
-    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
     <Property Name="PurchaseDate" Type="datetime" Nullable="true" />

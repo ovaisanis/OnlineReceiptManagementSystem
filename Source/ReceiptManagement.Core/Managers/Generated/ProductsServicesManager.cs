@@ -84,7 +84,7 @@ namespace ReceiptManagement.Core.Managers
         			// ADD to context
         			OnAdding(apiContext, products_Services);
     
-        			context.AddObject("Images", products_Services);
+        			context.AddObject("Products_Services", products_Services);
         				    
         			context.SaveChanges(); // Save Changes	
     			
@@ -928,12 +928,7 @@ namespace ReceiptManagement.Core.Managers
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(products_Services, "Description contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;
     			}
-    																		if (System.String.IsNullOrWhiteSpace(products_Services.Tags))
-    			{
-    				result.Messages.Add(Helpers.ActionResultMessage.Factory(products_Services, "Tags is required.", Helpers.ActionResultMessageType.Error));
-    				result.WasSuccessful = false;
-    			}
-    						if (!System.String.IsNullOrWhiteSpace(products_Services.Tags) && !System.Text.RegularExpressions.Regex.IsMatch(products_Services.Tags, alphaNumeric))
+    																		if (!System.String.IsNullOrWhiteSpace(products_Services.Tags) && !System.Text.RegularExpressions.Regex.IsMatch(products_Services.Tags, alphaNumeric))
     			{						
     				result.Messages.Add(Helpers.ActionResultMessage.Factory(products_Services, "Tags contains invalid characters.", Helpers.ActionResultMessageType.Error));
     				result.WasSuccessful = false;

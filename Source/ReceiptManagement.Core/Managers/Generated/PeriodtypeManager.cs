@@ -84,7 +84,7 @@ namespace ReceiptManagement.Core.Managers
         			// ADD to context
         			OnAdding(apiContext, periodType);
     
-        			context.AddObject("Images", periodType);
+        			context.AddObject("PeriodTypes", periodType);
         				    
         			context.SaveChanges(); // Save Changes	
     			

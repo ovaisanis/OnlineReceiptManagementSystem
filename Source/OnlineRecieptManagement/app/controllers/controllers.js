@@ -269,6 +269,7 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
         productServiceDetails.ReceiptUploadedFiles = $scope.productServices.ReceiptUploadedFiles;
         productServiceDetails.WarrantyCardUploadedFiles = $scope.productServices.WarrantyCardUploadedFiles;
 
+
         $.support.cors = true;
         $.ajax({
             url: 'http://localhost:22011/api/productservice',

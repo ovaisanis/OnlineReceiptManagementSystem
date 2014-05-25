@@ -84,7 +84,7 @@ namespace ReceiptManagement.Core.Managers
         			// ADD to context
         			OnAdding(apiContext, product_Service_Sections);
     
-        			context.AddObject("Images", product_Service_Sections);
+        			context.AddObject("Product_Service_Sections", product_Service_Sections);
         				    
         			context.SaveChanges(); // Save Changes	
     			

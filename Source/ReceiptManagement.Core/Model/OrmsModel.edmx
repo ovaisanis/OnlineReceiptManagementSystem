@@ -251,7 +251,7 @@
     <Property Name="CategoryId" Type="int" Nullable="true" />
     <Property Name="SubCategoryId" Type="int" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
-    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
     <Property Name="PurchaseDate" Type="datetime" Nullable="true" />
@@ -954,7 +954,7 @@
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="SubCategoryId" Type="Int32" />
           <Property Name="UserId" Type="Int64" />
-          <Property Type="String" Name="Tags" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Tags" Nullable="true" MaxLength="Max" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="My_Products_Services" Relationship="OrmsModel.FK_MyProductsServices_ProductsServices" FromRole="Products_Services" ToRole="My_Products_Services" />

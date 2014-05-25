@@ -180,7 +180,7 @@ void AddMethods(EntityType entity, CodeGenerationTools code)
     			// ADD to context
     			OnAdding(apiContext, <#=code.CamelCase(entity.Name)#>);
 
-    			context.AddObject("Images", <#=code.CamelCase(entity.Name)#>);
+    			context.AddObject("<#=GetEntitySet(entity)#>", <#=code.CamelCase(entity.Name)#>);
     				    
     			context.SaveChanges(); // Save Changes	
 			

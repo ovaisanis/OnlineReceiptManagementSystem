@@ -21,6 +21,7 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
                 //Entities.Products_Services prodService = prodServiceModel;
 
                 //new Managers.ProductServiceManager().Insert(Context.GetContext(), prodService);
+                SaveReceipts(prodServiceModel);
 
                 return Request.CreateResponse(HttpStatusCode.OK, "Product Added Successfully");
             }
@@ -46,8 +47,8 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
             prodService.Description = prodServiceModel.ServiceDescription;
             prodService.PurchaseDate = prodServiceModel.ServicePurchaseDate;
             prodService.Tags = prodServiceModel.ServiceTags;
-            prodService.CategoryId = prodServiceModel.ServiceCategoryId;
-            prodService.SubCategoryId = prodServiceModel.ServiceSubCategoryId;
+            prodService.CategoryId =1; //prodServiceModel.ServiceCategoryId;
+            prodService.SubCategoryId = 1; //prodServiceModel.ServiceSubCategoryId;
 
             Entities.Receipt receipt = new Entities.Receipt();
 
@@ -56,12 +57,29 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
             receipt.Description = prodServiceModel.ReceiptDescription;
             receipt.ReceiptDate = prodServiceModel.ReceiptDate;
 
+            List<Entities.Image> receiptImageList = new List<Entities.Image>();
+            foreach(Models.Image imageModel in prodServiceModel.ReceiptUploadedFiles)
+            {
+                Entities.Image image = imageModel;
+                receiptImageList.Add(image);
+            }
+            
             Entities.WarrantyCard warrantyCard = new Entities.WarrantyCard();
 
             warrantyCard.Description = prodServiceModel.ReceiptDescription;
             warrantyCard.Title = prodServiceModel.WarrantyTitle;
             warrantyCard.WarrantyExpireOn = prodServiceModel.WarrantyExpireOn;
             warrantyCard.CardNumber = prodServiceModel.WarrantyCardNumber;
+
+            List<Entities.Image> warranyCardImageList = new List<Entities.Image>();
+            foreach (Models.Image imageModel in prodServiceModel.WarrantyCardUploadedFiles)
+            {
+                Entities.Image image = imageModel;
+                warranyCardImageList.Add(image);
+            }
+
+            Managers.MyProductServiceManager manager = new Managers.MyProductServiceManager();
+            manager.Insert(Context.GetContext(), prodService, receipt, warrantyCard, receiptImageList, warranyCardImageList);
         }
 
         #endregion
