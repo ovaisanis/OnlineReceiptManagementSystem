@@ -249,6 +249,7 @@
     <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="PurchaseDate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="ReceiptImages">
     <Key>
@@ -331,6 +332,7 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="UserId" Type="bigint" Nullable="true" />
     <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="CardNumber" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="FK_Events_EventStatuses">
     <End Role="EventStatuses" Type="OrmsModel.Store.EventStatuses" Multiplicity="0..1" />

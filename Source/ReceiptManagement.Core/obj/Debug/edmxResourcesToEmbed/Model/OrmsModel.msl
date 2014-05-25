@@ -126,6 +126,7 @@
           <ScalarProperty Name="Tags" ColumnName="Tags" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -216,6 +217,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

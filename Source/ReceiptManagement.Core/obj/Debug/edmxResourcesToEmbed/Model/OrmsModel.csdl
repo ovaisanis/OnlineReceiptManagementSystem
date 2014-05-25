@@ -283,6 +283,7 @@
     <NavigationProperty Name="Product_Service_Images" Relationship="OrmsModel.FK_ProductServiceImages_ProductsServices" FromRole="Products_Services" ToRole="Product_Service_Images" />
     <NavigationProperty Name="Product_Service_SubCategories" Relationship="OrmsModel.FK_ProductsServices_SubCategory" FromRole="Products_Services" ToRole="Product_Service_SubCategories" />
     <NavigationProperty Name="User" Relationship="OrmsModel.FK_ProductsServices_Users" FromRole="Products_Services" ToRole="Users" />
+    <Property Type="DateTime" Name="PurchaseDate" Nullable="true" />
   </EntityType>
   <EntityType Name="ReceiptImage">
     <Key>
@@ -387,6 +388,7 @@
     <NavigationProperty Name="My_Products_Services" Relationship="OrmsModel.FK_MyProductsServices_WarrantyCards" FromRole="WarrantyCards" ToRole="My_Products_Services" />
     <NavigationProperty Name="User" Relationship="OrmsModel.FK_WarrantyCards_Users" FromRole="WarrantyCards" ToRole="Users" />
     <NavigationProperty Name="WarrantyCardImages" Relationship="OrmsModel.FK_WarrantyCardImages_WarrantyCards" FromRole="WarrantyCards" ToRole="WarrantyCardImages" />
+    <Property Type="String" Name="CardNumber" Nullable="true" />
   </EntityType>
   <Association Name="FK_Events_EventStatuses">
     <End Role="EventStatuses" Type="OrmsModel.EventStatus" Multiplicity="0..1" />
