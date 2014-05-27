@@ -1,0 +1,69 @@
+﻿
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Receipts
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Receipts</li>
+        </ol>
+    </section>
+
+    <section class="content" ng-controller="ProductServiceDashboardController">
+
+        
+                    <div class="box">
+                                <!--<div class="box-header">
+                                    <h3 class="box-title">Available Receipts</h3>                                    
+                                </div>--><!-- /.box-header -->
+                                <div class="box-body table-responsive">
+                                    <table id="tbl_receipts" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Date Created</th>
+                                                <th>Date Purchased</th>
+                                                <th>Category</th>
+                                                <th>Sub-Category</th>
+                                                <th>Product</th>
+                                                <th>Receipt Available</th>
+                                                <th>Warranty Card Available</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng:repeat="productservice in productServicesRecords">
+                                            <tr>
+                                               <td>{{productservice.DateCreated}}</td>
+                                                <td>{{productservice.DatePurchased}}</td>
+                                                <td>{{productservice.Category}}</td>
+                                                <td>{{productservice.SubCategory}}</td>
+                                                <td>{{productservice.Product_Service_Name}}</td>
+                                                <td>{{productservice.ReceiptAvailable}}</td>
+                                                <td>{{productservice.WarrantyCardAvailable}}</td>
+                                                <td><a href="#">View</a></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Date Created</th>
+                                                <th>Date Purchased</th>
+                                                <th>Category</th>
+                                                <th>Sub-Category</th>
+                                                <th>Product</th>
+                                                <th>Receipt Available</th>
+                                                <th>Warranty Card Available</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer" >
+                                    <button class="btn btn-primary btn-lg pull-right" onclick="window.location='#\createreceipt'">Add Receipt</button>
+                                </div>
+                            </div>
+
+                  
+
+                </section>
+	

@@ -277,7 +277,7 @@ app.controller('ProductServiceController', function ($scope, $http, $location) {
             data: $scope.productServices,
             dataType: "json",
             success: function (data) {
-                window.location = "/OnlineRecieptManagement/pages/f_pages/receipts.html";
+                window.location = "#/receipts";
             },
             error: function (data) {
                 alert('Problem in adding contacts:' + data.responseText);
@@ -432,4 +432,69 @@ app.controller('FileUploadController', function ($scope, $http, $location) {
     
     }
 
+});
+
+app.controller('ProductServiceDashboardController', function ($scope, $http, $location) {
+
+    
+    $scope.productServicesRecords = [];
+
+    $scope.$on('$viewContentLoaded', function (event) {
+
+        /*
+        $('#tbl_receipts').dataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false
+        });
+        //*/
+        
+    });
+
+    $scope.LoadData = function () {
+        
+        $.support.cors = true;
+        $.ajax({
+            url: 'http://localhost:22011/api/productservice',
+            type: 'Get',
+            success: function (data) {
+
+                if (data.response_type == 'ok') {
+                    console.log(data.response_object);
+                    $scope.productServicesRecords = data.response_object;
+                    $scope.$apply();
+                }
+            },
+            error: function (data) {
+                alert(data);
+
+            }
+        });
+
+    }
+
+    $scope.LoadData();
+
+    //$scope.productServices = {
+
+    //    Id: '',
+    //    DateCreated: '',
+    //    PurchaseDate: '',
+    //    Cateogry: '',
+    //    SubCategory: '',
+    //    Product_Service: '',
+    //    ReceiptAvailable: '',
+    //    WarrantyCardAvailable: ''
+
+    //};
+
+    
+
+
+    
+
+    
 });

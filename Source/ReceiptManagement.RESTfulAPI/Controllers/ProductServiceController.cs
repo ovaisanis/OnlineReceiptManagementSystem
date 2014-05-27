@@ -28,22 +28,29 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
             }
         }
 
-        // GET api/receipt/5
-        public List<Models.ReceiptModel> Get()
+        // GET api/receipt
+        public HttpResponseMessage Get()
         {
-            var lst = new Managers.MyProductServiceManager().Get(Context.GetContext());
-
-            List<Models.ReceiptModel> receiptList = new List<Models.ReceiptModel>();
-
-            foreach(var service in lst)
+            try
             {
-                var model = new Models.ReceiptModel();
-                model = service;
+                var lst = new Managers.MyProductServiceManager().Get(Context.GetContext());
 
-                receiptList.Add(model);
+                List<Models.ReceiptModel> receiptList = new List<Models.ReceiptModel>();
+
+                foreach (var service in lst)
+                {
+                    var model = new Models.ReceiptModel();
+                    model = service;
+
+                    receiptList.Add(model);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, new ResposeObject(receiptList));
             }
-
-            return receiptList;
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         #region Private Functions
