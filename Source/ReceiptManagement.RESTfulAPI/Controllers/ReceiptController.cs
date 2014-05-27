@@ -19,9 +19,9 @@ namespace ReceiptManagement.RESTfulAPI.Controllers
         {
             try
             {
-                Entities.Receipt receipt = receiptModel;
+                //Entities.Receipt receipt = receiptModel;
 
-                new Managers.ReceiptManager().Insert(Context.GetContext(), receipt);
+                //new Managers.ReceiptManager().Insert(Context.GetContext(), receipt);
 
                 return Request.CreateResponse(HttpStatusCode.OK, "Receipt Added Successfully");
             }

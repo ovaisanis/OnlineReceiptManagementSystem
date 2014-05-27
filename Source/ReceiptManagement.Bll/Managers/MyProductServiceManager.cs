@@ -140,5 +140,37 @@ namespace ReceiptManagement.Bll.Managers
         }
 
         #endregion
+
+        #region List
+
+        public List<Entities.My_Products_Services> Get(ApiContext apiContext)
+        {
+            var list = new List<Entities.My_Products_Services>();
+
+            try
+            {
+                var querySettings = QuerySettings<Entities.My_Products_Services>.Factory();
+
+                //Include Entities             
+                querySettings.IncludedEntities.Add("Receipt");
+                querySettings.IncludedEntities.Add("WarrantyCard");
+                querySettings.IncludedEntities.Add("Products_Services");
+                querySettings.IncludedEntities.Add("Products_Services.Product_Service_Categories");
+                querySettings.IncludedEntities.Add("Products_Services.Product_Service_SubCategories");
+
+                //Filter records
+                //querySettings.WhereExpression = rc => rc.UserId == userId;
+
+                CoreManagers.MyProductsServicesManager.Get(apiContext, querySettings, out list);
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

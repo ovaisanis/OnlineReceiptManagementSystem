@@ -281,15 +281,15 @@ namespace ReceiptManagement.Common.Helpers
              * Append IsDeleted Clause if IgnoreSoftDeletedRecords = True
              * Also make sure IsDeleted Property is available in entity
              */
-            if (_ignoreSoftDeleteRecords && typeof(TEntity).GetProperties().Any(p => p.Name == "IsDeleted"))
-            {
-                // CREATE expression (IsDeleted == False)
-                Expression<Func<TEntity, bool>> deleteExpression =
-                                System.Linq.Dynamic.DynamicExpression.ParseLambda<TEntity, bool>("!IsDeleted");
+            //if (_ignoreSoftDeleteRecords && typeof(TEntity).GetProperties().Any(p => p.Name == "IsDeleted"))
+            //{
+            //    // CREATE expression (IsDeleted == False)
+            //    Expression<Func<TEntity, bool>> deleteExpression =
+            //                    System.Linq.Dynamic.DynamicExpression.ParseLambda<TEntity, bool>("!IsDeleted");
 
-                // AND the two expressions
-                expression = expression.And(deleteExpression);
-            }
+            //    // AND the two expressions
+            //    expression = expression.And(deleteExpression);
+            //}
 
             //If System level filtes have been passed, AND them with the original Expression
             if (!string.IsNullOrEmpty(_systemFilter) && expression != null)

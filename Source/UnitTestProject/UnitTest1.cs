@@ -60,6 +60,13 @@ namespace UnitTestProject
 
             new ImageManager().Insert(apiContext, image,out id);
         }
+
+        [TestMethod]
+        public void GetServices()
+        {
+            var lst = new MyProductServiceManager().Get(apiContext);
+        }
     }
+
 }
 

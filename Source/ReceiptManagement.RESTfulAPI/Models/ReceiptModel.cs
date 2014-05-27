@@ -9,87 +9,48 @@ namespace ReceiptManagement.RESTfulAPI.Models
 {
     public class ReceiptModel
     {        
-        public long Id
-        {
-            get;
-            set;
-        }
-    
-        public Nullable<System.DateTime> ReceiptDate
-        {
-            get;
-            set;
-        }
-    
-        public string SerialNumber
-        {
-            get;
-            set;
-        }
-    
-        public string Title
-        {
-            get;
-            set;
-        }
-    
-        public string Description
-        {
-            get;
-            set;
-        }
-    
-        public Nullable<long> UserId
-        {
-            get;
-            set;
-           
-        }
-     
-    
-        public Nullable<System.DateTime> CreatedOn
-        {
-            get;
-            set;
-        }
+        public DateTime DateCreated {get;set;}
 
-        public  Nullable<bool> IsDeleted
-        {
-            get;
-            set;
-        }
+        public DateTime? DatePurchased  {get;set;}
 
-        public static implicit operator ReceiptModel(Receipt receipt)
+        public string Category {get;set;}
+
+        public string Sub_Category  {get;set;}
+
+        public string Product_Service_Name {get;set;}
+
+        bool Receipt_Available {get;set;}
+
+        bool Warranty_Card_Available {get;set;}
+
+        public static implicit operator ReceiptModel(My_Products_Services service)
         {
             ReceiptModel model = new ReceiptModel();
 
-            model.Id = receipt.Id;
-            model.ReceiptDate = receipt.ReceiptDate;
-            model.IsDeleted = receipt.IsDeleted;
-            model.SerialNumber = receipt.SerialNumber;
-            model.Title = receipt.Title;
-            model.Description = receipt.Description;
-            model.CreatedOn = receipt.CreatedOn;
-            model.UserId = receipt.UserId;
-          
+            model.DateCreated = service.CreatedOn;
+
+            if(service.Products_Services != null)
+            {
+                model.DatePurchased = service.Products_Services.PurchaseDate;
+                model.Product_Service_Name = service.Products_Services.Name;
+
+                if (service.Products_Services.Product_Service_Categories != null)
+                {
+                    model.Category = service.Products_Services.Product_Service_Categories.CategoryTitle;
+                }
+
+                if (service.Products_Services.Product_Service_SubCategories != null)
+                {
+                    model.Category = service.Products_Services.Product_Service_SubCategories.SubCategoryTitle;
+                }
+            }
+
+            model.Receipt_Available = service.Receipt != null ? true : false;
+
+            model.Warranty_Card_Available = service.WarrantyCard != null ? true : false;
+
             return model;
         }
-
-        public static implicit operator Receipt(ReceiptModel model)
-        {
-            Receipt receipt = new Receipt();
-
-            receipt.Id = model.Id;
-            receipt.ReceiptDate = model.ReceiptDate;
-            receipt.IsDeleted = model.IsDeleted;
-            receipt.SerialNumber = model.SerialNumber;
-            receipt.Title = model.Title;
-            receipt.Description = model.Description;
-            receipt.CreatedOn = model.CreatedOn;
-            receipt.UserId = model.UserId;
-          
-            return receipt;
-        }
-    
+           
     }
 }
